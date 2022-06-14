@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.binar.secondhand.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.binar.secondhand.notification.NotificationFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/navigation_jual"
+        android:name="com.binar.secondhand.jual.JualFragment"
+        android:label="@string/title_jual"
+        tools:layout="@layout/fragment_jual" />
+    <fragment
+        android:id="@+id/navigation_akun"
+        android:name="com.binar.secondhand.akun.AkunFragment"
+        android:label="@string/title_akun"
+        tools:layout="@layout/fragment_akun" />
+    <fragment
+        android:id="@+id/navigation_daftar_jual"
+        android:name="com.binar.secondhand.daftar_jual.DaftarJualFragment"
+        android:label="Daftar Jual"
+        tools:layout="@layout/fragment_daftar_jual" />
+</navigation>
