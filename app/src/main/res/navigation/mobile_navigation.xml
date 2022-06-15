@@ -31,6 +31,9 @@
             android:id="@+id/action_navigation_akun_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment" />
+        <argument
+            android:name="login"
+            app:argType="com.binar.secondhand.core.domain.model.Login" />
     </fragment>
     <fragment
         android:id="@+id/navigation_daftar_jual"
@@ -41,5 +44,11 @@
         android:id="@+id/loginFragment"
         android:name="com.binar.secondhand.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_akun"
+            app:destination="@id/navigation_akun"
+            app:popUpTo="@id/navigation_akun"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

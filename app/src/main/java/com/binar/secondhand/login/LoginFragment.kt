@@ -1,17 +1,21 @@
 package com.binar.secondhand.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.binar.secondhand.databinding.FragmentLoginBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +29,38 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.icBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        with(binding) {
+            btnMasuk.setOnClickListener {
+                val email = edtEmail.text.toString()
+                val password = edtPassword.text.toString()
+                viewModel.requestLogin(email, password)
+            }
+
+            profileLoginProgressBar.isVisible = false
+            with(viewModel.loginEventManager) {
+                onLoading = {
+                    profileLoginProgressBar.isVisible = true
+                    btnMasuk.isEnabled = false
+                }
+
+                onSuccess = {
+                    profileLoginProgressBar.isVisible = false
+                    btnMasuk.isEnabled = true
+                    viewModel.saveToken(it)
+                    findNavController().navigate(
+                        LoginFragmentDirections.actionLoginFragmentToNavigationAkun(
+                            it
+                        )
+                    )
+                }
+                onFailure = { code, ex ->
+                    profileLoginProgressBar.isVisible = false
+                    btnMasuk.isEnabled = true
+                    // failure
+                }
+            }
         }
     }
 

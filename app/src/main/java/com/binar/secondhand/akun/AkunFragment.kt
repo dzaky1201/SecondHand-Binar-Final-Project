@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.binar.secondhand.R
+import com.binar.secondhand.core.domain.model.Login
 import com.binar.secondhand.databinding.FragmentAkunBinding
 
 class AkunFragment : Fragment() {
@@ -23,8 +23,14 @@ class AkunFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val args = arguments?.getParcelable<Login>("login")
         binding.txtMoveToLogin.setOnClickListener {
             findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+        }
+
+        with(binding){
+            txtName.text = args?.name
+            txtEmail.text = args?.email
         }
     }
 
