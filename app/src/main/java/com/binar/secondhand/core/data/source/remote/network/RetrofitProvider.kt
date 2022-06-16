@@ -1,5 +1,6 @@
 package com.binar.secondhand.core.data.source.remote.network
 
+import com.binar.secondhand.core.data.source.remote.AuthInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -21,8 +22,11 @@ object RetrofitProvider {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
+    private val authInterceptor = AuthInterceptor()
+
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
+        .addInterceptor(authInterceptor)
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
 

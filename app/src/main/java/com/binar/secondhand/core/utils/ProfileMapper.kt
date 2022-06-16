@@ -1,7 +1,9 @@
 package com.binar.secondhand.core.utils
 
 import com.binar.secondhand.core.data.source.remote.response.LoginResponse
+import com.binar.secondhand.core.data.source.remote.response.UserResponse
 import com.binar.secondhand.core.domain.model.Login
+import com.binar.secondhand.core.domain.model.User
 
 object ProfileMapper {
 
@@ -10,6 +12,20 @@ object ProfileMapper {
             loginResponse?.accessToken.orEmpty(),
             loginResponse?.email.orEmpty(),
             loginResponse?.name.orEmpty()
+        )
+    }
+
+    fun mapUserResponseToEntity(userResponse: UserResponse?): User {
+        return User(
+            userResponse?.address.orEmpty(),
+            userResponse?.createdAt.orEmpty(),
+            userResponse?.email.orEmpty(),
+            userResponse?.fullName.orEmpty(),
+            userResponse?.id,
+            userResponse?.imageUrl.orEmpty(),
+            userResponse?.password.orEmpty(),
+            userResponse?.phoneNumber.orEmpty(),
+            userResponse?.updatedAt.orEmpty()
         )
     }
 }

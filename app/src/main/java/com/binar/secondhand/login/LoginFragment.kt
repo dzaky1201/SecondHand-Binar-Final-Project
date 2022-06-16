@@ -50,9 +50,7 @@ class LoginFragment : Fragment() {
                     btnMasuk.isEnabled = true
                     viewModel.saveToken(it)
                     findNavController().navigate(
-                        LoginFragmentDirections.actionLoginFragmentToNavigationAkun(
-                            it
-                        )
+                        LoginFragmentDirections.actionLoginFragmentToNavigationAkun()
                     )
                 }
                 onFailure = { code, ex ->
