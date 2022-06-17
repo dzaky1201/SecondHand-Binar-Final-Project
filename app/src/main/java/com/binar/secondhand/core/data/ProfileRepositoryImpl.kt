@@ -33,9 +33,12 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfile
     }
 
     override fun getUser() {
+        println("get user.......")
         val disposable = dataSource.getUser().fetchStateEventSubscriber { stateEvent ->
             _userStateEventManager.post(stateEvent)
         }
+
+        compositeDisposable.add(disposable)
     }
 
     override fun saveToken(token: String) {
@@ -44,6 +47,7 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfile
 
     override fun close() {
         _loginStateEventManager.closeQuietly()
+        _userStateEventManager.closeQuietly()
         compositeDisposable.dispose()
     }
 

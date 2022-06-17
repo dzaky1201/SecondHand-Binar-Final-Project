@@ -15,6 +15,7 @@ class DataPreferences(context: Context) {
                 .apply()
         }
 
+
     companion object : KoinComponent {
         const val NAME = "main_pref"
 

@@ -11,4 +11,11 @@
     <string name="masukan_password">Masukan Password</string>
     <string name="belum_punya_akun">Belum Punya Akun ?</string>
     <string name="daftar_di_sini">Daftar Di sini</string>
+    <string name="akun_saya">Akun Saya</string>
+    <string name="edit">edit</string>
+    <string name="photo_profile">Photo Profile</string>
+    <string name="ubah_akun">Ubah Akun</string>
+    <string name="pengaturan">Pengaturan</string>
+    <string name="keluar">Keluar</string>
+    <string name="app_version">Version 1.0.0</string>
 </resources>

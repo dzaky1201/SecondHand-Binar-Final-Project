@@ -18,7 +18,9 @@ class ProfileDataSource(private val authService: AuthService) {
     }
 
     fun getUser(): Observable<User>{
+        println("get user data sources...")
         return authService.getUser().mapObservable {
+            println("mapper....")
             ProfileMapper.mapUserResponseToEntity(it)
         }
     }

@@ -6,46 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".akun.AkunFragment">
 
+    <include
+        android:id="@+id/include_akun_saya"
+        layout="@layout/akun_saya_view"/>
+
     <TextView
-        android:id="@+id/txtMoveToLogin"
+        android:id="@+id/txtTryLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Move To Login"
-        android:textSize="21sp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Kamu Belum Login !"
+        android:visibility="invisible"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtName"
+    <Button
+        android:id="@+id/btnTryLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Name"
-        android:visibility="invisible"
-        android:textSize="21sp"
+        android:text="Login Sekarang Yuk !"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtMoveToLogin" />
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No Email"
         android:visibility="invisible"
-        android:textSize="21sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtName" />
+        app:layout_constraintEnd_toEndOf="@+id/txtTryLogin"
+        app:layout_constraintStart_toStartOf="@+id/txtTryLogin"
+        app:layout_constraintTop_toBottomOf="@+id/txtTryLogin" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
