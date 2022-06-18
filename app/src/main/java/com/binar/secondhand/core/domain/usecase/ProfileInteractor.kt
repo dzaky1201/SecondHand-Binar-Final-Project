@@ -20,6 +20,10 @@ class ProfileInteractor(private val profileRepository: IProfileRepository) : Pro
 
     override fun getUser() = profileRepository.getUser()
 
+    override fun clearSession() {
+        profileRepository.clearSession()
+    }
+
     override fun loginUser(request: LoginRequest) = profileRepository.login(request)
 
     override fun saveToken(token: String) = profileRepository.saveToken(token)

@@ -19,6 +19,8 @@ interface ProfileUseCase {
 
     fun isUserLogon(): Boolean
 
+    fun clearSession()
+
     companion object : KoinComponent {
         val get: ProfileUseCase = get()
     }

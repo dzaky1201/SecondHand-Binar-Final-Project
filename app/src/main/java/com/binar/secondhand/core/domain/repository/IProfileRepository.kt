@@ -15,4 +15,6 @@ interface IProfileRepository: Closeable {
     fun saveToken(token: String)
 
     fun getUser()
+
+    fun clearSession()
 }

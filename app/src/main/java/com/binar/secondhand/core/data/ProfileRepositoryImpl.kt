@@ -32,6 +32,10 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfile
         compositeDisposable.add(disposable)
     }
 
+    override fun clearSession() {
+        DataPreferences.get.clearSession()
+    }
+
     override fun getUser() {
         println("get user.......")
         val disposable = dataSource.getUser().fetchStateEventSubscriber { stateEvent ->

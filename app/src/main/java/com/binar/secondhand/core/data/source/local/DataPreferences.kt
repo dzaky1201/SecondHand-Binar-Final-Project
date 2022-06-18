@@ -1,5 +1,6 @@
 package com.binar.secondhand.core.data.source.local
 
+import android.annotation.SuppressLint
 import android.content.Context
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -15,7 +16,12 @@ class DataPreferences(context: Context) {
                 .apply()
         }
 
-
+    @SuppressLint("CommitPrefEdits")
+    fun clearSession(){
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+    }
     companion object : KoinComponent {
         const val NAME = "main_pref"
 

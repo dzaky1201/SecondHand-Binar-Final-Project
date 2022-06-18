@@ -9,8 +9,12 @@ import okhttp3.internal.closeQuietly
 class AkunViewModel(private val profileUseCase: ProfileUseCase) : ViewModel() {
     val userManager: StateEventManager<User> = profileUseCase.userStateEventManager
 
-    fun getUser(){
+    fun getUser() {
         profileUseCase.getUser()
+    }
+
+    fun clearSession() {
+        profileUseCase.clearSession()
     }
 
     override fun onCleared() {
