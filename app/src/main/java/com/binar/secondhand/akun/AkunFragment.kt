@@ -1,5 +1,6 @@
 package com.binar.secondhand.akun
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.binar.secondhand.core.data.source.local.DataPreferences
 import com.binar.secondhand.core.domain.usecase.ProfileUseCase
 import com.binar.secondhand.databinding.FragmentAkunBinding
+import com.binar.secondhand.update_akun.UpdateAkunActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,15 +47,19 @@ class AkunFragment : Fragment() {
             binding.progressBar.isVisible = true
         }
 
-        userManager.onSuccess = {
+        userManager.onSuccess = { user ->
             binding.progressBar.isVisible = false
             binding.includeAkunSaya.layoutAkun.isVisible = true
-            Glide.with(view).load(it.imageUrl).into(binding.includeAkunSaya.imgProfile)
+            Glide.with(view).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
+            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
+                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
+                intent.putExtra("showData", user)
+                startActivity(intent)
+            }
         }
 
         userManager.onFailure = { _, _ ->
             binding.progressBar.isVisible = false
-            Toast.makeText(requireContext(), "Kamu Belum Login", Toast.LENGTH_SHORT).show()
             binding.txtTryLogin.isVisible = true
             with(binding.btnTryLogin){
                 isVisible = true

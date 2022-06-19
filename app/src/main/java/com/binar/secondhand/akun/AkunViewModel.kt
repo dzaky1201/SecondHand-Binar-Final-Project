@@ -20,6 +20,7 @@ class AkunViewModel(private val profileUseCase: ProfileUseCase) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         userManager.closeQuietly()
+        profileUseCase.closeRepository()
     }
 
 }

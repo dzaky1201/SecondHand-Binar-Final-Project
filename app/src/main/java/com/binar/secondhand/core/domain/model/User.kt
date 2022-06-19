@@ -1,7 +1,9 @@
 package com.binar.secondhand.core.domain.model
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class User(
     val address: String? = "",
     val createdAt: String? = "",
@@ -12,4 +14,4 @@ data class User(
     val password: String? = "",
     val phoneNumber: String? = "",
     val updatedAt: String? = ""
-)
+): Parcelable
