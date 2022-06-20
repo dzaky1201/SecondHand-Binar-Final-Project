@@ -26,6 +26,18 @@ interface AuthService {
         @Part("password") password: RequestBody,
         @Part("phone_number") phoneNumber: RequestBody,
         @Part("address") address: RequestBody,
+        @Part("city") city: RequestBody
+    ): SecondHandResponse<UserResponse>
+
+    @Multipart
+    @PUT("auth/user")
+    fun updateUserWithImage(
+        @Part("full_name") fullName: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("phone_number") phoneNumber: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("city") city: RequestBody,
         @Part image: MultipartBody.Part? = null
     ): SecondHandResponse<UserResponse>
 }

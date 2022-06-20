@@ -16,6 +16,8 @@ data class UserResponse(
     val id: Int?,
     @SerializedName("image_url")
     val imageUrl: String?,
+    @SerializedName("city")
+    val city: String?,
     @SerializedName("password")
     val password: String?,
     @SerializedName("phone_number")

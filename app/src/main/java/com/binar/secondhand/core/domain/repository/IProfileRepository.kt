@@ -25,6 +25,16 @@ interface IProfileRepository: Closeable {
         password: String,
         address: String,
         phoneNumber: String,
-        image: File
+        city: String
+    )
+
+    fun updateUserWithImage(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
     )
 }

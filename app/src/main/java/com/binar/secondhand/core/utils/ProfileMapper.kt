@@ -24,6 +24,7 @@ object ProfileMapper {
             userResponse?.id,
             userResponse?.imageUrl.orEmpty(),
             userResponse?.password.orEmpty(),
+            userResponse?.city.orEmpty(),
             userResponse?.phoneNumber.orEmpty(),
             userResponse?.updatedAt.orEmpty()
         )

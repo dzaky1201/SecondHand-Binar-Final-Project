@@ -36,21 +36,52 @@ class ProfileDataSource(private val authService: AuthService) {
         password: String,
         address: String,
         phoneNumber: String,
-        image: File
+        city: String
     ): Observable<User> {
         val fullnameString = convertToString(fullname)
         val emailString = convertToString(email)
         val passwordString = convertToString(password)
         val addressString = convertToString(address)
+        val cityString = convertToString(city)
         val phoneNumberString = convertToString(phoneNumber)
-        val imageConvert = convertFile(image)
         return authService.updateUser(
             fullnameString,
             emailString,
             passwordString,
             phoneNumberString,
             addressString,
-            imageConvert
+            cityString
+        ).mapObservable {
+            ProfileMapper.mapUserResponseToEntity(
+                it
+            )
+        }
+    }
+
+    fun updateUserWithImage(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    ): Observable<User> {
+        val fullnameString = convertToString(fullname)
+        val emailString = convertToString(email)
+        val passwordString = convertToString(password)
+        val addressString = convertToString(address)
+        val phoneNumberString = convertToString(phoneNumber)
+        val cityString = convertToString(city)
+        val photo = convertFile(file)
+        return authService.updateUserWithImage(
+            fullnameString,
+            emailString,
+            passwordString,
+            phoneNumberString,
+            addressString,
+            cityString,
+            photo
         ).mapObservable {
             ProfileMapper.mapUserResponseToEntity(
                 it

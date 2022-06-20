@@ -23,4 +23,6 @@
     <string name="address">Address</string>
     <string name="update_profile">Update Profile</string>
     <string name="update_akun">Update Akun</string>
+    <string name="update_password">Update Password</string>
+    <string name="city">City</string>
 </resources>

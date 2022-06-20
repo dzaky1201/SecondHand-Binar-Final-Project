@@ -10,9 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.binar.secondhand.MainActivity
 import com.binar.secondhand.core.domain.model.profile.User
 import com.binar.secondhand.databinding.ActivityUpdateAkunBinding
+import com.binar.secondhand.screen.login.LoginFragmentDirections
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -39,6 +41,7 @@ class UpdateAkunActivity : AppCompatActivity() {
                 edtEmail.setText(args.email)
                 edtPhoneNumber.setText(args.phoneNumber)
                 edtAddress.setText(args.address)
+                edtCity.setText(args.city)
                 Glide.with(this@UpdateAkunActivity).load(args.imageUrl).into(binding.imgProfile)
             }
         }
@@ -86,26 +89,26 @@ class UpdateAkunActivity : AppCompatActivity() {
                 val email = edtEmail.text.toString()
                 val phoneNumber = edtPhoneNumber.text.toString()
                 val address = edtAddress.text.toString()
+                val city = edtCity.text.toString()
                 val password = edtPassword.text.toString()
                 val image = fileImage
-                if (fileImage == null) {
-                    Toast.makeText(
-                        this@UpdateAkunActivity,
-                        "Pilih Gambar Terlebih Dahulu",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                } else if(password.isEmpty()){
-                    Toast.makeText(this@UpdateAkunActivity, "Masukan Password Dulu Gan !", Toast.LENGTH_SHORT).show()
-                }
-
-                if (image != null && password.isNotEmpty()) {
+                if (image == null) {
                     viewModel.updateUser(
                         fullname,
                         email,
                         password,
                         address,
                         phoneNumber,
+                        city
+                    )
+                } else {
+                    viewModel.updateUserWithImage(
+                        fullname,
+                        email,
+                        password,
+                        address,
+                        phoneNumber,
+                        city,
                         image
                     )
                 }
@@ -113,6 +116,8 @@ class UpdateAkunActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     private fun takePhotoFromCamera() {
         Dexter.withActivity(this).withPermissions(

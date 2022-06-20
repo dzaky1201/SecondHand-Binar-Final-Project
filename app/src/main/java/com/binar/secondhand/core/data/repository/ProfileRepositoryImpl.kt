@@ -45,10 +45,28 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : IProfil
         password: String,
         address: String,
         phoneNumber: String,
-        image: File
+        city: String
     ) {
         val disposable =
-            dataSource.updateUser(fullname, email, password, address, phoneNumber, image)
+            dataSource.updateUser(fullname, email, password, address, phoneNumber, city)
+                .fetchStateEventSubscriber {
+                    _updateUserStateEventManager.post(it)
+                }
+
+        compositeDisposable.add(disposable)
+    }
+
+    override fun updateUserWithImage(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    ) {
+        val disposable =
+            dataSource.updateUserWithImage(fullname, email, password, address, phoneNumber, city, file)
                 .fetchStateEventSubscriber {
                     _updateUserStateEventManager.post(it)
                 }

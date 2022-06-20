@@ -12,6 +12,7 @@ data class User(
     val id: Int? = 0,
     val imageUrl: String? = "",
     val password: String? = "",
+    val city: String? = "",
     val phoneNumber: String? = "",
     val updatedAt: String? = ""
 ): Parcelable
