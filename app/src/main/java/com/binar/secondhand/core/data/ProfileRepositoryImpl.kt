@@ -11,11 +11,13 @@ import com.binar.secondhand.core.event.StateEventManager
 import com.binar.secondhand.core.utils.fetchStateEventSubscriber
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.internal.closeQuietly
+import java.io.File
 
-class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfileRepository {
+class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : IProfileRepository {
     private val compositeDisposable = CompositeDisposable()
 
-    private var _loginStateEventManager: MutableStateEventManager<Login> = MutableStateEventManager()
+    private var _loginStateEventManager: MutableStateEventManager<Login> =
+        MutableStateEventManager()
     override val loginStateEventManager: StateEventManager<Login>
         get() = _loginStateEventManager
 
@@ -23,6 +25,11 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfile
     private var _userStateEventManager: MutableStateEventManager<User> = MutableStateEventManager()
     override val userStateEventManager: StateEventManager<User>
         get() = _userStateEventManager
+
+    private var _updateUserStateEventManager: MutableStateEventManager<User> =
+        MutableStateEventManager()
+    override val updateUserStateEventManager: StateEventManager<User>
+        get() = _updateUserStateEventManager
 
     override fun login(request: LoginRequest) {
         val disposable = dataSource.postLogin(request).fetchStateEventSubscriber { stateEvent ->
@@ -32,10 +39,35 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfile
         compositeDisposable.add(disposable)
     }
 
+    override fun updateUser(
+        id: Int,
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        image: File
+    ) {
+        val disposable =
+            dataSource.updateUser(id, fullname, email, password, address, phoneNumber, image)
+                .fetchStateEventSubscriber {
+                    _updateUserStateEventManager.post(it)
+                }
+
+        compositeDisposable.add(disposable)
+    }
+
+    override fun clearSession() {
+        DataPreferences.get.clearSession()
+    }
+
     override fun getUser() {
+        println("get user.......")
         val disposable = dataSource.getUser().fetchStateEventSubscriber { stateEvent ->
             _userStateEventManager.post(stateEvent)
         }
+
+        compositeDisposable.add(disposable)
     }
 
     override fun saveToken(token: String) {
@@ -44,6 +76,7 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource): IProfile
 
     override fun close() {
         _loginStateEventManager.closeQuietly()
+        _userStateEventManager.closeQuietly()
         compositeDisposable.dispose()
     }
 

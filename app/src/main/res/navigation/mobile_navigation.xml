@@ -31,6 +31,9 @@
             android:id="@+id/action_navigation_akun_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment" />
+        <action
+            android:id="@+id/action_navigation_akun_to_updateAkunFragment"
+            app:destination="@id/updateAkunFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_daftar_jual"
@@ -48,4 +51,20 @@
             app:popUpTo="@id/navigation_akun"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/updateAkunFragment"
+        android:name="com.binar.secondhand.update_akun.UpdateAkunFragment"
+        android:label="UpdateAkunFragment" >
+        <argument
+            android:name="showData"
+            app:argType="com.binar.secondhand.core.domain.model.User" />
+    </fragment>
+    <activity
+        android:id="@+id/updateAkunActivity"
+        android:name="com.binar.secondhand.update_akun.UpdateAkunActivity"
+        android:label="UpdateAkunActivity" >
+        <argument
+            android:name="showData"
+            app:argType="com.binar.secondhand.core.domain.model.User" />
+    </activity>
 </navigation>

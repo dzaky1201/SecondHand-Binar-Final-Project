@@ -6,8 +6,8 @@ import okhttp3.Response
 
 class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val prefrences = DataPreferences.get
-        val token = prefrences.token
+        val preferences = DataPreferences.get
+        val token = preferences.token
 
         val request = chain
             .request()

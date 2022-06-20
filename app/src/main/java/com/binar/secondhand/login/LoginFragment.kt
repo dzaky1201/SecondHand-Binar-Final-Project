@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -56,6 +57,9 @@ class LoginFragment : Fragment() {
                 onFailure = { code, ex ->
                     profileLoginProgressBar.isVisible = false
                     btnMasuk.isEnabled = true
+                    if (code == 503){
+                        Toast.makeText(requireContext(), "error 503", Toast.LENGTH_SHORT).show()
+                    }
                     // failure
                 }
             }
