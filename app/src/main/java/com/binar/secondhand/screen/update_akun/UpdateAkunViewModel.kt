@@ -1,24 +1,16 @@
-package com.binar.secondhand.core.domain.repository
+package com.binar.secondhand.screen.update_akun
 
+import androidx.lifecycle.ViewModel
 import com.binar.secondhand.core.data.remote.profile.request.LoginRequest
 import com.binar.secondhand.core.domain.model.profile.Login
 import com.binar.secondhand.core.domain.model.profile.User
+import com.binar.secondhand.core.domain.usecase.profile.ProfileUseCase
 import com.binar.secondhand.core.event.StateEventManager
-import java.io.Closeable
 import java.io.File
 
-interface IProfileRepository: Closeable {
-    val loginStateEventManager: StateEventManager<Login>
-    val userStateEventManager: StateEventManager<User>
-    val updateUserStateEventManager: StateEventManager<User>
+class UpdateAkunViewModel(private val useCase: ProfileUseCase) : ViewModel() {
+    val updateUserManager: StateEventManager<User> = useCase.updateUserStateEventManager
 
-    fun login(request: LoginRequest)
-
-    fun saveToken(token: String)
-
-    fun getUser()
-
-    fun clearSession()
     fun updateUser(
         fullname: String,
         email: String,
@@ -26,7 +18,9 @@ interface IProfileRepository: Closeable {
         address: String,
         phoneNumber: String,
         city: String
-    )
+    ) {
+        useCase.updateUser(fullname, email, password, address, phoneNumber, city)
+    }
 
     fun updateUserWithImage(
         fullname: String,
@@ -36,5 +30,8 @@ interface IProfileRepository: Closeable {
         phoneNumber: String,
         city: String,
         file: File
-    )
+    ) {
+        useCase.updateUserWithImage(fullname, email, password, address, phoneNumber, city, file)
+    }
+
 }
