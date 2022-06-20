@@ -1,6 +1,6 @@
 package com.binar.secondhand.core.utils
 
-import com.binar.secondhand.core.data.source.remote.SecondHandResponse
+import com.binar.secondhand.core.data.network.SecondHandResponse
 import com.binar.secondhand.core.event.StateEvent
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder

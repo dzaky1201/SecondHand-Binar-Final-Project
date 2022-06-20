@@ -1,13 +1,13 @@
 package com.binar.secondhand.core.di
 
-import com.binar.secondhand.core.data.ProfileRepositoryImpl
-import com.binar.secondhand.core.data.source.ProfileDataSource
-import com.binar.secondhand.core.data.source.local.DataPreferences
-import com.binar.secondhand.core.data.source.remote.AuthService
-import com.binar.secondhand.core.data.source.remote.network.RetrofitProvider
+import com.binar.secondhand.core.data.repository.ProfileRepositoryImpl
+import com.binar.secondhand.core.data.remote.profile.source.ProfileDataSource
+import com.binar.secondhand.core.data.local.DataPreferences
+import com.binar.secondhand.core.data.remote.profile.AuthService
+import com.binar.secondhand.core.data.network.RetrofitProvider
 import com.binar.secondhand.core.domain.repository.IProfileRepository
-import com.binar.secondhand.core.domain.usecase.ProfileInteractor
-import com.binar.secondhand.core.domain.usecase.ProfileUseCase
+import com.binar.secondhand.core.domain.usecase.profile.ProfileInteractor
+import com.binar.secondhand.core.domain.usecase.profile.ProfileUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

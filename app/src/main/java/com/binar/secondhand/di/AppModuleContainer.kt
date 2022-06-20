@@ -1,9 +1,9 @@
 package com.binar.secondhand.di
 
-import com.binar.secondhand.akun.AkunViewModel
+import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.core.di.ModuleContainer
-import com.binar.secondhand.login.LoginViewModel
-import com.binar.secondhand.update_akun.UpdateAkunViewModel
+import com.binar.secondhand.screen.login.LoginViewModel
+import com.binar.secondhand.screen.update_akun.UpdateAkunViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

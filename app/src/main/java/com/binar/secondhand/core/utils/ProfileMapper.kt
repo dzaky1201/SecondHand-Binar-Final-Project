@@ -1,9 +1,9 @@
 package com.binar.secondhand.core.utils
 
-import com.binar.secondhand.core.data.source.remote.response.LoginResponse
-import com.binar.secondhand.core.data.source.remote.response.UserResponse
-import com.binar.secondhand.core.domain.model.Login
-import com.binar.secondhand.core.domain.model.User
+import com.binar.secondhand.core.data.remote.profile.response.LoginResponse
+import com.binar.secondhand.core.data.remote.profile.response.UserResponse
+import com.binar.secondhand.core.domain.model.profile.Login
+import com.binar.secondhand.core.domain.model.profile.User
 
 object ProfileMapper {
 
