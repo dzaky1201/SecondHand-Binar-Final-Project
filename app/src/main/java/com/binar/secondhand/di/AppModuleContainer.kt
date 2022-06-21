@@ -2,6 +2,7 @@ package com.binar.secondhand.di
 
 import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.core.di.ModuleContainer
+import com.binar.secondhand.screen.home.HomeViewModel
 import com.binar.secondhand.screen.login.LoginViewModel
 import com.binar.secondhand.screen.update_akun.UpdateAkunViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,6 +17,9 @@ class AppModuleContainer : ModuleContainer() {
         viewModel { AkunViewModel(get()) }
     }
 
+    private val viewModelHome = module{
+        viewModel {HomeViewModel(get())}
+    }
     private val viewModelUpdateAkun = module {
         viewModel { UpdateAkunViewModel(get()) }
     }

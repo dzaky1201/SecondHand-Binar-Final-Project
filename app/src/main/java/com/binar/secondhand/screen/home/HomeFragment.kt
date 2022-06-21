@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.databinding.FragmentHomeBinding
+import com.binar.secondhand.screen.home.adapter.ListProductsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -20,11 +22,34 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getProducts()
+
+        val adapter = ListProductsAdapter()
+        binding.rvListProducts.layoutManager =   LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvListProducts.adapter = adapter
+
+
+        with(viewModel.productStateEvent){
+            onLoading = {
+
+            }
+            onSuccess = {
+                adapter.submitList(it)
+            }
+            onFailure = { _,_->
+
+            }
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

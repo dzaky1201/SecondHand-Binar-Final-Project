@@ -25,4 +25,12 @@
     <string name="update_akun">Update Akun</string>
     <string name="update_password">Update Password</string>
     <string name="city">City</string>
+
+    <!--HOME STRINGS-->
+    <string name="search_text">Cari di Second Chance</string>
+    <string name="bulan_ramadhan">Bulan Ramadhan\nBanyak diskon!</string>
+    <string name="diskon_hingga">Diskon Hingga</string>
+    <string name="enam_puluh">60%</string>
+    <string name="telusuri">Telusuri Kategori</string>
+
 </resources>
