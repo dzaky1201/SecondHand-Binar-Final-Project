@@ -5,7 +5,7 @@ import com.binar.secondhand.core.domain.model.home.Product
 
 object ProductMapper {
 
-    private fun mapProductResponseToEntity(productResponseItem: ProductResponseItem): Product {
+     fun mapProductResponseToEntity(productResponseItem: ProductResponseItem): Product {
         val categoryResponse = productResponseItem.categories?.map {
             Product.Category(
                 id = it.id.orNol(),
