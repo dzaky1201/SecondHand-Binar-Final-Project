@@ -6,10 +6,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ProductService {
-    @GET("buyer/get")
+    @GET("buyer/product")
     fun getProducts(
-        @Query("status") status: String = "",
-        @Query("category_id") categoryId: Int = 0,
-        @Query("search") search: String = ""
+//        @Query("status") status: String = "",
+//        @Query("category_id") categoryId: Int = 0,
+//        @Query("search") search: String = ""
     ): SecondHandResponse<List<ProductResponseItem>>
 }

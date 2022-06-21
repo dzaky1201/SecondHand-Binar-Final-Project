@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
                 adapter.submitList(it)
             }
             onFailure = { _,_->
-
+                print("GAGAL COK")
             }
         }
     }
