@@ -79,7 +79,6 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : IProfil
     }
 
     override fun getUser() {
-        println("get user.......")
         val disposable = dataSource.getUser().fetchStateEventSubscriber { stateEvent ->
             _userStateEventManager.post(stateEvent)
         }

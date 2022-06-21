@@ -45,6 +45,36 @@ fun <T: Any, U: Any> SecondHandResponse<T>.mapObservable(mapper: (T) -> U): Obse
     }
 }
 
+fun <T: Any, U: Any> SecondHandResponse<T>.mapObservableList(mapper: (T) -> U): Observable<U> {
+    return flatMap { response ->
+        if (response.isSuccessful) {
+            val body = response.body()
+            if (body != null) {
+                val dataMapper = mapper.invoke(body)
+                Observable.just(dataMapper)
+            } else {
+                val exception = Throwable("Response data is null, message: error")
+                Observable.error(exception)
+            }
+        } else {
+            val bodyError = response.errorBody()?.string()
+            val gson = GsonBuilder()
+                .setPrettyPrinting()
+                .setLenient()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create()
+
+            val typeToken = object : TypeToken<Response<Any>>() {}.type
+            val bodyErrorData = gson.fromJson<Response<Any>>(bodyError, typeToken)
+            println("base response data -> $bodyErrorData")
+            val messageHttp = response.message()
+            val message = "$messageHttp, message: $bodyErrorData"
+            val exception = HttpException(response)
+            Observable.error(exception)
+        }
+    }
+}
+
 // fetcher state event
 // merubah data observable entity ke dalam subscriber state event
 fun <T: Any> Observable<T>.fetchStateEventSubscriber(onSubscribe: (StateEvent<T>) -> Unit) : Disposable {
