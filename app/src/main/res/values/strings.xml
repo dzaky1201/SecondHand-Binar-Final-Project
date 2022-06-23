@@ -29,4 +29,10 @@
     <string name="password">Password</string>
     <string name="add_foto">add foto</string>
     <string name="add_photo_profile">Add Photo Profile</string>
+
+    <string name="search_text">Cari di Second Chance</string>
+    <string name="bulan_ramadhan">Bulan Ramadhan\nBanyak diskon!</string>
+    <string name="diskon_hingga">Diskon Hingga</string>
+    <string name="enam_puluh">60%</string>
+    <string name="telusuri">Telusuri Kategori</string>
 </resources>

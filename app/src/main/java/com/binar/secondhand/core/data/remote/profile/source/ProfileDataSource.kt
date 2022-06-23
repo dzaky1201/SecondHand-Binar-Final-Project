@@ -37,7 +37,7 @@ class ProfileDataSource(private val authService: AuthService) {
         address: String,
         phoneNumber: String,
         city: String
-    ): Observable<User> {
+    ):Observable<User> {
         val fullnameString = convertToString(fullname)
         val emailString = convertToString(email)
         val passwordString = convertToString(password)
@@ -66,7 +66,7 @@ class ProfileDataSource(private val authService: AuthService) {
         phoneNumber: String,
         city: String,
         file: File
-    ): Observable<User> {
+    ): io.reactivex.Observable<User> {
         val fullnameString = convertToString(fullname)
         val emailString = convertToString(email)
         val passwordString = convertToString(password)
