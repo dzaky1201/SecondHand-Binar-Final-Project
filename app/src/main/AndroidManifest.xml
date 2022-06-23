@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SecondHand"
         tools:targetApi="31">
         <activity
+            android:name=".screen.register.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.update_akun.UpdateAkunActivity"
             android:exported="false" />
         <activity
