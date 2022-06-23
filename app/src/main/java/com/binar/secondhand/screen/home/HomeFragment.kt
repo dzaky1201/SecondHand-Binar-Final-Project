@@ -35,9 +35,6 @@ class HomeFragment : Fragment() {
         viewModel.getProducts()
         viewModel.getCategories()
 
-        val productsAdapter = ListProductsAdapter()
-        binding.rvListProducts.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvListProducts.adapter = productsAdapter
 
 
         binding.rvCategories.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -55,7 +52,10 @@ class HomeFragment : Fragment() {
 
             }
             onSuccess = {
-                productsAdapter.submitList(it)
+                val productsAdapter = ListProductsAdapter(it)
+                binding.rvListProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.rvListProducts.adapter = productsAdapter
+
             }
             onFailure = { _, _ ->
                 print("GAGAL COK")
