@@ -18,10 +18,12 @@ class ListProductsAdapter : ListAdapter<Product, ListProductsAdapter.ViewHolder>
         private val binding = ItemHomeListProductsBinding.bind(view)
 
         fun bind(data: Product) {
+
             binding.apply {
                 binding.tvTitle.text = data.name
                 binding.tvPrice.text = data.basePrice.toString()
-                binding.tvCategory.text = data.categories.toString()
+                binding.tvCategory.text = data.categories[0].name
+
 
                 Glide.with(binding.root).load(data.imageUrl)
                     .error(R.drawable.home_attribute)
@@ -44,7 +46,7 @@ class ListProductsAdapter : ListAdapter<Product, ListProductsAdapter.ViewHolder>
     }
 }
 
-class DiffCallBack: DiffUtil.ItemCallback<Product>(){
+ class DiffCallBack: DiffUtil.ItemCallback<Product>(){
     override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
         return oldItem.id == newItem.id
     }

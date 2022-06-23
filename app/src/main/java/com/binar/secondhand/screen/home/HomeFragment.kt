@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.databinding.FragmentHomeBinding
+import com.binar.secondhand.screen.home.adapter.CategoryAdapter
 import com.binar.secondhand.screen.home.adapter.ListProductsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +26,6 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
         return binding.root
     }
 
@@ -33,24 +33,36 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getProducts()
+        viewModel.getCategories()
 
-        val adapter = ListProductsAdapter()
-        binding.rvListProducts.layoutManager =  GridLayoutManager(requireContext(),2)
-        binding.rvListProducts.adapter = adapter
+        val productsAdapter = ListProductsAdapter()
+        binding.rvListProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvListProducts.adapter = productsAdapter
 
 
-        with(viewModel.productStateEvent){
+        binding.rvCategories.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+
+
+        with(viewModel.categoriesStateEvent){
+            onSuccess = {
+                val categoriesAdapter = CategoryAdapter(it)
+                binding.rvCategories.adapter = categoriesAdapter
+            }
+        }
+
+        with(viewModel.productStateEvent) {
             onLoading = {
 
             }
             onSuccess = {
-                adapter.submitList(it)
+                productsAdapter.submitList(it)
             }
-            onFailure = { _,_->
+            onFailure = { _, _ ->
                 print("GAGAL COK")
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

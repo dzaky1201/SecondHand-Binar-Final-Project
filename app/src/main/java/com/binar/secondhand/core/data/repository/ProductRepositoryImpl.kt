@@ -1,6 +1,7 @@
 package com.binar.secondhand.core.data.repository
 
 import com.binar.secondhand.core.data.remote.home.source.HomeDataSource
+import com.binar.secondhand.core.domain.model.home.Categories
 import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.domain.repository.IProductRepository
 import com.binar.secondhand.core.event.MutableStateEventManager
@@ -15,6 +16,10 @@ class ProductRepositoryImpl(private val homeDataSource: HomeDataSource): IProduc
     override val productStateEventManager: StateEventManager<List<Product>>
         get() = _productStateEventManager
 
+    private var _categoriesStateEventManager: MutableStateEventManager<List<Categories>> = MutableStateEventManager()
+    override val categoriesStateEventManager: StateEventManager<List<Categories>>
+        get() = _categoriesStateEventManager
+
     override fun getProducts() {
         compositeDisposable.add(
             homeDataSource.getProducts().fetchStateEventSubscriber { productStateEvent ->
@@ -23,8 +28,17 @@ class ProductRepositoryImpl(private val homeDataSource: HomeDataSource): IProduc
         )
     }
 
+    override fun getCategories(){
+        compositeDisposable.add(
+            homeDataSource.getCategories().fetchStateEventSubscriber {  categoriesStateEvent ->
+                _categoriesStateEventManager.post(categoriesStateEvent)
+            }
+        )
+    }
+
     override fun close() {
         _productStateEventManager.closeQuietly()
+        _categoriesStateEventManager.closeQuietly()
         compositeDisposable.dispose()
     }
 
