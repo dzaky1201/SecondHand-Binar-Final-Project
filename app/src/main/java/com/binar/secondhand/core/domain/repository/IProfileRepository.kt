@@ -11,6 +11,7 @@ interface IProfileRepository: Closeable {
     val loginStateEventManager: StateEventManager<Login>
     val userStateEventManager: StateEventManager<User>
     val updateUserStateEventManager: StateEventManager<User>
+    val registerUserStateEventManager: StateEventManager<User>
 
     fun login(request: LoginRequest)
 
@@ -29,6 +30,15 @@ interface IProfileRepository: Closeable {
     )
 
     fun updateUserWithImage(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    )
+    fun registerUser(
         fullname: String,
         email: String,
         password: String,

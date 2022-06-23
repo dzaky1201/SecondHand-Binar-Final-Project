@@ -21,6 +21,11 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : IProfil
     override val loginStateEventManager: StateEventManager<Login>
         get() = _loginStateEventManager
 
+    private var _registerUserStateEventManager: MutableStateEventManager<User> =
+        MutableStateEventManager()
+    override val registerUserStateEventManager: StateEventManager<User>
+        get() = _registerUserStateEventManager
+
 
     private var _userStateEventManager: MutableStateEventManager<User> = MutableStateEventManager()
     override val userStateEventManager: StateEventManager<User>
@@ -72,6 +77,25 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : IProfil
                 }
 
         compositeDisposable.add(disposable)
+    }
+
+    override fun registerUser(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    ) {
+        val disposable =
+            dataSource.registerUser(fullname, email, password, address, phoneNumber, city, file)
+                .fetchStateEventSubscriber {
+                    _registerUserStateEventManager.post(it)
+                }
+
+        compositeDisposable.add(disposable)
+
     }
 
     override fun clearSession() {

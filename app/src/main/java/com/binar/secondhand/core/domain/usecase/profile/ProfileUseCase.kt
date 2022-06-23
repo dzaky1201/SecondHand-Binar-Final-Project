@@ -10,6 +10,7 @@ interface ProfileUseCase {
     val loginStateEventManager: StateEventManager<Login>
     val userStateEventManager: StateEventManager<User>
     val updateUserStateEventManager: StateEventManager<User>
+    val registerUserStateEventManager: StateEventManager<User>
 
     fun loginUser(request: LoginRequest)
 
@@ -29,6 +30,16 @@ interface ProfileUseCase {
     )
 
     fun updateUserWithImage(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    )
+
+    fun registerUser(
         fullname: String,
         email: String,
         password: String,

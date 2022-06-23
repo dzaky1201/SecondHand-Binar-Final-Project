@@ -89,6 +89,37 @@ class ProfileDataSource(private val authService: AuthService) {
         }
     }
 
+    fun registerUser(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    ): Observable<User> {
+        val fullnameString = convertToString(fullname)
+        val emailString = convertToString(email)
+        val passwordString = convertToString(password)
+        val addressString = convertToString(address)
+        val phoneNumberString = convertToString(phoneNumber)
+        val cityString = convertToString(city)
+        val photo = convertFile(file)
+        return authService.registerUser(
+            fullnameString,
+            emailString,
+            passwordString,
+            phoneNumberString,
+            addressString,
+            cityString,
+            photo
+        ).mapObservable {
+            ProfileMapper.mapUserResponseToEntity(
+                it
+            )
+        }
+    }
+
     private fun convertToString(string: String): RequestBody {
         return string.toRequestBody("text/plain".toMediaTypeOrNull())
     }

@@ -17,6 +17,9 @@ class ProfileInteractor(private val profileRepository: IProfileRepository) : Pro
     override val updateUserStateEventManager: StateEventManager<User> =
         profileRepository.updateUserStateEventManager
 
+    override val registerUserStateEventManager: StateEventManager<User>
+        get() = profileRepository.registerUserStateEventManager
+
     override fun updateUser(
         fullname: String,
         email: String,
@@ -38,6 +41,18 @@ class ProfileInteractor(private val profileRepository: IProfileRepository) : Pro
         file: File
     ) {
         profileRepository.updateUserWithImage(fullname, email, password, address, phoneNumber,city, file)
+    }
+
+    override fun registerUser(
+        fullname: String,
+        email: String,
+        password: String,
+        address: String,
+        phoneNumber: String,
+        city: String,
+        file: File
+    ) {
+        profileRepository.registerUser(fullname, email, password, address, phoneNumber, city, file)
     }
 
     override fun getUser() = profileRepository.getUser()
