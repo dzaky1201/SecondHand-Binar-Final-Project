@@ -9,6 +9,7 @@ class ProductInteractor(private val productRepository: IProductRepository): Prod
     override val productStateEventManager: StateEventManager<List<Product>> = productRepository.productStateEventManager
     override val searchStateEventManager: StateEventManager<List<Product>> = productRepository.searchStateEventManager
     override val categoriesStateEventManager: StateEventManager<List<Categories>> = productRepository.categoriesStateEventManager
+    override val categoryStateEventManager: StateEventManager<List<Product>> = productRepository.categoryStateEventManager
 
     override fun getProducts() {
         productRepository.getProducts()
@@ -23,6 +24,9 @@ class ProductInteractor(private val productRepository: IProductRepository): Prod
         productRepository.searchProduct(product)
     }
 
+    override fun getCategory(categoryId: Int) {
+        productRepository.getCategory(categoryId)
+    }
     override fun closeRepository() {
         productRepository.close()
     }

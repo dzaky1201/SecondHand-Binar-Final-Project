@@ -1,6 +1,7 @@
 package com.binar.secondhand.screen.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,7 +73,9 @@ class HomeFragment : Fragment() {
 
         with(viewModel.categoriesStateEvent) {
             onSuccess = {
-                val categoriesAdapter = CategoryAdapter(it)
+                val categoriesAdapter = CategoryAdapter(it, clicked = {
+                    it.id?.let { it1 -> setByCategory(it1) }
+                })
                 binding.rvCategories.adapter = categoriesAdapter
             }
         }
@@ -88,7 +91,24 @@ class HomeFragment : Fragment() {
 
             }
             onFailure = { _, _ ->
-                print("GAGAL COK")
+            }
+        }
+    }
+
+    private fun setByCategory(categoryId : Int) {
+        viewModel.getCategory(categoryId)
+
+        with(viewModel.categoryStateEvent){
+            onLoading = {
+
+            }
+            onSuccess = {
+                val productsAdapter = ListProductsAdapter(it)
+                binding.rvListProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.rvListProducts.adapter = productsAdapter
+            }
+            onFailure = { _, _ ->
+                Log.d("Failed","Category Failed")
             }
         }
     }

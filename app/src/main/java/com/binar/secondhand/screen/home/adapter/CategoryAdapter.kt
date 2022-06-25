@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.binar.secondhand.MainActivity
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Categories
 import com.binar.secondhand.databinding.ItemHomeCategoryBinding
+import com.binar.secondhand.screen.home.HomeViewModel
 import com.bumptech.glide.Glide
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CategoryAdapter(
-private val item: List<Categories>
+private val item: List<Categories>,
+private val clicked: (Categories) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.MainViewHolder>() {
 
     class MainViewHolder(val binding: ItemHomeCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -33,7 +37,7 @@ private val item: List<Categories>
         var index = 0;
         holder.binding.tvCategory.text = item[position].name.toString()
         holder.binding.bgCategory.setOnClickListener {
-            index = position
+            Log.d("Test","Test")
             notifyDataSetChanged()
         }
 
@@ -51,9 +55,8 @@ private val item: List<Categories>
 
 
         holder.itemView.setOnClickListener {
-            index = position
-            notifyDataSetChanged()
-            Log.d("TEST",index.toString())
+            Log.d("Test","Test")
+            clicked(item[position])
         }
     }
 
