@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -36,11 +37,40 @@ class HomeFragment : Fragment() {
         viewModel.getCategories()
 
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-        binding.rvCategories.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.searchProduct(newText)
+                with(viewModel.searchStateEvent) {
+                    onLoading = {
+
+                    }
+                    onSuccess = {
+                        val productsAdapter = ListProductsAdapter(it)
+                        binding.rvListProducts.layoutManager =
+                            GridLayoutManager(requireContext(), 2)
+                        binding.rvListProducts.adapter = productsAdapter
+
+                    }
+                    onFailure = { _, _ ->
+                        print("GAGAL COK")
+                    }
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+//
+                return false
+            }
+
+        })
+
+        binding.rvCategories.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
 
-        with(viewModel.categoriesStateEvent){
+        with(viewModel.categoriesStateEvent) {
             onSuccess = {
                 val categoriesAdapter = CategoryAdapter(it)
                 binding.rvCategories.adapter = categoriesAdapter

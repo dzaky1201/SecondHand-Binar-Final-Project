@@ -20,6 +20,10 @@ class ProductRepositoryImpl(private val homeDataSource: HomeDataSource): IProduc
     override val categoriesStateEventManager: StateEventManager<List<Categories>>
         get() = _categoriesStateEventManager
 
+    private var _searchStateEventManager: MutableStateEventManager<List<Product>> = MutableStateEventManager()
+    override val searchStateEventManager: StateEventManager<List<Product>>
+    get() = _searchStateEventManager
+
     override fun getProducts() {
         compositeDisposable.add(
             homeDataSource.getProducts().fetchStateEventSubscriber { productStateEvent ->
@@ -35,6 +39,15 @@ class ProductRepositoryImpl(private val homeDataSource: HomeDataSource): IProduc
             }
         )
     }
+
+    override fun searchProduct(product:String) {
+        compositeDisposable.add(
+            homeDataSource.searchProduct(product).fetchStateEventSubscriber { searchStateEvent ->
+                _searchStateEventManager.post(searchStateEvent)
+            }
+        )
+    }
+
 
     override fun close() {
         _productStateEventManager.closeQuietly()

@@ -7,7 +7,9 @@ import com.binar.secondhand.core.event.StateEventManager
 interface ProductUseCase {
     val productStateEventManager: StateEventManager<List<Product>>
     val categoriesStateEventManager: StateEventManager<List<Categories>>
+    val searchStateEventManager: StateEventManager<List<Product>>
     fun getProducts()
     fun getCategories()
+    fun searchProduct(product:String)
     fun closeRepository()
 }

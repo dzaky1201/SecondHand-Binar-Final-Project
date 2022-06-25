@@ -33,9 +33,9 @@ class ListProductsAdapter(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.binding.tvTitle.text = item[position].name
         holder.binding.tvPrice.text = item[position].basePrice.toString()
-        holder.binding.tvCategory.text = item[position].categories[0].name
-
-
+        if(item[position].categories.isNotEmpty()){
+            holder.binding.tvCategory.text = item[position].categories[0].name
+        }
         Glide.with(holder.binding.root).load(item[position].imageUrl)
             .error(R.drawable.home_attribute)
             .into(holder.binding.ivPosterImage)

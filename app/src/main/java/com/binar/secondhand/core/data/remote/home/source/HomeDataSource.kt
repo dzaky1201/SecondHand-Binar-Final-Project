@@ -20,4 +20,10 @@ class HomeDataSource(private val productService: ProductService) {
             ProductMapper.mapCatResponseToEntity(it)
         }
     }
+
+    fun searchProduct(product:String):Observable<List<Product>>{
+        return productService.searchProduct(product).mapObservable {
+            ProductMapper.mapProdResponseToEntity(it)
+        }
+    }
 }

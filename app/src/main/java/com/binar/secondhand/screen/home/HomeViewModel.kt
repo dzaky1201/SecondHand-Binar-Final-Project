@@ -13,6 +13,7 @@ class HomeViewModel(private val useCase: ProductUseCase) : ViewModel() {
 
     val productStateEvent: StateEventManager<List<Product>> = useCase.productStateEventManager
     val categoriesStateEvent: StateEventManager<List<Categories>> = useCase.categoriesStateEventManager
+    val searchStateEvent: StateEventManager<List<Product>> = useCase.searchStateEventManager
 
     fun getProducts(){
         useCase.getProducts()
@@ -22,5 +23,8 @@ class HomeViewModel(private val useCase: ProductUseCase) : ViewModel() {
         useCase.getCategories()
     }
 
+    fun searchProduct(product:String){
+        useCase.searchProduct(product)
+    }
 
 }
