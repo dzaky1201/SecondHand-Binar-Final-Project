@@ -1,100 +1,63 @@
 package com.binar.secondhand.screen.home.adapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.binar.secondhand.MainActivity
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Categories
 import com.binar.secondhand.databinding.ItemHomeCategoryBinding
-import com.binar.secondhand.screen.home.HomeViewModel
-import com.bumptech.glide.Glide
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CategoryAdapter(
-private val item: List<Categories>,
-private val clicked: (Categories) -> Unit
-) : RecyclerView.Adapter<CategoryAdapter.MainViewHolder>() {
+class CategoryAdapter(private val clicked: (Categories) -> Unit) :
+    ListAdapter<Categories, CategoryAdapter.ViewHolder>(DiffCallBackCategories()) {
 
-    class MainViewHolder(val binding: ItemHomeCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = ItemHomeCategoryBinding.bind(view)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val binding = ItemHomeCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return MainViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        var index = 0;
-        holder.binding.tvCategory.text = item[position].name.toString()
-        holder.binding.bgCategory.setOnClickListener {
-            Log.d("Test","Test")
-            notifyDataSetChanged()
-        }
-
-        if(index == position){
-            holder.binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home)
-            holder.binding.ivSearch.setBackgroundResource(R.drawable.ic_search)
-            holder.binding.tvCategory.setTextColor(Color.WHITE)
-//            notifyDataSetChanged()
-        }else{
-            holder.binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home_white)
-            holder.binding.ivSearch.setBackgroundResource(R.drawable.ic_search_black)
-            holder.binding.tvCategory.setTextColor(Color.BLACK)
-//            notifyDataSetChanged()
-        }
+        fun bind(data: Categories) {
+            var rowIndex: Int
+            binding.apply {
+                binding.tvCategory.text = data.name
+                root.setOnClickListener {
+                    rowIndex = adapterPosition
+                    if (rowIndex == adapterPosition) {
+                        binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home)
+                        binding.ivSearch.setImageResource(R.drawable.ic_search)
+                        binding.tvCategory.setTextColor(Color.WHITE)
+                    }
+                    clicked(data)
+                }
 
 
-        holder.itemView.setOnClickListener {
-            Log.d("Test","Test")
-            clicked(item[position])
+            }
         }
     }
 
-    override fun getItemCount(): Int {
-        return item.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_home_category, parent, false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = getItem(position)
+        holder.bind(data)
     }
 }
-//
-//class CategoryAdapter : ListAdapter<Categories, CategoryAdapter.ViewHolder>(diffCallBack()) {
-//
-//    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        private val binding = ItemHomeCategoryBinding.bind(view)
-//
-//        fun bind(data: Categories) {
-//            binding.apply {
-//                binding.tvCategory.text = data.name
-//            }
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_home_category, parent, false))
-//    }
-//
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val data = getItem(position)
-//        holder.bind(data)
-//    }
-//}
-//
-//class diffCallBack: DiffUtil.ItemCallback<Categories>(){
-//    override fun areItemsTheSame(oldItem: Categories, newItem: Categories): Boolean {
-//        return oldItem.id == newItem.id
-//    }
-//
-//    override fun areContentsTheSame(oldItem: Categories, newItem: Categories): Boolean {
-//        return oldItem == newItem
-//    }
-//
-//}
+
+class DiffCallBackCategories : DiffUtil.ItemCallback<Categories>() {
+    override fun areItemsTheSame(oldItem: Categories, newItem: Categories): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Categories, newItem: Categories): Boolean {
+        return oldItem == newItem
+    }
+
+}
 

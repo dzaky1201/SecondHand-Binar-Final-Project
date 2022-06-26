@@ -18,9 +18,9 @@ interface ProductService {
     @GET("seller/category")
     fun getCategories() : SecondHandResponse<List<CategoriesResponseItem>>
 
-    @GET("buyer/product?")
+    @GET("buyer/product")
     fun searchProduct(@Query("search") search: String = "") : SecondHandResponse<List<ProductResponseItem>>
 
-    @GET("buyer/product?")
+    @GET("buyer/product")
     fun getCategory(@Query("category_id") category: Int = 0) : SecondHandResponse<List<ProductResponseItem>>
 }

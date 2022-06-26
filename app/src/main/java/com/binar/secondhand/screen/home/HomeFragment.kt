@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.databinding.FragmentHomeBinding
@@ -34,6 +34,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // adapter for products
+        val productsAdapter = ListProductsAdapter()
+        binding.rvListProducts.layoutManager =
+            GridLayoutManager(requireContext(), 2)
+        binding.rvListProducts.adapter = productsAdapter
+
+        // adapter for categories
+        val categoriesAdapter = CategoryAdapter {
+            setByCategory(it.id ?: 0, productsAdapter)
+        }
+        binding.rvCategories.adapter = categoriesAdapter
+        binding.rvCategories.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+
         viewModel.getProducts()
         viewModel.getCategories()
 
@@ -44,17 +58,15 @@ class HomeFragment : Fragment() {
                 viewModel.searchProduct(newText)
                 with(viewModel.searchStateEvent) {
                     onLoading = {
-
+                        binding.loadingHome.isVisible = true
                     }
                     onSuccess = {
-                        val productsAdapter = ListProductsAdapter(it)
-                        binding.rvListProducts.layoutManager =
-                            GridLayoutManager(requireContext(), 2)
-                        binding.rvListProducts.adapter = productsAdapter
+                        binding.loadingHome.isVisible = false
+                        productsAdapter.submitList(it)
 
                     }
                     onFailure = { _, _ ->
-                        print("GAGAL COK")
+                        binding.loadingHome.isVisible = false
                     }
                 }
                 return false
@@ -67,48 +79,40 @@ class HomeFragment : Fragment() {
 
         })
 
-        binding.rvCategories.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-
 
         with(viewModel.categoriesStateEvent) {
             onSuccess = {
-                val categoriesAdapter = CategoryAdapter(it, clicked = {
-                    it.id?.let { it1 -> setByCategory(it1) }
-                })
-                binding.rvCategories.adapter = categoriesAdapter
+                categoriesAdapter.submitList(it)
             }
         }
 
         with(viewModel.productStateEvent) {
             onLoading = {
-
+                binding.loadingHome.isVisible = true
             }
             onSuccess = {
-                val productsAdapter = ListProductsAdapter(it)
-                binding.rvListProducts.layoutManager = GridLayoutManager(requireContext(), 2)
-                binding.rvListProducts.adapter = productsAdapter
-
+                binding.loadingHome.isVisible = false
+                productsAdapter.submitList(it)
             }
             onFailure = { _, _ ->
+                binding.loadingHome.isVisible = false
             }
         }
     }
 
-    private fun setByCategory(categoryId : Int) {
+    private fun setByCategory(categoryId: Int, productsAdapter: ListProductsAdapter) {
         viewModel.getCategory(categoryId)
 
-        with(viewModel.categoryStateEvent){
+        with(viewModel.categoryStateEvent) {
             onLoading = {
-
+                binding.loadingHome.isVisible = true
             }
             onSuccess = {
-                val productsAdapter = ListProductsAdapter(it)
-                binding.rvListProducts.layoutManager = GridLayoutManager(requireContext(), 2)
-                binding.rvListProducts.adapter = productsAdapter
+                binding.loadingHome.isVisible = false
+                productsAdapter.submitList(it)
             }
             onFailure = { _, _ ->
-                Log.d("Failed","Category Failed")
+                Log.d("Failed", "Category Failed")
             }
         }
     }
