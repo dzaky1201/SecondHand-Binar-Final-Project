@@ -7,29 +7,49 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.binar.secondhand.home.HomeFragment"
+        android:name="com.binar.secondhand.screen.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notification"
-        android:name="com.binar.secondhand.notification.NotificationFragment"
+        android:name="com.binar.secondhand.screen.notification.NotificationFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/navigation_jual"
-        android:name="com.binar.secondhand.jual.JualFragment"
+        android:name="com.binar.secondhand.screen.jual.JualFragment"
         android:label="@string/title_jual"
         tools:layout="@layout/fragment_jual" />
     <fragment
         android:id="@+id/navigation_akun"
-        android:name="com.binar.secondhand.akun.AkunFragment"
+        android:name="com.binar.secondhand.screen.akun.AkunFragment"
         android:label="@string/title_akun"
-        tools:layout="@layout/fragment_akun" />
+        tools:layout="@layout/fragment_akun" >
+        <action
+            android:id="@+id/action_navigation_akun_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_daftar_jual"
-        android:name="com.binar.secondhand.daftar_jual.DaftarJualFragment"
+        android:name="com.binar.secondhand.screen.daftar_jual.DaftarJualFragment"
         android:label="Daftar Jual"
         tools:layout="@layout/fragment_daftar_jual" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.binar.secondhand.screen.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_akun"
+            app:destination="@id/navigation_akun"
+            app:popUpTo="@id/navigation_akun"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/updateAkunActivity"
+        android:name="com.binar.secondhand.screen.update_akun.UpdateAkunActivity"
+        android:label="UpdateAkunActivity" />
 </navigation>
