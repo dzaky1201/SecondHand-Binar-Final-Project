@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.binar.secondhand.screen.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notification"
@@ -52,4 +56,13 @@
         android:id="@+id/updateAkunActivity"
         android:name="com.binar.secondhand.screen.update_akun.UpdateAkunActivity"
         android:label="UpdateAkunActivity" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.binar.secondhand.screen.detailbuyer.DetailFragment"
+        android:label="fragment_detail_buyer"
+        tools:layout="@layout/fragment_detail_buyer" >
+        <argument
+            android:name="idProduct"
+            app:argType="integer" />
+    </fragment>
 </navigation>

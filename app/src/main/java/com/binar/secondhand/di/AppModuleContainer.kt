@@ -2,6 +2,7 @@ package com.binar.secondhand.di
 
 import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.core.di.ModuleContainer
+import com.binar.secondhand.screen.detailbuyer.DetailViewModel
 import com.binar.secondhand.screen.home.HomeViewModel
 import com.binar.secondhand.screen.login.LoginViewModel
 import com.binar.secondhand.screen.register.RegisterViewModel
@@ -27,5 +28,9 @@ class AppModuleContainer : ModuleContainer() {
 
     private val viewModelRegister = module {
         viewModel { RegisterViewModel(get()) }
+    }
+
+    private val viewModelDetail = module {
+        viewModel { DetailViewModel(get()) }
     }
 }

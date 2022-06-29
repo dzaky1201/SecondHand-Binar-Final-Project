@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.detailbuyer.FragmentaBuy">
+    tools:context=".screen.detailbuyer.DetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,11 +24,11 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/nego"
+                    android:id="@+id/btnBuy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Saya tertarik dan ingin nego"
+                    android:text="Saya tertarik dan ingin btnBuy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="50dp"
-                    app:layout_constraintBottom_toTopOf="@+id/nego"
+                    app:layout_constraintBottom_toTopOf="@+id/btnBuy"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -49,11 +49,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Deskripsi"
+                        android:text="Description"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/deskripsi"
+                        android:id="@+id/tvDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -73,7 +73,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
                     <ImageView
-                        android:id="@+id/profilepenjual"
+                        android:id="@+id/ivSellerProfile"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
@@ -81,7 +81,7 @@
                         android:background="@drawable/ic_launcher_background" />
 
                     <TextView
-                        android:id="@+id/namapenjual"
+                        android:id="@+id/tvNameSeller"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
@@ -90,7 +90,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/kotapenjual"
+                        android:id="@+id/tvCity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
@@ -104,15 +104,15 @@
                     android:layout_width="350dp"
                     android:layout_height="70dp"
                     android:background="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/nego"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnBuy"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.491"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/gambarproduk"
+                    app:layout_constraintTop_toTopOf="@+id/rlProduct"
                     app:layout_constraintVertical_bias="0.301">
 
                     <TextView
-                        android:id="@+id/namaproduk"
+                        android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -120,7 +120,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/kategori"
+                        android:id="@+id/tvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -129,7 +129,7 @@
                         android:textSize="10dp" />
 
                     <TextView
-                        android:id="@+id/harga"
+                        android:id="@+id/tvHarga"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -137,8 +137,8 @@
                         android:text="Rp 275.000" />
                 </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:id="@+id/gambarproduk"
+                <RelativeLayout
+                    android:id="@+id/rlProduct"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@drawable/ic_launcher_background"
@@ -148,13 +148,22 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:id="@+id/ivProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:fitsSystemWindows="true"
+                        android:src="@drawable/bg_home" />
+                    
+                    <ImageView
                         android:id="@+id/back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/ic_back" />
-                </LinearLayout>
+                </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
