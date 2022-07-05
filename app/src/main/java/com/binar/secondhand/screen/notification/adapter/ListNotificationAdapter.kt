@@ -33,7 +33,7 @@ class ListNotificationAdapter : ListAdapter<Notification, ListNotificationAdapte
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
                 root.setOnClickListener{
-//                    it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToDetailFragment(item.id))
+
                 }
             }
         }
