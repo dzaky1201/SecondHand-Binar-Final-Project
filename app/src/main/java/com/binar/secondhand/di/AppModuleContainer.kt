@@ -5,6 +5,7 @@ import com.binar.secondhand.core.di.ModuleContainer
 import com.binar.secondhand.screen.detailbuyer.DetailViewModel
 import com.binar.secondhand.screen.home.HomeViewModel
 import com.binar.secondhand.screen.login.LoginViewModel
+import com.binar.secondhand.screen.notification.NotificationViewModel
 import com.binar.secondhand.screen.register.RegisterViewModel
 import com.binar.secondhand.screen.update_akun.UpdateAkunViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,5 +33,9 @@ class AppModuleContainer : ModuleContainer() {
 
     private val viewModelDetail = module {
         viewModel { DetailViewModel(get()) }
+    }
+
+    private val viewModelNotification = module {
+        viewModel { NotificationViewModel(get()) }
     }
 }

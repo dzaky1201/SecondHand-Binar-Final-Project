@@ -3,11 +3,15 @@ package com.binar.secondhand.screen.notification
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.binar.secondhand.core.domain.model.notification.Notification
+import com.binar.secondhand.core.domain.usecase.notification.NotificationUseCase
+import com.binar.secondhand.core.event.StateEventManager
 
-class NotificationViewModel : ViewModel() {
+class NotificationViewModel(private val useCase : NotificationUseCase) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    val notificationStateEvent : StateEventManager<List<Notification>> = useCase.notificationStateEventManager
+
+    fun getNotificationList(){
+        useCase.getNotificationList()
     }
-    val text: LiveData<String> = _text
 }

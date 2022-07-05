@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    app:cardCornerRadius="20dp"
+    android:padding="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <!--image view for displaying course image-->
+
+
+        <!--text view for displaying course name-->
+        <TextView
+            android:id="@+id/idTVCourseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Masukkan Harga Tawarmu"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!--text view for displaying course tracks-->
+        <TextView
+            android:id="@+id/idTVCourseTracks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idTVCourseName"
+            android:layout_marginTop="10dp"
+
+            android:text="@string/detail_nego"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <!--text view for displaying course duration-->
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            android:id="@+id/cardItem"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            >
+            <ImageView
+                android:background="@drawable/shape_images"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/ivPoster"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_launcher_background"/>
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="65dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_medium"
+                android:text=""/>
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="65dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:text=""/>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_below="@id/cardItem"
+            android:id="@+id/hargaTawar"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harga Tawar"/>
+
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hargaTawar"
+            android:ems="20"
+            android:inputType="number"/>
+        <!--button for dismissing our dialog-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBuy"
+            android:backgroundTint="@color/purple"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hargaTawar"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_btn_detail"
+            android:text="Kirim"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

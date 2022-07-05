@@ -9,15 +9,21 @@ import com.binar.secondhand.core.data.remote.detail.DetailService
 import com.binar.secondhand.core.data.remote.detail.source.DetailDataSource
 import com.binar.secondhand.core.data.remote.home.ProductService
 import com.binar.secondhand.core.data.remote.home.source.HomeDataSource
+import com.binar.secondhand.core.data.remote.notification.NotificationService
+import com.binar.secondhand.core.data.remote.notification.source.NotificationDataSource
 import com.binar.secondhand.core.data.repository.DetailRepositoryImpl
+import com.binar.secondhand.core.data.repository.NotificationRepositoryImpl
 import com.binar.secondhand.core.data.repository.ProductRepositoryImpl
 import com.binar.secondhand.core.domain.repository.IProductRepository
 import com.binar.secondhand.core.domain.repository.IProfileRepository
 import com.binar.secondhand.core.domain.repository.iDetailRepository
+import com.binar.secondhand.core.domain.repository.iNotificationRepository
 import com.binar.secondhand.core.domain.usecase.detail.DetailUseCase
 import com.binar.secondhand.core.domain.usecase.detail.Detailinteractor
 import com.binar.secondhand.core.domain.usecase.home.ProductInteractor
 import com.binar.secondhand.core.domain.usecase.home.ProductUseCase
+import com.binar.secondhand.core.domain.usecase.notification.NotificationInteractor
+import com.binar.secondhand.core.domain.usecase.notification.NotificationUseCase
 import com.binar.secondhand.core.domain.usecase.profile.ProfileInteractor
 import com.binar.secondhand.core.domain.usecase.profile.ProfileUseCase
 import org.koin.android.ext.koin.androidContext
@@ -39,6 +45,9 @@ class CoreModuleContainer : ModuleContainer() {
     }
 
 
+    private val notificationServicesModule = module {
+        single<NotificationService> { RetrofitProvider.retrofit().create(NotificationService::class.java) }
+    }
     private val profileDataSourceModule = module {
         single { ProfileDataSource(get()) }
     }
@@ -49,6 +58,10 @@ class CoreModuleContainer : ModuleContainer() {
 
     private val detailDataSourceModule = module{
         single {DetailDataSource(get())}
+    }
+
+    private val notificationDataSourceModuley = module{
+        single {NotificationDataSource(get())}
     }
 
     private val profileRepositoryModule = module {
@@ -63,6 +76,10 @@ class CoreModuleContainer : ModuleContainer() {
         factory<iDetailRepository> { DetailRepositoryImpl(get()) }
     }
 
+    private val notificationRepositoryModule = module{
+        factory<iNotificationRepository> { NotificationRepositoryImpl(get()) }
+    }
+
     private val profileUseCaseModule = module {
         factory<ProfileUseCase> { ProfileInteractor(get()) }
     }
@@ -73,6 +90,10 @@ class CoreModuleContainer : ModuleContainer() {
 
     private val detailUserCaseModule = module{
         factory<DetailUseCase>{Detailinteractor(get())}
+    }
+
+    private val notificationUserCaseModule = module{
+        factory<NotificationUseCase>{NotificationInteractor(get())}
     }
 
     private val preferencesModule = module {

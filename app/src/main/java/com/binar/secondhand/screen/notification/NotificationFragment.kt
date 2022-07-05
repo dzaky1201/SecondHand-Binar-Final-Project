@@ -1,38 +1,121 @@
 package com.binar.secondhand.screen.notification
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.binar.secondhand.core.data.local.DataPreferences
 import com.binar.secondhand.databinding.FragmentNotificationBinding
+import com.binar.secondhand.screen.akun.AkunFragmentDirections
+import com.binar.secondhand.screen.akun.AkunViewModel
+import com.binar.secondhand.screen.notification.adapter.ListNotificationAdapter
+import com.binar.secondhand.screen.update_akun.UpdateAkunActivity
+import com.bumptech.glide.Glide
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
 
     private var _binding: FragmentNotificationBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModelAkun: AkunViewModel by viewModel()
+    private val viewModelNotif: NotificationViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationViewModel =
-            ViewModelProvider(this).get(NotificationViewModel::class.java)
-
         _binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        notificationViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModelAkun.getUser()
+        val userManager = viewModelAkun.userManager
+        val prefrences = DataPreferences.get
+        val token = prefrences.token
+        Log.d("token", token)
+
+        userManager.onLoading = {
+            binding.progressBar.isVisible = true
         }
-        return root
+        userManager.onSuccess = { user ->
+//            binding.progressBar.isVisible = false
+//            binding.includeAkunSaya.layoutAkun.isVisible = true
+//            Glide.with(view).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
+//            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
+//                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
+//                intent.putExtra("showData", user)
+//                startActivity(intent)
+//            }
+
+            binding.rvNotifList.isVisible = true
+            binding.textNotification.isVisible = true
+            viewModelNotif.getNotificationList()
+
+            with(viewModelNotif.notificationStateEvent){
+                onLoading = {
+
+                }
+                onSuccess = {
+
+                    val listNotificationAdapter = ListNotificationAdapter()
+                    binding.rvNotifList.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                    binding.rvNotifList.adapter = listNotificationAdapter
+                    listNotificationAdapter.submitList(it)
+                }
+                onFailure = {_,_ ->
+
+                }
+            }
+
+
+        }
+
+        userManager.onFailure = { _, _ ->
+            binding.progressBar.isVisible = false
+            binding.txtTryLogin.isVisible = true
+            binding.rvNotifList.isVisible = false
+            binding.textNotification.isVisible = false
+            with(binding.btnTryLogin){
+                isVisible = true
+                setOnClickListener {
+                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+                }
+            }
+            binding.includeAkunSaya.layoutAkun.isVisible = false
+        }
+
+        with(binding.includeAkunSaya){
+            btnLogout.setOnClickListener {
+                val dialog = AlertDialog.Builder(view.context)
+                dialog.setTitle("Logout")
+                dialog.setMessage("Apakah Anda Yakin Ingin Logout ?")
+                dialog.setPositiveButton("Yakin") { _, _ ->
+                    viewModelAkun.clearSession()
+                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+                }
+
+                dialog.setNegativeButton("Batal") { listener, _ ->
+                    listener.dismiss()
+                }
+
+                dialog.show()
+            }
+        }
     }
 
     override fun onDestroyView() {

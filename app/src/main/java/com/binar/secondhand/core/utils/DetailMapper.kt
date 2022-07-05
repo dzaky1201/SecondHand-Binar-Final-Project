@@ -1,8 +1,10 @@
 package com.binar.secondhand.core.utils
 
 import com.binar.secondhand.core.data.remote.detail.response.DetailResponseItem
+import com.binar.secondhand.core.data.remote.detail.response.OrderResponseItem
 import com.binar.secondhand.core.data.remote.profile.response.UserResponse
 import com.binar.secondhand.core.domain.model.detail.Detail
+import com.binar.secondhand.core.domain.model.detail.Order
 import com.binar.secondhand.core.domain.model.profile.User
 
 object DetailMapper {
@@ -58,6 +60,23 @@ object DetailMapper {
             userResponse?.city.orEmpty(),
             userResponse?.phoneNumber.orEmpty(),
             userResponse?.updatedAt.orEmpty()
+        )
+    }
+
+    fun mapOrderResponseToEntity(orderResponse : OrderResponseItem?):Order{
+        return Order(
+            orderResponse?.basePrice.orNol(),
+            orderResponse?.buyerId.orNol(),
+            orderResponse?.createdAt.orEmpty(),
+            orderResponse?.id.orNol(),
+            orderResponse?.imageProduct.orEmpty(),
+            orderResponse?.price.orNol(),
+            orderResponse?.productId.orNol(),
+            orderResponse?.productName.orEmpty(),
+            orderResponse?.status.orEmpty(),
+            orderResponse?.transactionDate.orEmpty(),
+            orderResponse?.updatedAt.orEmpty(),
+
         )
     }
 }
