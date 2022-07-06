@@ -81,4 +81,6 @@ dependencies {
 
     // Dexter
     implementation 'com.karumi:dexter:6.2.1'
+
+    implementation 'com.github.pratikbutani:MultiSelectSpinner:1.0.1'
 }

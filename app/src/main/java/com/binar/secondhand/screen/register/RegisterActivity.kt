@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.loadingUpdate.isVisible = false
         }
 
-        binding.txtAddPhotoProfile.setOnClickListener {
+        binding.profileView.setOnClickListener {
             val pictureDialog = AlertDialog.Builder(this)
             pictureDialog.setTitle("Select Action")
             val pictureDialogItems = arrayOf(

@@ -9,18 +9,6 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/profileView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/add_foto"
-            android:elevation="18dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/add_image_plus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/outlinedTextFieldAddress"
-            app:layout_constraintTop_toBottomOf="@+id/titleUpdate" />
-
-        <ImageView
             android:id="@+id/icBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -32,110 +20,104 @@
 
         <TextView
             android:id="@+id/titleUpdate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="@string/daftar"
+            android:gravity="center"
+            android:text="Add Product"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/icBack"
+            app:layout_constraintStart_toEndOf="@+id/icBack"
             app:layout_constraintTop_toTopOf="@+id/icBack" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextFieldFullname"
+            android:id="@+id/outlinedTextFieldName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:hint="@string/fullname"
+            android:hint="Nama Produk"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
-            android:layout_marginTop="16dp"
             app:boxCornerRadiusTopStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileView">
+            app:layout_constraintTop_toBottomOf="@+id/titleUpdate">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtFullName"
+                android:id="@+id/edtNamaProduk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextFieldEmail"
+            android:id="@+id/outlinedTextFieldHarga"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:hint="@string/email"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:hint="Harga Produk"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            android:layout_marginStart="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldFullname">
+            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldName">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtEmail"
+                android:id="@+id/edtHargaProduk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- text view to display selected items-->
+
+
+        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
+            android:id="@+id/selectCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:hintText="Pilih Category"
+            app:drawableRightCompat="@android:drawable/arrow_down_float"
+            app:layout_constraintEnd_toEndOf="@id/outlinedTextFieldHarga"
+            app:layout_constraintStart_toStartOf="@id/outlinedTextFieldHarga"
+            app:layout_constraintTop_toBottomOf="@id/outlinedTextFieldHarga" />
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextFieldPhone"
+            android:id="@+id/outlinedTextFieldDescription"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
-            android:hint="@string/phone_number"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:hint="Description"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldEmail">
+            app:layout_constraintTop_toBottomOf="@+id/selectCategory">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtPhoneNumber"
+                android:id="@+id/edtDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextFieldCity"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_marginStart="12dp"
-            android:hint="@string/city"
-            android:layout_marginTop="12dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldPhone">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtCity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:lines="5"
+                android:scrollbars="vertical" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,74 +126,89 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
-            android:hint="@string/address"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:hint="@string/address"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldCity">
+            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldDescription">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="5"
-                android:scrollbars="vertical"/>
+                android:scrollbars="vertical" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextFieldPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+
+        <ImageView
+            android:id="@+id/profileView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/add_foto"
+            android:elevation="18dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/add_image_plus"
+            app:layout_constraintStart_toStartOf="@id/outlinedTextFieldAddress"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddPhotoProfile" />
+
+        <TextView
+            android:id="@+id/txtAddPhotoProfile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginStart="12dp"
-            android:hint="@string/password"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/outlinedTextFieldAddress">
+            android:text="Foto Produk"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldAddress"
+            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldAddress" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTerbitkan"
+            android:layout_width="156dp"
+            android:layout_height="60dp"
             android:layout_marginTop="24dp"
-            android:text="@string/daftar"
-            app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldPassword"
-            app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldPassword"
-            app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldPassword" />
+            android:text="Terbitkan"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnPreview"
+            app:layout_constraintTop_toBottomOf="@+id/profileView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnPreview"
+            android:layout_width="156dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_border_add_product"
+            android:text="Preview"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnTerbitkan"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileView" />
 
 
         <ProgressBar
-            android:id="@+id/loadingUpdate"
+            android:id="@+id/loadingAddProduk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-            app:layout_constraintStart_toStartOf="@+id/btnRegister"
-            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
