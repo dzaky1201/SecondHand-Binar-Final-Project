@@ -1,6 +1,8 @@
 package com.binar.secondhand.screen.home.adapter
 
 
+import android.text.Spannable
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide
 
 class ListProductsAdapter : ListAdapter<Product, ListProductsAdapter.ViewHolder>(DiffCallBack()) {
 
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemHomeListProductsBinding.bind(view)
 
@@ -26,20 +29,19 @@ class ListProductsAdapter : ListAdapter<Product, ListProductsAdapter.ViewHolder>
                 binding.tvTitle.text = item.name
                 binding.tvPrice.text = item.basePrice.toString()
                 if (item.categories.isNotEmpty()) {
-                    binding.tvCategory.text = item.categories[0].name
+                    item.categories.forEach {
+                        val span = SpannableString(it.name + "\n")
+                        binding.tvCategory.text = span
+                    }
                 }
-
 
                 Glide.with(binding.root).load(item.imageUrl)
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
+                    
                 root.setOnClickListener{
                     it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToDetailFragment(item.id))
                 }
-//                root.setOnClickListener {
-//                 val id = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id ?: 0)
-//                  it.findNavController().navigate(id)
-//                }
             }
         }
     }
