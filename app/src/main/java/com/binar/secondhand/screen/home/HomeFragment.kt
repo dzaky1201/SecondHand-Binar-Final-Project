@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentHomeBinding
 import com.binar.secondhand.screen.home.adapter.CategoryAdapter
 import com.binar.secondhand.screen.home.adapter.ListProductsAdapter
@@ -20,6 +21,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModel()
+    private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +35,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         // adapter for products
         val productsAdapter = ListProductsAdapter()
@@ -55,25 +58,25 @@ class HomeFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.searchProduct(newText)
-                with(viewModel.searchStateEvent) {
-                    onLoading = {
-                        binding.loadingHome.isVisible = true
-                    }
-                    onSuccess = {
-                        binding.loadingHome.isVisible = false
-                        productsAdapter.submitList(it)
 
-                    }
-                    onFailure = { _, _ ->
-                        binding.loadingHome.isVisible = false
-                    }
-                }
                 return false
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-//
+                    viewModel.searchProduct(query)
+                with(viewModel.searchStateEvent) {
+                    onLoading = {
+                        progressDialog = DialogWindow.progressCircle(requireContext(), "Sedang Mencari...", true)
+                    }
+                    onSuccess = {
+                        progressDialog?.dismiss()
+                        productsAdapter.submitList(it)
+
+                    }
+                    onFailure = { _, _ ->
+                        progressDialog?.dismiss()
+                    }
+                }
                 return false
             }
 
@@ -81,21 +84,22 @@ class HomeFragment : Fragment() {
 
 
         with(viewModel.categoriesStateEvent) {
+            onLoading = {
+                progressDialog = DialogWindow.progressCircle(requireContext(), "Sedang Memuat Product...", true)
+            }
             onSuccess = {
+                progressDialog?.dismiss()
                 categoriesAdapter.submitList(it)
             }
         }
 
         with(viewModel.productStateEvent) {
-            onLoading = {
-                binding.loadingHome.isVisible = true
-            }
             onSuccess = {
-                binding.loadingHome.isVisible = false
+                progressDialog?.dismiss()
                 productsAdapter.submitList(it)
             }
             onFailure = { _, _ ->
-                binding.loadingHome.isVisible = false
+                progressDialog?.dismiss()
             }
         }
     }
@@ -105,13 +109,14 @@ class HomeFragment : Fragment() {
 
         with(viewModel.categoryStateEvent) {
             onLoading = {
-                binding.loadingHome.isVisible = true
+                progressDialog = DialogWindow.progressCircle(requireContext(), "Loading...", true)
             }
             onSuccess = {
-                binding.loadingHome.isVisible = false
+                progressDialog?.dismiss()
                 productsAdapter.submitList(it)
             }
             onFailure = { _, _ ->
+                progressDialog?.dismiss()
                 Log.d("Failed", "Category Failed")
             }
         }

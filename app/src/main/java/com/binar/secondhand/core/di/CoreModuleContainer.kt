@@ -69,8 +69,9 @@ class CoreModuleContainer : ModuleContainer() {
         single {DetailDataSource(get())}
     }
 
-    private val notificationDataSourceModuley = module{
-        single {NotificationDataSource(get())}
+    private val notificationDataSourceModuley = module {
+        single { NotificationDataSource(get()) }
+    }
         
     private val jualDataSourceModule = module {
         single { JualDataSource(get()) }
@@ -88,8 +89,9 @@ class CoreModuleContainer : ModuleContainer() {
         factory<iDetailRepository> { DetailRepositoryImpl(get()) }
     }
 
-    private val notificationRepositoryModule = module{
+    private val notificationRepositoryModule = module {
         factory<iNotificationRepository> { NotificationRepositoryImpl(get()) }
+    }
     private val jualRepositoryModule = module {
         factory<IJualRepository> { JualRepositoryImpl(get()) }
     }
@@ -106,8 +108,9 @@ class CoreModuleContainer : ModuleContainer() {
         factory<DetailUseCase>{Detailinteractor(get())}
     }
 
-    private val notificationUserCaseModule = module{
-        factory<NotificationUseCase>{NotificationInteractor(get())}
+    private val notificationUserCaseModule = module {
+        factory<NotificationUseCase> { NotificationInteractor(get()) }
+    }
         
     private val jualUseCaseModule = module {
         factory<JualUseCase> { JualInteractor(get()) }

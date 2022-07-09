@@ -19,7 +19,11 @@
         android:id="@+id/navigation_notification"
         android:name="com.binar.secondhand.screen.notification.NotificationFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_navigation_notification_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_jual"

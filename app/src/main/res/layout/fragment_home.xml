@@ -64,14 +64,6 @@
             app:layout_constraintStart_toStartOf="@id/imgBanner"
             app:layout_constraintTop_toBottomOf="@id/titleTelusuriCategory" />
 
-        <ProgressBar
-            android:id="@+id/loadingHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/rvCategories"
-            app:layout_constraintStart_toStartOf="@id/rvCategories"
-            app:layout_constraintTop_toTopOf="@+id/rvCategories" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvListProducts"

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.core.data.local.DataPreferences
+import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentNotificationBinding
 import com.binar.secondhand.screen.akun.AkunFragmentDirections
 import com.binar.secondhand.screen.akun.AkunViewModel
@@ -29,6 +30,8 @@ class NotificationFragment : Fragment() {
 
     private val viewModelAkun: AkunViewModel by viewModel()
     private val viewModelNotif: NotificationViewModel by viewModel()
+    private var progressDialog: AlertDialog? = null
+
 
 
     override fun onCreateView(
@@ -50,35 +53,27 @@ class NotificationFragment : Fragment() {
         Log.d("token", token)
 
         userManager.onLoading = {
-            binding.progressBar.isVisible = true
+            progressDialog = DialogWindow.progressCircle(requireContext(), "Tunggu Sebentar...", true)
         }
         userManager.onSuccess = { user ->
-//            binding.progressBar.isVisible = false
-//            binding.includeAkunSaya.layoutAkun.isVisible = true
-//            Glide.with(view).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
-//            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
-//                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
-//                intent.putExtra("showData", user)
-//                startActivity(intent)
-//            }
-
+            progressDialog?.dismiss()
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
             viewModelNotif.getNotificationList()
 
             with(viewModelNotif.notificationStateEvent){
                 onLoading = {
-
+                    progressDialog = DialogWindow.progressCircle(requireContext(), "Mendapatkan Notifikasi...", true)
                 }
                 onSuccess = {
-
+                    progressDialog?.dismiss()
                     val listNotificationAdapter = ListNotificationAdapter()
                     binding.rvNotifList.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
                     binding.rvNotifList.adapter = listNotificationAdapter
                     listNotificationAdapter.submitList(it)
                 }
                 onFailure = {_,_ ->
-
+                    progressDialog?.dismiss()
                 }
             }
 
@@ -86,36 +81,18 @@ class NotificationFragment : Fragment() {
         }
 
         userManager.onFailure = { _, _ ->
-            binding.progressBar.isVisible = false
+            progressDialog?.dismiss()
             binding.txtTryLogin.isVisible = true
             binding.rvNotifList.isVisible = false
             binding.textNotification.isVisible = false
             with(binding.btnTryLogin){
                 isVisible = true
                 setOnClickListener {
-                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+                    findNavController().navigate(NotificationFragmentDirections.actionNavigationNotificationToLoginFragment())
                 }
             }
-            binding.includeAkunSaya.layoutAkun.isVisible = false
         }
 
-        with(binding.includeAkunSaya){
-            btnLogout.setOnClickListener {
-                val dialog = AlertDialog.Builder(view.context)
-                dialog.setTitle("Logout")
-                dialog.setMessage("Apakah Anda Yakin Ingin Logout ?")
-                dialog.setPositiveButton("Yakin") { _, _ ->
-                    viewModelAkun.clearSession()
-                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
-                }
-
-                dialog.setNegativeButton("Batal") { listener, _ ->
-                    listener.dismiss()
-                }
-
-                dialog.show()
-            }
-        }
     }
 
     override fun onDestroyView() {

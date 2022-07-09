@@ -1,7 +1,7 @@
 package com.binar.secondhand.di
 
-import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.core.di.ModuleContainer
+import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.screen.detailbuyer.DetailViewModel
 import com.binar.secondhand.screen.home.HomeViewModel
 import com.binar.secondhand.screen.jual.JualViewModel
@@ -22,8 +22,8 @@ class AppModuleContainer : ModuleContainer() {
         viewModel { AkunViewModel(get()) }
     }
 
-    private val viewModelHome = module{
-        viewModel {HomeViewModel(get())}
+    private val viewModelHome = module {
+        viewModel { HomeViewModel(get()) }
     }
     private val viewModelUpdateAkun = module {
         viewModel { UpdateAkunViewModel(get()) }
@@ -38,7 +38,8 @@ class AppModuleContainer : ModuleContainer() {
 
     private val viewModelNotification = module {
         viewModel { NotificationViewModel(get()) }
-        
+    }
+
     private val viewModelJual = module {
         viewModel { JualViewModel(get(), get(), get()) }
     }
