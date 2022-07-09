@@ -14,26 +14,29 @@ import com.binar.secondhand.databinding.ItemHomeCategoryBinding
 
 class CategoryAdapter(private val clicked: (Categories) -> Unit) :
     ListAdapter<Categories, CategoryAdapter.ViewHolder>(DiffCallBackCategories()) {
+    var rowIndex: Int = -1
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemHomeCategoryBinding.bind(view)
 
 
         fun bind(data: Categories) {
-            var rowIndex: Int
             binding.apply {
                 binding.tvCategory.text = data.name
                 root.setOnClickListener {
                     rowIndex = adapterPosition
-                    if (rowIndex == adapterPosition) {
-                        binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home)
-                        binding.ivSearch.setImageResource(R.drawable.ic_search)
-                        binding.tvCategory.setTextColor(Color.WHITE)
-                    }
+                    notifyDataSetChanged()
                     clicked(data)
                 }
-
-
+                if (rowIndex == adapterPosition) {
+                    binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home)
+                    binding.ivSearch.setImageResource(R.drawable.ic_search)
+                    binding.tvCategory.setTextColor(Color.WHITE)
+                } else{
+                    binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home_white)
+                    binding.ivSearch.setImageResource(R.drawable.ic_search_black)
+                    binding.tvCategory.setTextColor(Color.BLACK)
+                }
             }
         }
     }
