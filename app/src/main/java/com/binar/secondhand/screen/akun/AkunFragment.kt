@@ -36,9 +36,6 @@ class AkunFragment : Fragment() {
         viewModel.getUser()
 
         val userManager = viewModel.userManager
-        val prefrences = DataPreferences.get
-        val token = prefrences.token
-        Log.d("token", token)
 
         userManager.onLoading = {
             binding.progressBar.isVisible = true
@@ -74,7 +71,8 @@ class AkunFragment : Fragment() {
                 dialog.setMessage("Apakah Anda Yakin Ingin Logout ?")
                 dialog.setPositiveButton("Yakin") { _, _ ->
                     viewModel.clearSession()
-                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+                    viewModel.getUser()
+                    binding.includeAkunSaya.layoutAkun.isVisible = false
                 }
 
                 dialog.setNegativeButton("Batal") { listener, _ ->

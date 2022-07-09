@@ -35,4 +35,6 @@
     <string name="diskon_hingga">Diskon Hingga</string>
     <string name="enam_puluh">60%</string>
     <string name="telusuri">Telusuri Kategori</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

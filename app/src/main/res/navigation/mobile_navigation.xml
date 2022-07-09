@@ -21,7 +21,13 @@
         android:id="@+id/navigation_jual"
         android:name="com.binar.secondhand.screen.jual.JualFragment"
         android:label="@string/title_jual"
-        tools:layout="@layout/fragment_jual" />
+        tools:layout="@layout/fragment_jual" >
+        <action
+            android:id="@+id/action_navigation_jual_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_akun"
         android:name="com.binar.secondhand.screen.akun.AkunFragment"
@@ -52,4 +58,8 @@
         android:id="@+id/updateAkunActivity"
         android:name="com.binar.secondhand.screen.update_akun.UpdateAkunActivity"
         android:label="UpdateAkunActivity" />
+    <dialog
+        android:id="@+id/loginFragmentDialog"
+        android:name="com.binar.secondhand.screen.login.LoginFragmentDialog"
+        android:label="LoginFragmentDialog" />
 </navigation>
