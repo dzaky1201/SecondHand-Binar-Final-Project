@@ -3,6 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/rectangle_notif.xml" value="0.15709090364314326" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/shape_btn_detail.xml" value="0.102" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/shape_category_home.xml" value="0.11" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/shape_category_home_white.xml" value="0.1" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/shape_detail_card.xml" value="0.1" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/shape_et_search_home.xml" value="0.108" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/drawable/shape_images.xml" value="0.102" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/activity_home.xml" value="0.10643115942028986" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/activity_main.xml" value="0.19199999334161955" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/akun_saya_view.xml" value="0.2767210144927536" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/bottom_sheet_detail.xml" value="0.19830028328611898" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_akun.xml" value="0.1483636312185242" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_detail_buyer.xml" value="0.18327272091700048" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_fragmenta_buy.xml" value="0.13854166666666667" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_home.xml" value="0.15709090364314326" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_jual.xml" value="0.13854166666666667" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_login.xml" value="0.13854166666666667" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/fragment_notification.xml" value="0.21818181061547676" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/item_home_category.xml" value="0.21818181061547676" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/item_home_list_products.xml" value="0.19199999334161955" />
+        <entry key="..\:/Users/albet/Documents/Binar Academy/Final Project/E-Commerce App/app/src/main/res/layout/item_notification.xml" value="0.4363636212309535" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand/app/src/main/res/layout/activity_register.xml" value="0.18342391304347827" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand/app/src/main/res/layout/activity_update_akun.xml" value="0.10916919959473151" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand/app/src/main/res/layout/fragment_login.xml" value="0.18342391304347827" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand/app/src/main/res/layout/fragment_register.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/FInal/app/src/main/res/drawable/ic_back.xml" value="0.1075" />
         <entry key="..\:/AndroidStudioProjects/FInal/app/src/main/res/layout/fragment_buyer.xml" value="0.17552083333333332" />
         <entry key="..\:/AndroidStudioProjects/FInal/app/src/main/res/layout/fragment_fragmenta_buy.xml" value="0.3506224066390041" />

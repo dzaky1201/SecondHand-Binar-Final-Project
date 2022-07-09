@@ -6,12 +6,14 @@ import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.databinding.ItemHomeListProductsBinding
+import com.binar.secondhand.screen.home.HomeFragmentDirections
 import com.bumptech.glide.Glide
 
 
@@ -36,7 +38,10 @@ class ListProductsAdapter : ListAdapter<Product, ListProductsAdapter.ViewHolder>
                 Glide.with(binding.root).load(item.imageUrl)
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
-
+                    
+                root.setOnClickListener{
+                    it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToDetailFragment(item.id))
+                }
             }
         }
     }
