@@ -1,4 +1,4 @@
-package com.binar.secondhand.screen.daftar_jual
+package com.binar.secondhand.screen.daftar_jual.screen
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,25 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.binar.secondhand.R
+import com.binar.secondhand.screen.daftar_jual.TerjualViewModel
 
-class DaftarJualFragment : Fragment() {
+class TerjualFragment : Fragment() {
 
     companion object {
-        fun newInstance() = DaftarJualFragment()
+        fun newInstance() = TerjualFragment()
     }
 
-    private lateinit var viewModel: DaftarJualViewModel
+    private lateinit var viewModel: TerjualViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_daftar_jual, container, false)
+        return inflater.inflate(R.layout.fragment_terjual, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DaftarJualViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TerjualViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

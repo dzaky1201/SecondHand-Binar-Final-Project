@@ -38,5 +38,8 @@
     <string name="detail_nego">Harga tawaranmu akan diketahui penjual,\njika penjual cocok kamu akan segera\ndihubungi penjual</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product">Product</string>
+    <string name="diminati">Diminati</string>
+    <string name="terjual">Terjual</string>
     <!-- Detail -->
 </resources>

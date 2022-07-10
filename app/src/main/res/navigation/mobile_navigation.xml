@@ -48,9 +48,13 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_daftar_jual"
-        android:name="com.binar.secondhand.screen.daftar_jual.DaftarJualFragment"
+        android:name="com.binar.secondhand.screen.daftar_jual.screen.DaftarJualFragment"
         android:label="Daftar Jual"
-        tools:layout="@layout/fragment_daftar_jual" />
+        tools:layout="@layout/fragment_daftar_jual" >
+        <action
+            android:id="@+id/action_navigation_daftar_jual_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.binar.secondhand.screen.login.LoginFragment"

@@ -33,37 +33,6 @@ class AkunFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getUser()
-
-        val userManager = viewModel.userManager
-
-        userManager.onLoading = {
-            binding.progressBar.isVisible = true
-        }
-
-        userManager.onSuccess = { user ->
-            binding.progressBar.isVisible = false
-            binding.includeAkunSaya.layoutAkun.isVisible = true
-            Glide.with(view).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
-            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
-                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
-                intent.putExtra("showData", user)
-                startActivity(intent)
-            }
-        }
-
-        userManager.onFailure = { _, _ ->
-            binding.progressBar.isVisible = false
-            binding.txtTryLogin.isVisible = true
-            with(binding.btnTryLogin){
-                isVisible = true
-                setOnClickListener {
-                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
-                }
-            }
-            binding.includeAkunSaya.layoutAkun.isVisible = false
-        }
-
         with(binding.includeAkunSaya){
             btnLogout.setOnClickListener {
                 val dialog = AlertDialog.Builder(view.context)
@@ -83,6 +52,40 @@ class AkunFragment : Fragment() {
             }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUser()
+
+        val userManager = viewModel.userManager
+
+        userManager.onLoading = {
+            binding.progressBar.isVisible = true
+        }
+
+        userManager.onSuccess = { user ->
+            binding.progressBar.isVisible = false
+            binding.includeAkunSaya.layoutAkun.isVisible = true
+            Glide.with(binding.root).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
+            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
+                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
+                intent.putExtra("showData", user)
+                startActivity(intent)
+            }
+        }
+
+        userManager.onFailure = { _, _ ->
+            binding.progressBar.isVisible = false
+            binding.txtTryLogin.isVisible = true
+            with(binding.btnTryLogin){
+                isVisible = true
+                setOnClickListener {
+                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+                }
+            }
+            binding.includeAkunSaya.layoutAkun.isVisible = false
+        }
     }
 
     override fun onDestroyView() {

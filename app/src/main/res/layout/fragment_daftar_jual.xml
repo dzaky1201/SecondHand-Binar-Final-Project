@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.daftar_jual.DaftarJualFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screen.daftar_jual.screen.DaftarJualFragment">
+
+    <include
+        android:id="@+id/includeDaftarJual"
+        layout="@layout/daftar_jual"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/txtTryLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Kamu Belum Login !"
+        android:visibility="invisible"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnTryLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login Sekarang Yuk !"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/txtTryLogin"
+        app:layout_constraintStart_toStartOf="@+id/txtTryLogin"
+        app:layout_constraintTop_toBottomOf="@+id/txtTryLogin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -85,6 +85,7 @@ class DetailFragment : Fragment() {
                     bin.tvDescription.text = it.description
                     bin.tvNameSeller.text = it.user.fullname
                     bin.tvCity.text = it.user.city
+                    bin.tvHarga.text = it.base_price.toString()
 
                     bin.btnBuy.setOnClickListener {
                         val dialog = BottomSheetDialog(requireActivity())

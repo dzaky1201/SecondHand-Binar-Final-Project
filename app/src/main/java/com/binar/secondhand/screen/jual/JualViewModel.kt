@@ -11,7 +11,7 @@ import com.binar.secondhand.core.domain.usecase.profile.ProfileUseCase
 import com.binar.secondhand.core.event.StateEventManager
 import okhttp3.internal.closeQuietly
 
-class JualViewModel(private val jualUseCase: JualUseCase,private val productUseCase: ProductUseCase, private val profileUseCase: ProfileUseCase) : ViewModel() {
+class JualViewModel(private val productUseCase: ProductUseCase, private val profileUseCase: ProfileUseCase) : ViewModel() {
 
     val stateCategories: StateEventManager<List<Categories>> = productUseCase.categoriesStateEventManager
     val usertStateEventManager : StateEventManager<User> = profileUseCase.userStateEventManager
@@ -28,7 +28,6 @@ class JualViewModel(private val jualUseCase: JualUseCase,private val productUseC
         super.onCleared()
         stateCategories.closeQuietly()
         usertStateEventManager.closeQuietly()
-        jualUseCase.closeRepository()
         productUseCase.closeRepository()
         profileUseCase.closeRepository()
     }

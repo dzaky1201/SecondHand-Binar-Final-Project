@@ -10,11 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
-import com.binar.secondhand.MainActivity
 import com.binar.secondhand.core.domain.model.profile.User
 import com.binar.secondhand.databinding.ActivityUpdateAkunBinding
-import com.binar.secondhand.screen.login.LoginFragmentDirections
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -30,6 +27,7 @@ class UpdateAkunActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateAkunBinding
     private val viewModel: UpdateAkunViewModel by viewModel()
     private var fileImage: File? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateAkunBinding.inflate(layoutInflater)
@@ -52,9 +50,7 @@ class UpdateAkunActivity : AppCompatActivity() {
             binding.loadingUpdate.isVisible = true
         }
         updateUserManager.onSuccess = {
-            val intent = Intent(this@UpdateAkunActivity, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            onBackPressed()
             Toast.makeText(this@UpdateAkunActivity, "User Berhasil Diupdate", Toast.LENGTH_LONG)
                 .show()
         }
@@ -116,7 +112,6 @@ class UpdateAkunActivity : AppCompatActivity() {
         }
 
     }
-
 
 
     private fun takePhotoFromCamera() {
@@ -199,6 +194,10 @@ class UpdateAkunActivity : AppCompatActivity() {
 
                 }
             })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }

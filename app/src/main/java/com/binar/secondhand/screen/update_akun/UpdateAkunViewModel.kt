@@ -11,6 +11,10 @@ import java.io.File
 class UpdateAkunViewModel(private val useCase: ProfileUseCase) : ViewModel() {
     val updateUserManager: StateEventManager<User> = useCase.updateUserStateEventManager
 
+    fun refreshUser(){
+        useCase.getUser()
+    }
+
     fun updateUser(
         fullname: String,
         email: String,

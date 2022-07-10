@@ -125,7 +125,7 @@ class ProfileDataSource(private val authService: AuthService) {
     }
 
     private fun convertFile(file: File): MultipartBody.Part {
-        val reqFile: RequestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val reqFile: RequestBody = file.asRequestBody("image/jpg".toMediaTypeOrNull())
         return MultipartBody.Part.createFormData("image", file.name, reqFile)
     }
 }
