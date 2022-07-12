@@ -1,18 +1,26 @@
 package com.binar.secondhand.core.domain.usecase.home
 
+import com.binar.secondhand.core.domain.model.home.Banner
 import com.binar.secondhand.core.domain.model.home.Categories
+import com.binar.secondhand.core.domain.model.home.PagingHome
 import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.domain.repository.IProductRepository
 import com.binar.secondhand.core.event.StateEventManager
 
 class ProductInteractor(private val productRepository: IProductRepository): ProductUseCase {
-    override val productStateEventManager: StateEventManager<List<Product>> = productRepository.productStateEventManager
-    override val searchStateEventManager: StateEventManager<List<Product>> = productRepository.searchStateEventManager
+    override val productStateEventManager: StateEventManager<PagingHome<Product>> = productRepository.productStateEventManager
+    override val searchStateEventManager: StateEventManager<PagingHome<Product>> = productRepository.searchStateEventManager
     override val categoriesStateEventManager: StateEventManager<List<Categories>> = productRepository.categoriesStateEventManager
-    override val categoryStateEventManager: StateEventManager<List<Product>> = productRepository.categoryStateEventManager
+    override val categoryStateEventManager: StateEventManager<PagingHome<Product>> = productRepository.categoryStateEventManager
+    override val bannerStateEventManager: StateEventManager<List<Banner>>
+        get() = productRepository.bannerStateEventManager
 
-    override fun getProducts() {
-        productRepository.getProducts()
+    override fun getProducts(page: Int) {
+        productRepository.getProducts(page)
+    }
+
+    override fun getBannerList() {
+        productRepository.getBanner()
     }
 
     override fun getCategories(){
@@ -20,8 +28,8 @@ class ProductInteractor(private val productRepository: IProductRepository): Prod
     }
 
 
-    override fun searchProduct(product:String){
-        productRepository.searchProduct(product)
+    override fun searchProduct(product:String, page: Int){
+        productRepository.searchProduct(product, page)
     }
 
     override fun getCategory(categoryId: Int) {

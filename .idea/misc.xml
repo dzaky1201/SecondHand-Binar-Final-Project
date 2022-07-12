@@ -17,6 +17,7 @@
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/activity_update_akun.xml" value="0.17074275362318841" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/add_product_layout.xml" value="0.17074275362318841" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/akun_saya_view.xml" value="0.17074275362318841" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/banner_slider_item.xml" value="0.1" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/daftar_jual.xml" value="0.25" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_akun.xml" value="0.17074275362318841" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.17074275362318841" />
@@ -27,6 +28,8 @@
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_notification.xml" value="0.1453804347826087" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_seller_produc.xml" value="0.17074275362318841" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_adapter_error.xml" value="0.17074275362318841" />
+        <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_adapter_loading.xml" value="0.17074275362318841" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_home_category.xml" value="0.17074275362318841" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_home_list_products.xml" value="0.17074275362318841" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_notification.xml" value="0.33" />

@@ -83,4 +83,10 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.1'
 
     implementation 'com.github.pratikbutani:MultiSelectSpinner:1.0.1'
+
+    //Viewpager Implementation
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
 }
