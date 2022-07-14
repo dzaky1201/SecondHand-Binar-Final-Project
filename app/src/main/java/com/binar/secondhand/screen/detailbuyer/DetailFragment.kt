@@ -30,6 +30,7 @@ class DetailFragment : Fragment() {
     var price: Int = 0
     var image: String = ""
     var checkProduct : Boolean = false;
+    var checkLoggedIn : Boolean = false;
     private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(
@@ -50,6 +51,18 @@ class DetailFragment : Fragment() {
         val prefrences = DataPreferences.get
         val token = prefrences.token
         Log.d("token", token)
+
+        userManager.onSuccess = {
+
+            checkLoggedIn = true
+
+        }
+        userManager.onFailure = {_, _->
+            checkLoggedIn = false
+            binding.btnBuy.setText("Anda perlu login terlebih dahulu")
+            binding.btnBuy.isClickable = false
+            binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
+        }
 
         viewModel.checkOrdersProduct()
         with(viewModel.checkOrdersProductStateEvent){
@@ -128,15 +141,16 @@ class DetailFragment : Fragment() {
                     bin.tvCity.text = it.user.city
                     bin.tvHarga.text = it.base_price.toString()
 
-                    userManager.onSuccess = {
 
+                    if(checkLoggedIn == true){
                         bin.btnBuy.setOnClickListener {
+
+
                             Log.d("Check Product",checkProduct.toString())
                             Log.d("Nama Product",name)
                             Log.d("Harga Product",price.toString())
+
                             if(bin.btnBuy.text != "Order sedang dalam Proses.."  ){
-
-
                                 val dialog = BottomSheetDialog(requireActivity())
                                 val view = layoutInflater.inflate(R.layout.bottom_sheet_detail, null)
 
@@ -189,17 +203,13 @@ class DetailFragment : Fragment() {
                                 dialog.show()
                             }
                             else{
+                                bin.btnBuy.isClickable = false
                                 Toast.makeText(requireActivity(),"Pesanan Sudah di Order",Toast.LENGTH_LONG).show()
                             }
 
                         }
-                    }
-                    userManager.onFailure = {_, _->
-                        binding.btnBuy.setText("Anda perlu login terlebih dahulu")
-                        binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
-                        bin.btnBuy.setOnClickListener {
-                            Toast.makeText(requireActivity(),"Pastikan anda sudah login",Toast.LENGTH_LONG)
-                        }
+                    }else{
+                        Toast.makeText(requireActivity(),"Anda perlu login terlebih dahulu",Toast.LENGTH_LONG).show()
                     }
 
 

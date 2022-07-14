@@ -12,6 +12,7 @@ import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.notification.Notification
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.binar.secondhand.screen.home.HomeFragmentDirections
+import com.binar.secondhand.screen.notification.NotificationFragmentDirections
 import com.bumptech.glide.Glide
 
 
@@ -33,7 +34,7 @@ class ListNotificationAdapter : ListAdapter<Notification, ListNotificationAdapte
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
                 root.setOnClickListener{
-
+                    it.findNavController().navigate(NotificationFragmentDirections.actionNavigationNotificationToDetailFragment(item.productId))
                 }
             }
         }
