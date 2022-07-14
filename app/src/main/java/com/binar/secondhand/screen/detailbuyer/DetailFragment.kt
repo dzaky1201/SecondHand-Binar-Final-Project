@@ -64,28 +64,8 @@ class DetailFragment : Fragment() {
             binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
         }
 
-        viewModel.checkOrdersProduct()
-        with(viewModel.checkOrdersProductStateEvent){
-            onSuccess = {
-                var i = 0
-                for(i in 0..it.size-1){
-                    if(it[i].productId == idProduct){
-                        Log.d("Product ID",it[i].productId.toString())
-                        binding.btnBuy.setText("Order sedang dalam Proses..")
-                        binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
-                        Toast.makeText(requireActivity(),it[i].status,Toast.LENGTH_LONG)
-                        checkProduct = true
-                    }else{
-                        checkProduct = false
-                    }
-                }
-                Log.d("Looping","Testing")
-            }
 
-            onFailure = {_,_->
-                Log.d("FAILED","Looping")
-            }
-        }
+
 
         val data = arguments?.getInt("idProduct")
         viewModel.getDetailProduct(data ?: 0)
@@ -113,8 +93,31 @@ class DetailFragment : Fragment() {
                     "Sedang Memuat Detail Product...",
                     true
                 )
+                viewModel.checkOrdersProduct()
             }
             onSuccess = {
+
+                with(viewModel.checkOrdersProductStateEvent){
+                    onSuccess = {
+                        var i = 0
+                        for(i in 0..it.size-1){
+                            if(it[i].productId == idProduct){
+                                Log.d("Product ID",it[i].productId.toString())
+                                binding.btnBuy.setText("Order sedang dalam Proses..")
+                                binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
+                                Toast.makeText(requireActivity(),it[i].status,Toast.LENGTH_LONG)
+                                checkProduct = true
+                            }else{
+                                checkProduct = false
+                            }
+                        }
+                        Log.d("Looping","Testing")
+                    }
+
+                    onFailure = {_,_->
+                        Log.d("FAILED","Looping")
+                    }
+                }
                 progressDialog?.dismiss()
                 idProduct = it.id!!
                 Log.d("ID PRODUCT",idProduct.toString())
@@ -209,8 +212,10 @@ class DetailFragment : Fragment() {
 
                         }
                     }else{
-                        Toast.makeText(requireActivity(),"Anda perlu login terlebih dahulu",Toast.LENGTH_LONG).show()
-                    }
+                        bin.btnBuy.setOnClickListener {
+                            Toast.makeText(requireActivity(),"Anda perlu login terlebih dahulu",Toast.LENGTH_LONG).show()
+                        }
+                     }
 
 
                 }
