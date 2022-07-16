@@ -29,8 +29,8 @@ class DetailFragment : Fragment() {
     var name: String = ""
     var price: Int = 0
     var image: String = ""
-    var checkProduct : Boolean = false;
-    var checkLoggedIn : Boolean = false;
+    var checkProduct: Boolean = false;
+    var checkLoggedIn: Boolean = false;
     private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(
@@ -53,18 +53,14 @@ class DetailFragment : Fragment() {
         Log.d("token", token)
 
         userManager.onSuccess = {
-
             checkLoggedIn = true
-
         }
-        userManager.onFailure = {_, _->
+        userManager.onFailure = { _, _ ->
             checkLoggedIn = false
             binding.btnBuy.setText("Anda perlu login terlebih dahulu")
             binding.btnBuy.isClickable = false
             binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
         }
-
-
 
 
         val data = arguments?.getInt("idProduct")
@@ -97,32 +93,32 @@ class DetailFragment : Fragment() {
             }
             onSuccess = {
 
-                with(viewModel.checkOrdersProductStateEvent){
+                with(viewModel.checkOrdersProductStateEvent) {
                     onSuccess = {
                         var i = 0
-                        for(i in 0..it.size-1){
-                            if(it[i].productId == idProduct){
-                                Log.d("Product ID",it[i].productId.toString())
+                        for (i in 0..it.size - 1) {
+                            if (it[i].productId == idProduct) {
+                                Log.d("Product ID", it[i].productId.toString())
                                 binding.btnBuy.setText("Order sedang dalam Proses..")
                                 binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
-                                Toast.makeText(requireActivity(),it[i].status,Toast.LENGTH_LONG)
+                                Toast.makeText(requireActivity(), it[i].status, Toast.LENGTH_LONG)
                                 checkProduct = true
-                            }else{
+                            } else {
                                 checkProduct = false
                             }
                         }
-                        Log.d("Looping","Testing")
+                        Log.d("Looping", "Testing")
                     }
 
-                    onFailure = {_,_->
-                        Log.d("FAILED","Looping")
+                    onFailure = { _, _ ->
+                        Log.d("FAILED", "Looping")
                     }
                 }
                 progressDialog?.dismiss()
                 idProduct = it.id!!
-                Log.d("ID PRODUCT",idProduct.toString())
-                Log.d("Name PRODUCT",it.name.toString())
-                Log.d("Price PRODUCT",it.base_price.toString())
+                Log.d("ID PRODUCT", idProduct.toString())
+                Log.d("Name PRODUCT", it.name.toString())
+                Log.d("Price PRODUCT", it.base_price.toString())
                 name = it.name!!
                 price = it.base_price!!
                 image = it.image_url!!
@@ -145,17 +141,16 @@ class DetailFragment : Fragment() {
                     bin.tvHarga.text = it.base_price.toString()
 
 
-                    if(checkLoggedIn == true){
+                    if (checkLoggedIn == true) {
                         bin.btnBuy.setOnClickListener {
+                            Log.d("Check Product", checkProduct.toString())
+                            Log.d("Nama Product", name)
+                            Log.d("Harga Product", price.toString())
 
-
-                            Log.d("Check Product",checkProduct.toString())
-                            Log.d("Nama Product",name)
-                            Log.d("Harga Product",price.toString())
-
-                            if(bin.btnBuy.text != "Order sedang dalam Proses.."  ){
+                            if (bin.btnBuy.text != "Order sedang dalam Proses..") {
                                 val dialog = BottomSheetDialog(requireActivity())
-                                val view = layoutInflater.inflate(R.layout.bottom_sheet_detail, null)
+                                val view =
+                                    layoutInflater.inflate(R.layout.bottom_sheet_detail, null)
 
                                 val btnClose = view.findViewById<Button>(R.id.btnBuy)
                                 val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
@@ -204,18 +199,22 @@ class DetailFragment : Fragment() {
                                 dialog.setCancelable(true)
                                 dialog.setContentView(view)
                                 dialog.show()
-                            }
-                            else{
+                            } else {
                                 bin.btnBuy.isClickable = false
-                                Toast.makeText(requireActivity(),"Pesanan Sudah di Order",Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Pesanan Sudah di Order",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
 
                         }
-                    }else{
+                    }
+                    if (checkLoggedIn == false) {
                         bin.btnBuy.setOnClickListener {
-                            Toast.makeText(requireActivity(),"Anda perlu login terlebih dahulu",Toast.LENGTH_LONG).show()
+                            null
                         }
-                     }
+                    }
 
 
                 }
