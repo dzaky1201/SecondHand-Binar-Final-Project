@@ -12,7 +12,7 @@ import com.binar.secondhand.core.domain.model.home.Categories
 import com.binar.secondhand.databinding.ItemHomeCategoryBinding
 
 
-class CategoryAdapter(private val clicked: (Categories) -> Unit) :
+class CategoryAdapter(private val clicked: (id: Int, page: Int) -> Unit) :
     ListAdapter<Categories, CategoryAdapter.ViewHolder>(DiffCallBackCategories()) {
     var rowIndex: Int = -1
 
@@ -26,7 +26,7 @@ class CategoryAdapter(private val clicked: (Categories) -> Unit) :
                 root.setOnClickListener {
                     rowIndex = adapterPosition
                     notifyDataSetChanged()
-                    clicked(data)
+                    clicked(data.id!!, 1)
                 }
                 if (rowIndex == adapterPosition) {
                     binding.bgCategory.setBackgroundResource(R.drawable.shape_category_home)
