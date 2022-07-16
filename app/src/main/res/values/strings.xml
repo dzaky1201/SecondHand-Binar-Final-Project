@@ -42,5 +42,7 @@
     <string name="product">Product</string>
     <string name="diminati">Diminati</string>
     <string name="terjual">Terjual</string>
+    <string name="basePrice">Rp. %s</string>
+    <string name="fixPrice">Ditawar Rp. %s</string>
     <!-- Detail -->
 </resources>

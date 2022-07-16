@@ -1,4 +1,4 @@
-package com.binar.secondhand.screen.daftar_jual.screen
+package com.binar.secondhand.screen.daftar_jual.screen.diminati
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentDiminatiBinding
-import com.binar.secondhand.screen.daftar_jual.DiminatiViewModel
 import com.binar.secondhand.screen.daftar_jual.adapter.DiminatiProductAdapter
+import com.binar.secondhand.screen.daftar_jual.screen.DaftarJualFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DiminatiFragment : Fragment() {
@@ -30,7 +31,9 @@ class DiminatiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = DiminatiProductAdapter()
+        val adapter = DiminatiProductAdapter {
+            findNavController().navigate(DaftarJualFragmentDirections.actionNavigationDaftarJualToDiminatiDetailFragment(it))
+        }
         binding.rvDiminati.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         binding.rvDiminati.adapter = adapter

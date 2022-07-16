@@ -12,4 +12,7 @@ interface IDaftarJualRepository: Closeable {
 
     val sellerOrderStateEventManager: StateEventManager<List<SellerProductInterestedEntity>>
     fun getSellerOrder()
+
+    val sellerOrderDetailStateEventManager: StateEventManager<SellerProductInterestedEntity>
+    fun getDetailSellerOrder(id: Int)
 }

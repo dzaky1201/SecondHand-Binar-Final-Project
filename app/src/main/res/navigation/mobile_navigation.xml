@@ -26,10 +26,6 @@
         <action
             android:id="@+id/action_navigation_notification_to_detailFragment"
             app:destination="@id/detailFragment" />
-        <argument
-            android:name="isFromPageAccount"
-            app:argType="boolean"
-            android:defaultValue="false" />
     </fragment>
 
     <fragment
@@ -53,8 +49,8 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment" />
         <action
-            android:id="@+id/action_navigation_akun_to_navigation_notification"
-            app:destination="@id/navigation_notification" />
+            android:id="@+id/action_navigation_akun_to_orderHistoryFragment"
+            app:destination="@id/orderHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_daftar_jual"
@@ -67,6 +63,9 @@
         <action
             android:id="@+id/action_navigation_daftar_jual_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_navigation_daftar_jual_to_diminatiDetailFragment"
+            app:destination="@id/diminatiDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -100,4 +99,19 @@
         android:id="@+id/loginFragmentDialog"
         android:name="com.binar.secondhand.screen.login.LoginFragmentDialog"
         android:label="LoginFragmentDialog" />
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.binar.secondhand.screen.order_history.OrderHistoryFragment"
+        android:label="OrderHistoryFragment"
+        tools:layout="@layout/fragment_order_history"/>
+    <fragment
+        android:id="@+id/diminatiDetailFragment"
+        android:name="com.binar.secondhand.screen.daftar_jual.screen.diminati.DiminatiDetailFragment"
+        android:label="fragment_diminati_detail"
+        tools:layout="@layout/fragment_diminati_detail" >
+        <argument
+            android:name="idDiminati"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

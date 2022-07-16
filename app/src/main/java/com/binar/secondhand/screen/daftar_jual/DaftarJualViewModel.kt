@@ -8,11 +8,19 @@ import com.binar.secondhand.core.domain.usecase.daftar_jual.DaftarJualUseCase
 import com.binar.secondhand.core.domain.usecase.profile.ProfileUseCase
 import com.binar.secondhand.core.event.StateEventManager
 
-class DaftarJualViewModel( private val profileUseCase: ProfileUseCase) : ViewModel() {
+class DaftarJualViewModel( private val profileUseCase: ProfileUseCase, private val daftarJualUseCase: DaftarJualUseCase) : ViewModel() {
     val userChecked: StateEventManager<User> = profileUseCase.userStateEventManager
 
     fun getUser() {
         profileUseCase.getUser()
+    }
+
+    fun getSellerProduct(){
+        daftarJualUseCase.getSellerProducts()
+    }
+
+    fun getSellerOrder(){
+        daftarJualUseCase.getSellerOrder()
     }
 
     override fun onCleared() {

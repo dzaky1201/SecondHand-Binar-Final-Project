@@ -1,4 +1,4 @@
-package com.binar.secondhand.screen.OrdersProduct.adapter
+package com.binar.secondhand.screen.notification.adapter
 
 
 import android.view.LayoutInflater
@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.detail.OrdersProduct
-import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.binar.secondhand.databinding.ItemOrderHistoryBinding
-import com.binar.secondhand.screen.home.HomeFragmentDirections
 import com.binar.secondhand.screen.notification.NotificationFragmentDirections
 import com.bumptech.glide.Glide
 
 
-class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapter.ViewHolder>(DiffCallBack()) {
+class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapter.ViewHolder>(
+    DiffCallBackHistory()
+) {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemOrderHistoryBinding.bind(view)
@@ -28,7 +28,6 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
                 binding.tvProductName.text = item.productName
                 binding.tvBasePrice.text ="Harga Awal Rp."+item.basePrice
                 binding.tvSellerName.text = "Status Barang : "+item.status
-                binding.tvDate.text = item.transactionDate
 
 
                 Glide.with(binding.root).load(item.product.imageUrl)
@@ -55,7 +54,7 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
     }
 }
 
-class DiffCallBack : DiffUtil.ItemCallback<OrdersProduct>() {
+class DiffCallBackHistory : DiffUtil.ItemCallback<OrdersProduct>() {
     override fun areItemsTheSame(oldItem: OrdersProduct, newItem: OrdersProduct): Boolean {
         return oldItem.id == newItem.id
     }

@@ -10,10 +10,11 @@ import com.binar.secondhand.core.utils.fetchStateEventSubscriber
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.internal.closeQuietly
 
-class DaftarJualRepositoryImpl(private val source: DaftarJualSource): IDaftarJualRepository {
+class DaftarJualRepositoryImpl(private val source: DaftarJualSource) : IDaftarJualRepository {
     private val compositeDisposable = CompositeDisposable()
 
-    private var _productSellerStateEventManager: MutableStateEventManager<List<Product>> = MutableStateEventManager()
+    private var _productSellerStateEventManager: MutableStateEventManager<List<Product>> =
+        MutableStateEventManager()
     override val productSellerStateEventManager: StateEventManager<List<Product>>
         get() = _productSellerStateEventManager
 
@@ -25,7 +26,8 @@ class DaftarJualRepositoryImpl(private val source: DaftarJualSource): IDaftarJua
         )
     }
 
-    private val _sellerOrderStateEventManager: MutableStateEventManager<List<SellerProductInterestedEntity>> = MutableStateEventManager()
+    private val _sellerOrderStateEventManager: MutableStateEventManager<List<SellerProductInterestedEntity>> =
+        MutableStateEventManager()
     override val sellerOrderStateEventManager: StateEventManager<List<SellerProductInterestedEntity>>
         get() = _sellerOrderStateEventManager
 
@@ -33,6 +35,19 @@ class DaftarJualRepositoryImpl(private val source: DaftarJualSource): IDaftarJua
         compositeDisposable.add(
             source.getSellerOrder().fetchStateEventSubscriber { sellerStateEvent ->
                 _sellerOrderStateEventManager.post(sellerStateEvent)
+            }
+        )
+    }
+
+    private var _sellerOrderDetailStateEventManager: MutableStateEventManager<SellerProductInterestedEntity> =
+        MutableStateEventManager()
+    override val sellerOrderDetailStateEventManager: StateEventManager<SellerProductInterestedEntity>
+        get() = _sellerOrderDetailStateEventManager
+
+    override fun getDetailSellerOrder(id: Int) {
+        compositeDisposable.add(
+            source.getDetailSellerOrder(id).fetchStateEventSubscriber {
+                _sellerOrderDetailStateEventManager.post(it)
             }
         )
     }

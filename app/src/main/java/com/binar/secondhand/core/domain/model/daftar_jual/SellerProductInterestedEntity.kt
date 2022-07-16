@@ -21,6 +21,7 @@ data class SellerProductInterestedEntity(
         val email: String?,
         val fullName: String?,
         val id: Int?,
-        val phoneNumber: String?
+        val phoneNumber: String?,
+        val imageUrl: String
     )
 }

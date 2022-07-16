@@ -3,7 +3,7 @@ package com.binar.secondhand.screen.daftar_jual.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.binar.secondhand.screen.daftar_jual.screen.DiminatiFragment
+import com.binar.secondhand.screen.daftar_jual.screen.diminati.DiminatiFragment
 import com.binar.secondhand.screen.daftar_jual.screen.SellerProducFragment
 import com.binar.secondhand.screen.daftar_jual.screen.TerjualFragment
 

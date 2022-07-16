@@ -2,7 +2,6 @@ package com.binar.secondhand.screen.akun
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.binar.secondhand.core.data.local.DataPreferences
 import com.binar.secondhand.databinding.FragmentAkunBinding
-import com.binar.secondhand.screen.home.HomeFragmentDirections
 import com.binar.secondhand.screen.update_akun.UpdateAkunActivity
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,7 +32,38 @@ class AkunFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.includeAkunSaya){
+        viewModel.getUser()
+
+        val userManager = viewModel.userManager
+
+        userManager.onLoading = {
+            binding.progressBar.isVisible = true
+        }
+
+        userManager.onSuccess = { user ->
+            binding.progressBar.isVisible = false
+            binding.includeAkunSaya.layoutAkun.isVisible = true
+            Glide.with(binding.root).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
+            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
+                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
+                intent.putExtra("showData", user)
+                startActivity(intent)
+            }
+        }
+
+        userManager.onFailure = { _, _ ->
+            binding.progressBar.isVisible = false
+            binding.txtTryLogin.isVisible = true
+            with(binding.btnTryLogin) {
+                isVisible = true
+                setOnClickListener {
+                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
+                }
+            }
+            binding.includeAkunSaya.layoutAkun.isVisible = false
+        }
+
+        with(binding.includeAkunSaya) {
             btnLogout.setOnClickListener {
                 val dialog = AlertDialog.Builder(view.context)
                 dialog.setTitle("Logout")
@@ -54,44 +82,14 @@ class AkunFragment : Fragment() {
             }
         }
 
+        binding.includeAkunSaya.btnOrderHistory.setOnClickListener {
+            findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToOrderHistoryFragment())
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getUser()
-
-        val userManager = viewModel.userManager
-
-        userManager.onLoading = {
-            binding.progressBar.isVisible = true
-        }
-
-        userManager.onSuccess = { user ->
-            binding.progressBar.isVisible = false
-            binding.includeAkunSaya.layoutAkun.isVisible = true
-            Glide.with(binding.root).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
-
-            binding.includeAkunSaya.btnOrderHistory.setOnClickListener {
-                findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToNavigationNotification(true))
-            }
-            binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
-                val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
-                intent.putExtra("showData", user)
-                startActivity(intent)
-            }
-        }
-
-        userManager.onFailure = { _, _ ->
-            binding.progressBar.isVisible = false
-            binding.txtTryLogin.isVisible = true
-            with(binding.btnTryLogin){
-                isVisible = true
-                setOnClickListener {
-                    findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToLoginFragment())
-                }
-            }
-            binding.includeAkunSaya.layoutAkun.isVisible = false
-        }
     }
 
     override fun onDestroyView() {

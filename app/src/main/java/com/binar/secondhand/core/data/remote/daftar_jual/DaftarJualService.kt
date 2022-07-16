@@ -12,6 +12,9 @@ interface DaftarJualService {
     @GET("seller/product")
     fun getSellerProduct() : SecondHandResponse<List<ProductResponseItem>>
 
-    @GET("seller/order")//d
+    @GET("seller/order")
     fun getSellerOrder(@Query("status") status: String = "pending") : SecondHandResponse<List<SellerProductInterestedItem>>
+
+    @GET("seller/order/{id}")
+    fun detailSellerOrder(@Path("id") id: Int) : SecondHandResponse<SellerProductInterestedItem>
 }

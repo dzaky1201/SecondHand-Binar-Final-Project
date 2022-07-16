@@ -38,29 +38,6 @@ class DaftarJualFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sectionPagerAdapter = SectionPagerAdapter(requireActivity())
-        binding.includeDaftarJual.viewPager.adapter = sectionPagerAdapter
-
-        with(binding.includeDaftarJual) {
-            TabLayoutMediator(tabs, viewPager) { tab, position ->
-                tab.text = resources.getString(TAB_TITLES[position])
-            }.attach()
-
-        }
-
-    }
-
-    companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.product,
-            R.string.diminati,
-            R.string.terjual
-        )
-    }
-
-    override fun onStart() {
-        super.onStart()
         viewModel.getUser()
 
         with(viewModel.userChecked) {
@@ -80,6 +57,8 @@ class DaftarJualFragment : Fragment() {
                     intent.putExtra("showData", user)
                     startActivity(intent)
                 }
+                viewModel.getSellerProduct()
+                viewModel.getSellerOrder()
             }
 
             onFailure = { _, _ ->
@@ -95,6 +74,25 @@ class DaftarJualFragment : Fragment() {
             }
 
         }
+        val sectionPagerAdapter = SectionPagerAdapter(requireActivity())
+        binding.includeDaftarJual.viewPager.adapter = sectionPagerAdapter
+
+        with(binding.includeDaftarJual) {
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                tab.text = resources.getString(TAB_TITLES[position])
+            }.attach()
+
+        }
+
+    }
+
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.product,
+            R.string.diminati,
+            R.string.terjual
+        )
     }
 
 

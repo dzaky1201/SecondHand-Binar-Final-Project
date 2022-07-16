@@ -11,7 +11,7 @@ import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductIntereste
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.bumptech.glide.Glide
 
-class DiminatiProductAdapter : ListAdapter<SellerProductInterestedEntity, DiminatiProductAdapter.ViewHolder>(
+class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) : ListAdapter<SellerProductInterestedEntity, DiminatiProductAdapter.ViewHolder>(
         DiffCallBackDiminati()
     ) {
 
@@ -31,7 +31,7 @@ class DiminatiProductAdapter : ListAdapter<SellerProductInterestedEntity, Dimina
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
                 root.setOnClickListener {
-
+                   onClick(item.id!!)
                 }
             }
         }

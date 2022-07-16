@@ -20,6 +20,13 @@ class DaftarJualInteractor(private val repository: IDaftarJualRepository): Dafta
         repository.getSellerOrder()
     }
 
+    override val sellerOrderDetailStateEventManager: StateEventManager<SellerProductInterestedEntity>
+        get() = repository.sellerOrderDetailStateEventManager
+
+    override fun getDetailSellerOrder(id: Int) {
+        repository.getDetailSellerOrder(id)
+    }
+
     override fun closeRepository() {
         repository.close()
     }

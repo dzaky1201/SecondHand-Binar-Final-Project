@@ -22,4 +22,10 @@ class DaftarJualSource(private val service: DaftarJualService) {
             DaftarJualMapper.sellerOrderResponseToEntity(it)
         }
     }
+
+    fun getDetailSellerOrder(id: Int): Observable<SellerProductInterestedEntity>{
+        return service.detailSellerOrder(id).mapObservable {
+            DaftarJualMapper.sellerOrderMapToEntity(it)
+        }
+    }
 }

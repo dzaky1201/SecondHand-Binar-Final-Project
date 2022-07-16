@@ -12,7 +12,7 @@ object DaftarJualMapper {
         return sellerOrderEntity
     }
 
-    private fun sellerOrderMapToEntity(sellerProductInterestedItem: SellerProductInterestedItem): SellerProductInterestedEntity {
+    fun sellerOrderMapToEntity(sellerProductInterestedItem: SellerProductInterestedItem): SellerProductInterestedEntity {
         return SellerProductInterestedEntity(
             sellerProductInterestedItem.id,
             sellerProductInterestedItem.buyerId,
@@ -29,6 +29,7 @@ object DaftarJualMapper {
                 sellerProductInterestedItem.user?.fullName,
                 sellerProductInterestedItem.user?.id,
                 sellerProductInterestedItem.user?.phoneNumber,
+                sellerProductInterestedItem.user?.imageUrl.orEmpty()
             )
         )
     }
