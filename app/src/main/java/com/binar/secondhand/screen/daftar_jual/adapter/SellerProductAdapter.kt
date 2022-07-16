@@ -5,12 +5,14 @@ import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.databinding.ItemHomeListProductsBinding
+import com.binar.secondhand.screen.daftar_jual.screen.DaftarJualFragmentDirections
 import com.bumptech.glide.Glide
 
 
@@ -36,9 +38,9 @@ class SellerProductAdapter : ListAdapter<Product, SellerProductAdapter.ViewHolde
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
                     
-//                root.setOnClickListener{
-//                    it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToDetailFragment(item.id))
-//                }
+                root.setOnClickListener{
+                    it.findNavController().navigate(DaftarJualFragmentDirections.actionNavigationDaftarJualToDetailFragment(item.id, true))
+          }
             }
         }
     }

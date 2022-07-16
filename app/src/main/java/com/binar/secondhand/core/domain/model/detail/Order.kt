@@ -1,6 +1,5 @@
 package com.binar.secondhand.core.domain.model.detail
 
-import com.google.gson.annotations.SerializedName
 
 data class Order (
     val basePrice: Int = 0,

@@ -2,9 +2,15 @@ package com.binar.secondhand.core.utils
 
 import com.binar.secondhand.core.data.remote.detail.response.DetailResponseItem
 import com.binar.secondhand.core.data.remote.detail.response.OrderResponseItem
+import com.binar.secondhand.core.data.remote.detail.response.OrdersResponseItem
+import com.binar.secondhand.core.data.remote.detail.response.WishListResponseItem
+import com.binar.secondhand.core.data.remote.home.response.ProductResponseItem
 import com.binar.secondhand.core.data.remote.profile.response.UserResponse
 import com.binar.secondhand.core.domain.model.detail.Detail
 import com.binar.secondhand.core.domain.model.detail.Order
+import com.binar.secondhand.core.domain.model.detail.OrdersProduct
+import com.binar.secondhand.core.domain.model.detail.Wishlist
+import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.domain.model.profile.User
 
 object DetailMapper {
@@ -48,6 +54,56 @@ object DetailMapper {
         )
     }
 
+
+    fun mapCheckOrders(ordersResponse: OrdersResponseItem): OrdersProduct {
+
+
+        //TODO produce response json to detail
+
+        val userModel : OrdersProduct.UserX = OrdersProduct.UserX()
+         userModel.address = ordersResponse.user.address
+         userModel.city = ordersResponse.user.city
+         userModel.email = ordersResponse.user.email
+         userModel.fullName = ordersResponse.user.fullName
+         userModel.id = ordersResponse.user.id
+         userModel.phoneNumber = ordersResponse.user.phoneNumber
+
+
+        val product : OrdersProduct.Product = OrdersProduct.Product(
+            user = OrdersProduct.User()
+        )
+        product.basePrice = ordersResponse.product.basePrice
+        product.description = ordersResponse.product.description.orEmpty()
+        product.imageName = ordersResponse.product.imageName.orEmpty()
+        product.imageUrl = ordersResponse.product.imageUrl.orEmpty()
+        product.name = ordersResponse.product.name
+        product.status = ordersResponse.product.status
+        product.userId = ordersResponse.product.userId
+        
+        
+
+        return OrdersProduct(
+            ordersResponse?.basePrice.orEmpty(),
+            ordersResponse?.buyerId.orNol(),
+            ordersResponse?.id.orNol(),
+            ordersResponse?.imageProduct.orEmpty(),
+            ordersResponse?.price.orNol(),
+            product,
+            ordersResponse?.productId.orNol(),
+            ordersResponse?.productName.orEmpty(),
+            ordersResponse?.status.orEmpty(),
+            ordersResponse?.transactionDate.orEmpty(),
+            userModel
+        )
+    }
+
+
+    fun mapProdResponseToEntity(ordersList: List<OrdersResponseItem>): List<OrdersProduct> {
+        val checkOrders = ordersList.map {
+            DetailMapper.mapCheckOrders(it)
+        }
+        return checkOrders
+    }
     fun mapUserResponseToEntity(userResponse: UserResponse?): User {
         return User(
             userResponse?.address.orEmpty(),
@@ -78,5 +134,26 @@ object DetailMapper {
             orderResponse?.updatedAt.orEmpty(),
 
         )
+    }
+
+    fun mapWishlistResponse(wishlistResponse: WishListResponseItem?):Wishlist{
+
+        val product : Wishlist.Product = Wishlist.Product(
+        )
+        product.basePrice = wishlistResponse?.product?.basePrice.orNol()
+        product.createdAt = wishlistResponse?.product?.createdAt.orEmpty()
+        product.description = wishlistResponse?.product?.description.orEmpty()
+        product.id = wishlistResponse?.product?.id.orNol()
+        product.imageName = wishlistResponse?.product?.imageName.orEmpty()
+        product.imageUrl = wishlistResponse?.product?.imageUrl.orEmpty()
+        product.location = wishlistResponse?.product?.location.orEmpty()
+        product.name = wishlistResponse?.product?.name.orEmpty()
+        product.updatedAt = wishlistResponse?.product?.updatedAt.orEmpty()
+        product.userId = wishlistResponse?.product?.userId.orNol()
+
+        return Wishlist(
+            wishlistResponse?.name.orEmpty(),
+            product
+            )
     }
 }

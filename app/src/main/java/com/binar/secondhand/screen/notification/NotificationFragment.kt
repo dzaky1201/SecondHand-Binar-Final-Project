@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.core.data.local.DataPreferences
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentNotificationBinding
+import com.binar.secondhand.screen.OrdersProduct.adapter.ListOrderHistoryAdapter
 import com.binar.secondhand.screen.akun.AkunFragmentDirections
 import com.binar.secondhand.screen.akun.AkunViewModel
+import com.binar.secondhand.screen.detailbuyer.DetailViewModel
 import com.binar.secondhand.screen.notification.adapter.ListNotificationAdapter
 import com.binar.secondhand.screen.update_akun.UpdateAkunActivity
 import com.bumptech.glide.Glide
@@ -28,10 +30,11 @@ class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModelDetail: DetailViewModel by viewModel()
     private val viewModelAkun: AkunViewModel by viewModel()
     private val viewModelNotif: NotificationViewModel by viewModel()
     private var progressDialog: AlertDialog? = null
-
+    var isLoggedIn: Boolean = false
 
 
     override fun onCreateView(
@@ -50,7 +53,12 @@ class NotificationFragment : Fragment() {
         val userManager = viewModelAkun.userManager
         val prefrences = DataPreferences.get
         val token = prefrences.token
+        val data = arguments?.getBoolean("isFromPageAccount")
+        Log.d("Bool", data.toString())
         Log.d("token", token)
+
+
+
 
         userManager.onLoading = {
             progressDialog = DialogWindow.progressCircle(requireContext(), "Tunggu Sebentar...", true)
@@ -59,24 +67,37 @@ class NotificationFragment : Fragment() {
             progressDialog?.dismiss()
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
-            viewModelNotif.getNotificationList()
 
-            with(viewModelNotif.notificationStateEvent){
-                onLoading = {
-                    progressDialog = DialogWindow.progressCircle(requireContext(), "Mendapatkan Notifikasi...", true)
+            if(data == true){
+                binding.textNotification.text = "Order History"
+                viewModelDetail.checkOrdersProduct()
+                with(viewModelDetail.checkOrdersProductStateEvent) {
+                    onSuccess = {
+                        val listNotificationAdapter = ListOrderHistoryAdapter()
+                        binding.rvNotifList.layoutManager =
+                            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                        binding.rvNotifList.adapter = listNotificationAdapter
+                        listNotificationAdapter.submitList(it)
+                    }
                 }
-                onSuccess = {
-                    progressDialog?.dismiss()
-                    val listNotificationAdapter = ListNotificationAdapter()
-                    binding.rvNotifList.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-                    binding.rvNotifList.adapter = listNotificationAdapter
-                    listNotificationAdapter.submitList(it)
-                }
-                onFailure = {_,_ ->
-                    progressDialog?.dismiss()
+            }else{
+                viewModelNotif.getNotificationList()
+                with(viewModelNotif.notificationStateEvent){
+                    onLoading = {
+                        progressDialog = DialogWindow.progressCircle(requireContext(), "Mendapatkan Notifikasi...", true)
+                    }
+                    onSuccess = {
+                        progressDialog?.dismiss()
+                        val listNotificationAdapter = ListNotificationAdapter()
+                        binding.rvNotifList.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                        binding.rvNotifList.adapter = listNotificationAdapter
+                        listNotificationAdapter.submitList(it)
+                    }
+                    onFailure = {_,_ ->
+                        progressDialog?.dismiss()
+                    }
                 }
             }
-
 
         }
 
