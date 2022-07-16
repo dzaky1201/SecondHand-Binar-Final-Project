@@ -1,8 +1,5 @@
 package com.binar.secondhand.core.domain.model.detail
 
-import com.binar.secondhand.core.domain.model.home.Categories
-import com.binar.secondhand.core.domain.model.home.Product
-
 data class Detail(
 
     val id: Int? = 0,

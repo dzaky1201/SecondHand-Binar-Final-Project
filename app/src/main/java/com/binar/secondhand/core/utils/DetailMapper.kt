@@ -3,11 +3,13 @@ package com.binar.secondhand.core.utils
 import com.binar.secondhand.core.data.remote.detail.response.DetailResponseItem
 import com.binar.secondhand.core.data.remote.detail.response.OrderResponseItem
 import com.binar.secondhand.core.data.remote.detail.response.OrdersResponseItem
+import com.binar.secondhand.core.data.remote.detail.response.WishListResponseItem
 import com.binar.secondhand.core.data.remote.home.response.ProductResponseItem
 import com.binar.secondhand.core.data.remote.profile.response.UserResponse
 import com.binar.secondhand.core.domain.model.detail.Detail
 import com.binar.secondhand.core.domain.model.detail.Order
 import com.binar.secondhand.core.domain.model.detail.OrdersProduct
+import com.binar.secondhand.core.domain.model.detail.Wishlist
 import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.domain.model.profile.User
 
@@ -132,5 +134,26 @@ object DetailMapper {
             orderResponse?.updatedAt.orEmpty(),
 
         )
+    }
+
+    fun mapWishlistResponse(wishlistResponse: WishListResponseItem?):Wishlist{
+
+        val product : Wishlist.Product = Wishlist.Product(
+        )
+        product.basePrice = wishlistResponse?.product?.basePrice.orNol()
+        product.createdAt = wishlistResponse?.product?.createdAt.orEmpty()
+        product.description = wishlistResponse?.product?.description.orEmpty()
+        product.id = wishlistResponse?.product?.id.orNol()
+        product.imageName = wishlistResponse?.product?.imageName.orEmpty()
+        product.imageUrl = wishlistResponse?.product?.imageUrl.orEmpty()
+        product.location = wishlistResponse?.product?.location.orEmpty()
+        product.name = wishlistResponse?.product?.name.orEmpty()
+        product.updatedAt = wishlistResponse?.product?.updatedAt.orEmpty()
+        product.userId = wishlistResponse?.product?.userId.orNol()
+
+        return Wishlist(
+            wishlistResponse?.name.orEmpty(),
+            product
+            )
     }
 }

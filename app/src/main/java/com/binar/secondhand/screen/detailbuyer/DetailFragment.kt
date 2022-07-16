@@ -1,6 +1,5 @@
 package com.binar.secondhand.screen.detailbuyer
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.binar.secondhand.R
 import com.binar.secondhand.core.data.local.DataPreferences
 import com.binar.secondhand.core.data.remote.detail.request.OrderRequest
+import com.binar.secondhand.core.data.remote.detail.request.WishListRequest
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentDetailBuyerBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
@@ -29,8 +30,8 @@ class DetailFragment : Fragment() {
     var name: String = ""
     var price: Int = 0
     var image: String = ""
-    var checkProduct: Boolean = false;
-    var checkLoggedIn: Boolean = false;
+    var checkProduct: Boolean = false
+    var checkLoggedIn: Boolean = false
     private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(
@@ -64,10 +65,27 @@ class DetailFragment : Fragment() {
 
 
         val data = arguments?.getInt("idProduct")
+        val isFromDaftarJual = arguments?.getBoolean("isFromDaftarJual")
+        if (isFromDaftarJual == true){
+            binding.btnBuy.isVisible = false
+        }
         viewModel.getDetailProduct(data ?: 0)
 
         binding.icBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.icFavoriteFalse.setOnClickListener {
+            val request: WishListRequest = WishListRequest(
+                idProduct
+            )
+            viewModel.addToWishlist(request)
+
+            with(viewModel.wishlistStateEvent){
+                onSuccess = {
+                    binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
+                }
+            }
         }
 
         binding.btnBuy.setOnClickListener {
@@ -97,14 +115,14 @@ class DetailFragment : Fragment() {
                     onSuccess = {
                         var i = 0
                         for (i in 0..it.size - 1) {
-                            if (it[i].productId == idProduct) {
+                            checkProduct = if (it[i].productId == idProduct) {
                                 Log.d("Product ID", it[i].productId.toString())
                                 binding.btnBuy.setText("Order sedang dalam Proses..")
                                 binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
                                 Toast.makeText(requireActivity(), it[i].status, Toast.LENGTH_LONG)
-                                checkProduct = true
+                                true
                             } else {
-                                checkProduct = false
+                                false
                             }
                         }
                         Log.d("Looping", "Testing")
@@ -219,7 +237,6 @@ class DetailFragment : Fragment() {
 
                 }
             }
-
             onFailure = { _, _ ->
                 Log.d("Detail API", "Loading Detail")
 

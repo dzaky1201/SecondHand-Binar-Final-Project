@@ -1,10 +1,12 @@
 package com.binar.secondhand.core.data.repository
 
 import com.binar.secondhand.core.data.remote.detail.request.OrderRequest
+import com.binar.secondhand.core.data.remote.detail.request.WishListRequest
 import com.binar.secondhand.core.data.remote.detail.source.DetailDataSource
 import com.binar.secondhand.core.domain.model.detail.Detail
 import com.binar.secondhand.core.domain.model.detail.Order
 import com.binar.secondhand.core.domain.model.detail.OrdersProduct
+import com.binar.secondhand.core.domain.model.detail.Wishlist
 import com.binar.secondhand.core.domain.repository.iDetailRepository
 import com.binar.secondhand.core.event.MutableStateEventManager
 import com.binar.secondhand.core.event.StateEventManager
@@ -26,6 +28,10 @@ class DetailRepositoryImpl(private val detailDataSource: DetailDataSource): iDet
     private var _orderStateEventManager: MutableStateEventManager<Order> = MutableStateEventManager()
     override val orderStateEventManager: StateEventManager<Order>
         get() = _orderStateEventManager
+
+    private var _wishlistStateEventManager: MutableStateEventManager<Wishlist> = MutableStateEventManager()
+    override val wishlistStateEventManager: StateEventManager<Wishlist>
+        get() = _wishlistStateEventManager
 
     override fun getProducts(productId : Int) {
         compositeDisposable.add(
@@ -50,6 +56,15 @@ class DetailRepositoryImpl(private val detailDataSource: DetailDataSource): iDet
             }
         )
     }
+
+    override fun addToWishlist(request: WishListRequest) {
+        compositeDisposable.add(
+            detailDataSource.addToWishlist(request).fetchStateEventSubscriber { wishlist ->
+                _wishlistStateEventManager.post(wishlist)
+            }
+        )
+    }
+
     override fun close() {
         _detailStateEventManager.closeQuietly()
         compositeDisposable.dispose()

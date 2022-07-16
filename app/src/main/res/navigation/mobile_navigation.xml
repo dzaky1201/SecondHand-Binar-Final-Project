@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_navigation_daftar_jual_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_navigation_daftar_jual_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -88,6 +91,10 @@
         <argument
             android:name="idProduct"
             app:argType="integer" />
+        <argument
+            android:name="isFromDaftarJual"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <dialog
         android:id="@+id/loginFragmentDialog"

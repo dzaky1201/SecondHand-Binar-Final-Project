@@ -180,6 +180,14 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/ic_back" />
+
+                    <ImageView
+                        android:id="@+id/icFavoriteFalse"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="370dp"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/ic_favorite_false" />
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
