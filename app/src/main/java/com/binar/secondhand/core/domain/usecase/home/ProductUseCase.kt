@@ -11,11 +11,11 @@ interface ProductUseCase {
     val categoriesStateEventManager: StateEventManager<List<Categories>>
     val searchStateEventManager: StateEventManager<PagingHome<Product>>
     val categoryStateEventManager: StateEventManager<PagingHome<Product>>
-    val bannerStateEventManager : StateEventManager<List<Banner>>
+    val bannerStateEventManager: StateEventManager<List<Banner>>
     fun getProducts(page: Int)
     fun getBannerList()
     fun getCategories()
-    fun searchProduct(product:String, page: Int)
-    fun getCategory(categoryId:Int)
+    fun searchProduct(product: String, page: Int)
+    fun getCategory(categoryId: Int, page: Int)
     fun closeRepository()
 }

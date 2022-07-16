@@ -35,8 +35,8 @@ class HomeViewModel(private val useCase: ProductUseCase) : ViewModel() {
         useCase.searchProduct(product, page)
     }
 
-    fun getCategory(categoryId:Int){
-        useCase.getCategory(categoryId)
+    fun getCategory(categoryId:Int, page: Int){
+        useCase.getCategory(categoryId, page)
     }
 
 }

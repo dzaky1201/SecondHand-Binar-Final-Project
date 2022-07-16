@@ -29,8 +29,8 @@ class HomeDataSource(private val productService: ProductService) {
         }
     }
 
-    fun getProductWithCategory(categoryId: Int): Observable<PagingHome<Product>> {
-        return productService.getCategory(categoryId).mapObservable {
+    fun getProductWithCategory(categoryId: Int, page: Int): Observable<PagingHome<Product>> {
+        return productService.getCategory(categoryId, page).mapObservable {
             ProductMapper.mapProdResponsePagingToEntity(it)
         }
     }

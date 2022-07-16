@@ -26,7 +26,11 @@ interface ProductService {
     ): SecondHandPagingResponse<ProductResponseItem>
 
     @GET("buyer/product")
-    fun getCategory(@Query("category_id") category: Int = 0): SecondHandPagingResponse<ProductResponseItem>
+    fun getCategory(
+        @Query("category_id") category: Int = 0,
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10
+    ): SecondHandPagingResponse<ProductResponseItem>
 
     @GET("seller/banner")
     fun getBanner(): SecondHandResponse<List<BannerResponseItem>>

@@ -7,15 +7,15 @@ import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.event.StateEventManager
 import java.io.Closeable
 
-interface IProductRepository: Closeable {
+interface IProductRepository : Closeable {
     val productStateEventManager: StateEventManager<PagingHome<Product>>
     val categoriesStateEventManager: StateEventManager<List<Categories>>
-    val searchStateEventManager : StateEventManager<PagingHome<Product>>
-    val categoryStateEventManager : StateEventManager<PagingHome<Product>>
-    val bannerStateEventManager : StateEventManager<List<Banner>>
+    val searchStateEventManager: StateEventManager<PagingHome<Product>>
+    val categoryStateEventManager: StateEventManager<PagingHome<Product>>
+    val bannerStateEventManager: StateEventManager<List<Banner>>
     fun getProducts(page: Int)
     fun getCategories()
     fun getBanner()
-    fun searchProduct(product:String, page: Int)
-    fun getCategory(categoryId:Int)
+    fun searchProduct(product: String, page: Int)
+    fun getCategory(categoryId: Int, page: Int)
 }

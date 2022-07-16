@@ -46,7 +46,7 @@ class GenericAdapter<T : Equatable>(
         viewError.setBackgroundColor(getRandomColor())
         viewData.setBackgroundColor(getRandomColor())*/
 
-        return when(viewType) {
+        return when (viewType) {
             TYPE_LOADING -> LoadingViewHolder(viewLoading)
             TYPE_ERROR -> ErrorViewHolder(viewError)
             else -> DataViewHolder<T>(viewData)
@@ -86,6 +86,18 @@ class GenericAdapter<T : Equatable>(
 
     fun pushItems(item: List<T>) {
         val newItem = calculateMutableItems()
+        newItem.addAll(item)
+        items = newItem
+    }
+
+    fun deleteItem() {
+        val newItem = calculateMutableItems()
+        newItem.clear()
+    }
+
+    fun pushItemNew(item: List<T>) {
+        val newItem = calculateMutableItems()
+        newItem.clear()
         newItem.addAll(item)
         items = newItem
     }
@@ -135,7 +147,7 @@ class GenericAdapter<T : Equatable>(
         return newItems
     }
 
-    private fun setGridSpan(column: Int) : GridLayoutManager.SpanSizeLookup {
+    private fun setGridSpan(column: Int): GridLayoutManager.SpanSizeLookup {
         return object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (getItemViewType(position)) {

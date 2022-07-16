@@ -32,8 +32,8 @@ class ProductInteractor(private val productRepository: IProductRepository): Prod
         productRepository.searchProduct(product, page)
     }
 
-    override fun getCategory(categoryId: Int) {
-        productRepository.getCategory(categoryId)
+    override fun getCategory(categoryId: Int, page: Int) {
+        productRepository.getCategory(categoryId, page)
     }
     override fun closeRepository() {
         productRepository.close()

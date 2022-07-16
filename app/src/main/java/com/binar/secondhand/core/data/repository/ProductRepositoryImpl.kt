@@ -72,9 +72,9 @@ class ProductRepositoryImpl(private val homeDataSource: HomeDataSource) : IProdu
         )
     }
 
-    override fun getCategory(categoryId: Int) {
+    override fun getCategory(categoryId: Int, page: Int) {
         compositeDisposable.add(
-            homeDataSource.getProductWithCategory(categoryId)
+            homeDataSource.getProductWithCategory(categoryId, page)
                 .fetchStateEventSubscriber { getStateEvent ->
                     _categoryStateEventManager.post(getStateEvent)
                 }
