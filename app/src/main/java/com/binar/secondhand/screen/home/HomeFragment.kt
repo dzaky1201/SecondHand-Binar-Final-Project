@@ -1,58 +1,151 @@
 package com.binar.secondhand.screen.home
 
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.binar.secondhand.R
+import com.binar.secondhand.core.domain.model.home.Product
+import com.binar.secondhand.core.utils.BindingFragment
 import com.binar.secondhand.core.utils.DialogWindow
+import com.binar.secondhand.core.utils.genericAdapterLazy
+import com.binar.secondhand.core.utils.onReachBottomScroll
 import com.binar.secondhand.databinding.FragmentHomeBinding
+import com.binar.secondhand.databinding.ItemHomeListProductsBinding
 import com.binar.secondhand.screen.home.adapter.CategoryAdapter
-import com.binar.secondhand.screen.home.adapter.ListProductsAdapter
+import com.binar.secondhand.screen.home.adapter.ImageSlideAdapter
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModel()
     private var progressDialog: AlertDialog? = null
+    private val productPagingAdapter by genericAdapterLazy<Product>(
+        layoutRes = R.layout.item_home_list_products,
+        onBind = { _, item ->
+            onBindData(item)
+        }
+    )
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    private var currentPage = 1
+    private var currentPageCategory = 1
+    private var currentPageSearch = 1
+    private var stateCategoryProduct = false
 
-        return binding.root
+    private fun View.onBindData(
+        item: Product
+    ) {
+        ItemHomeListProductsBinding.bind(this).apply {
+            root.setOnClickListener {
+                it.findNavController()
+                    .navigate(HomeFragmentDirections.actionNavigationHomeToDetailFragment(item.id))
+            }
+
+            val categoryName = arrayListOf<String>()
+
+            item.categories.forEach {
+                categoryName.add(it.name)
+            }
+
+            val categories = categoryName.joinToString()
+            Log.d("CategoryName", categories)
+            tvTitle.text = item.name
+            tvPrice.text = item.basePrice.toString()
+
+            tvCategory.text = categories.replace(", ", "\n")
+
+
+
+            Glide.with(binding.root).load(item.imageUrl)
+                .error(R.drawable.home_attribute)
+                .into(ivPosterImage)
+        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
+    private fun setByCategory(categoryId: Int) {
+        viewModel.getCategory(categoryId, currentPageCategory)
+        binding.rvListProducts.onReachBottomScroll(viewModel.categoryStateEvent) {
+            viewModel.getCategory(categoryId, currentPageCategory)
+            with(viewModel.categoryStateEvent) {
+                onLoading = {
+                    productPagingAdapter.pushLoading()
+                }
+                onSuccess = {
+                    progressDialog?.dismiss()
+                    productPagingAdapter.pushItems(it.data!!)
+                    currentPageCategory += 1
+                }
+                onFailure = { _, _ ->
+                    progressDialog?.dismiss()
+                    Log.d("Failed", "Category Failed")
+                }
+            }
+        }
+
+        with(viewModel.categoryStateEvent) {
+            onLoading = {
+                productPagingAdapter.pushLoading()
+            }
+            onSuccess = {
+                progressDialog?.dismiss()
+                productPagingAdapter.pushItemNew(it.data!!)
+            }
+            onFailure = { _, _ ->
+                progressDialog?.dismiss()
+                Log.d("Failed", "Category Failed")
+            }
+        }
+    }
+
+
+    override fun inflaterBinding(): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreateBinding() {
+
+        viewModel.getCategories()
+        viewModel.getBanner()
+        viewModel.getProducts(currentPage)
 
         // adapter for products
-        val productsAdapter = ListProductsAdapter()
         binding.rvListProducts.layoutManager =
             GridLayoutManager(requireContext(), 2)
-        binding.rvListProducts.adapter = productsAdapter
+        binding.rvListProducts.adapter = productPagingAdapter
 
         // adapter for categories
-        val categoriesAdapter = CategoryAdapter {
-            setByCategory(it.id ?: 0, productsAdapter)
+        val categoriesAdapter = CategoryAdapter { id, page ->
+            currentPage = page
+            currentPageCategory = page
+            stateCategoryProduct = true
+            setByCategory(id)
         }
+
         binding.rvCategories.adapter = categoriesAdapter
         binding.rvCategories.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
-        viewModel.getProducts()
-        viewModel.getCategories()
+        val productEventManager = viewModel.productStateEvent
+        binding.rvListProducts.onReachBottomScroll(productEventManager) {
+            if (!stateCategoryProduct) {
+                viewModel.getProducts(currentPage)
+            }
+
+        }
+
+        with(viewModel.bannerStateEvent) {
+            onSuccess = {
+                progressDialog?.dismiss()
+                val adapter = ImageSlideAdapter(requireContext(), it)
+                binding.viewpager.adapter = adapter
+                binding.indicator.setViewPager(binding.viewpager)
+            }
+        }
 
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -63,14 +156,31 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                    viewModel.searchProduct(query)
+                viewModel.searchProduct(query, currentPageSearch)
+                binding.rvListProducts.onReachBottomScroll(viewModel.categoryStateEvent) {
+                    viewModel.searchProduct(query, currentPageSearch)
+                    with(viewModel.categoryStateEvent) {
+                        onLoading = {
+                            productPagingAdapter.pushLoading()
+                        }
+                        onSuccess = {
+                            progressDialog?.dismiss()
+                            productPagingAdapter.pushItems(it.data!!)
+                            currentPageSearch += 1
+                        }
+                        onFailure = { _, _ ->
+                            progressDialog?.dismiss()
+                            Log.d("Failed", "Category Failed")
+                        }
+                    }
+                }
                 with(viewModel.searchStateEvent) {
                     onLoading = {
-                        progressDialog = DialogWindow.progressCircle(requireContext(), "Sedang Mencari...", true)
+                        productPagingAdapter.pushLoading()
                     }
                     onSuccess = {
                         progressDialog?.dismiss()
-                        productsAdapter.submitList(it)
+                        productPagingAdapter.pushItemNew(it.data!!)
 
                     }
                     onFailure = { _, _ ->
@@ -85,7 +195,8 @@ class HomeFragment : Fragment() {
 
         with(viewModel.categoriesStateEvent) {
             onLoading = {
-                progressDialog = DialogWindow.progressCircle(requireContext(), "Sedang Memuat Product...", true)
+                progressDialog =
+                    DialogWindow.progressCircle(requireContext(), "Sedang Memuat Product...", true)
             }
             onSuccess = {
                 progressDialog?.dismiss()
@@ -94,36 +205,19 @@ class HomeFragment : Fragment() {
         }
 
         with(viewModel.productStateEvent) {
-            onSuccess = {
-                progressDialog?.dismiss()
-                productsAdapter.submitList(it)
-            }
-            onFailure = { _, _ ->
-                progressDialog?.dismiss()
-            }
-        }
-    }
-
-    private fun setByCategory(categoryId: Int, productsAdapter: ListProductsAdapter) {
-        viewModel.getCategory(categoryId)
-
-        with(viewModel.categoryStateEvent) {
             onLoading = {
-                progressDialog = DialogWindow.progressCircle(requireContext(), "Loading...", true)
+                productPagingAdapter.pushLoading()
             }
             onSuccess = {
                 progressDialog?.dismiss()
-                productsAdapter.submitList(it)
+                if (!stateCategoryProduct) {
+                    productPagingAdapter.pushItems(it.data!!)
+                    currentPage += 1
+                }
             }
             onFailure = { _, _ ->
                 progressDialog?.dismiss()
-                Log.d("Failed", "Category Failed")
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
