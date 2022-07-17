@@ -5,6 +5,7 @@ import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.screen.daftar_jual.DaftarJualViewModel
 import com.binar.secondhand.screen.daftar_jual.screen.diminati.DiminatiViewModel
 import com.binar.secondhand.screen.daftar_jual.SellerProducViewModel
+import com.binar.secondhand.screen.daftar_jual.TerjualViewModel
 import com.binar.secondhand.screen.detailbuyer.DetailViewModel
 import com.binar.secondhand.screen.home.HomeViewModel
 import com.binar.secondhand.screen.jual.JualViewModel
@@ -60,5 +61,9 @@ class AppModuleContainer : ModuleContainer() {
 
     private val viewModelDiminati = module {
         viewModel { DiminatiViewModel(get(), get()) }
+    }
+
+    private val viewModelTerjual = module {
+        viewModel { TerjualViewModel(get(), get()) }
     }
 }

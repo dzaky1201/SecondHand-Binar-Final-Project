@@ -1,7 +1,9 @@
 package com.binar.secondhand.core.data.repository
 
+import com.binar.secondhand.core.data.remote.daftar_jual.request.UpdateStatusProductReq
 import com.binar.secondhand.core.data.remote.daftar_jual.source.DaftarJualSource
 import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductInterestedEntity
+import com.binar.secondhand.core.domain.model.daftar_jual.UpdateStatusProduct
 import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.domain.repository.IDaftarJualRepository
 import com.binar.secondhand.core.event.MutableStateEventManager
@@ -31,9 +33,9 @@ class DaftarJualRepositoryImpl(private val source: DaftarJualSource) : IDaftarJu
     override val sellerOrderStateEventManager: StateEventManager<List<SellerProductInterestedEntity>>
         get() = _sellerOrderStateEventManager
 
-    override fun getSellerOrder() {
+    override fun getSellerOrder(status: String) {
         compositeDisposable.add(
-            source.getSellerOrder().fetchStateEventSubscriber { sellerStateEvent ->
+            source.getSellerOrder(status).fetchStateEventSubscriber { sellerStateEvent ->
                 _sellerOrderStateEventManager.post(sellerStateEvent)
             }
         )
@@ -48,6 +50,18 @@ class DaftarJualRepositoryImpl(private val source: DaftarJualSource) : IDaftarJu
         compositeDisposable.add(
             source.getDetailSellerOrder(id).fetchStateEventSubscriber {
                 _sellerOrderDetailStateEventManager.post(it)
+            }
+        )
+    }
+
+    private var _updateStatusOrderEvent: MutableStateEventManager<UpdateStatusProduct> = MutableStateEventManager()
+    override val updateStatusOrderEvent: StateEventManager<UpdateStatusProduct>
+        get() = _updateStatusOrderEvent
+
+    override fun updateStatusOrder(id: Int, req: UpdateStatusProductReq) {
+        compositeDisposable.add(
+            source.updateStatusOrder(id, req).fetchStateEventSubscriber {
+                _updateStatusOrderEvent.post(it)
             }
         )
     }

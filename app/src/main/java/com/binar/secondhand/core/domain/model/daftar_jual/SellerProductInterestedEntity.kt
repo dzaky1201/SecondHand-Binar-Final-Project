@@ -12,7 +12,8 @@ data class SellerProductInterestedEntity(
     val transactionDate: String?,
     val price: Int?,
     val basePrice: String?,
-    val user: UserBuyer?
+    val user: UserBuyer?,
+    val status: String?
 
 ){
     data class UserBuyer(

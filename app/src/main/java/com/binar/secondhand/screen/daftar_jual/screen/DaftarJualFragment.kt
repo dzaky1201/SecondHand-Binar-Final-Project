@@ -57,8 +57,6 @@ class DaftarJualFragment : Fragment() {
                     intent.putExtra("showData", user)
                     startActivity(intent)
                 }
-                viewModel.getSellerProduct()
-                viewModel.getSellerOrder()
             }
 
             onFailure = { _, _ ->

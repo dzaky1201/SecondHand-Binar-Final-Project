@@ -15,14 +15,6 @@ class DaftarJualViewModel( private val profileUseCase: ProfileUseCase, private v
         profileUseCase.getUser()
     }
 
-    fun getSellerProduct(){
-        daftarJualUseCase.getSellerProducts()
-    }
-
-    fun getSellerOrder(){
-        daftarJualUseCase.getSellerOrder()
-    }
-
     override fun onCleared() {
         super.onCleared()
         profileUseCase.closeRepository()

@@ -1,5 +1,6 @@
 package com.binar.secondhand.screen.daftar_jual.adapter
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,8 @@ import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductIntereste
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.bumptech.glide.Glide
 
-class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) : ListAdapter<SellerProductInterestedEntity, DiminatiProductAdapter.ViewHolder>(
+class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
+    ListAdapter<SellerProductInterestedEntity, DiminatiProductAdapter.ViewHolder>(
         DiffCallBackDiminati()
     ) {
 
@@ -22,8 +24,20 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) : ListAdapter
 
             binding.apply {
                 binding.tvProductName.text = item.productName
-                binding.tvStartPrice.text = item.basePrice
-                binding.tvBidPrice.text = "Ditawar Rp. ${item.price.toString()}"
+                if (item.status == "accepted") {
+                    binding.tvStartPrice.apply {
+                        text = itemView.resources.getString(R.string.basePrice, item.basePrice)
+                        paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                    }
+                } else {
+                    binding.tvStartPrice.text =
+                        itemView.resources.getString(R.string.basePrice, item.basePrice)
+
+                }
+                binding.tvStartPrice.text =
+                    itemView.resources.getString(R.string.basePrice, item.basePrice)
+                binding.tvBidPrice.text =
+                    itemView.resources.getString(R.string.fixPrice, item.price.toString())
                 binding.tvDate.text = item.transactionDate
 
 
@@ -31,7 +45,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) : ListAdapter
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
                 root.setOnClickListener {
-                   onClick(item.id!!)
+                    onClick(item.id!!)
                 }
             }
         }

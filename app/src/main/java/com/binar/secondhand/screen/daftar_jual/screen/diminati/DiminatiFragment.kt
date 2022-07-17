@@ -61,7 +61,7 @@ class DiminatiFragment : Fragment() {
         super.onResume()
         viewModel.getUser()
         viewModel.userChecked.onSuccess = {
-            viewModel.getSellerOrder()
+            viewModel.getSellerOrder("pending")
         }
 
     }

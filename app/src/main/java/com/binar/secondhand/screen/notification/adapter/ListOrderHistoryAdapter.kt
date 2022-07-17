@@ -33,9 +33,6 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
                 Glide.with(binding.root).load(item.product.imageUrl)
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
-                root.setOnClickListener{
-                    it.findNavController().navigate(NotificationFragmentDirections.actionNavigationNotificationToDetailFragment(item.productId))
-                }
             }
         }
     }
