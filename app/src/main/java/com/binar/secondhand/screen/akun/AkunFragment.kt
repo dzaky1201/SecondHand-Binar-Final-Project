@@ -85,6 +85,9 @@ class AkunFragment : Fragment() {
         binding.includeAkunSaya.btnOrderHistory.setOnClickListener {
             findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToOrderHistoryFragment())
         }
+        binding.includeAkunSaya.btnWishList.setOnClickListener {
+            findNavController().navigate(AkunFragmentDirections.actionNavigationAkunToFragmentWishlist())
+        }
 
     }
 

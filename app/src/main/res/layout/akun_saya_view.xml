@@ -167,11 +167,55 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray" />
+
+
+    <LinearLayout
+        android:id="@+id/btnWishList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineHistory"
+        tools:ignore="UseCompoundDrawables"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/edit"
+            android:src="@drawable/ic_history" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/order_history"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/lineWishList"
+        app:layout_constraintEnd_toEndOf="@id/btnPengaturan"
+        app:layout_constraintStart_toStartOf="@+id/btnPengaturan"
+        app:layout_constraintTop_toBottomOf="@id/btnWishList"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray" />
     <LinearLayout
         android:id="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lineHistory"
+        app:layout_constraintTop_toBottomOf="@+id/lineWishList"
         tools:ignore="UseCompoundDrawables"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

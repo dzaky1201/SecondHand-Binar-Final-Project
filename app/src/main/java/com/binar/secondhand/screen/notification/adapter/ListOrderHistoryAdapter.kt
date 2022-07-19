@@ -4,15 +4,15 @@ package com.binar.secondhand.screen.notification.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.detail.OrdersProduct
 import com.binar.secondhand.databinding.ItemOrderHistoryBinding
-import com.binar.secondhand.screen.notification.NotificationFragmentDirections
 import com.bumptech.glide.Glide
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapter.ViewHolder>(
@@ -25,9 +25,12 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
         fun bind(item: OrdersProduct) {
 
             binding.apply {
+                val str = item.transactionDate
                 binding.tvProductName.text = item.productName
                 binding.tvBasePrice.text ="Harga Awal Rp."+item.basePrice
                 binding.tvSellerName.text = "Status Barang : "+item.status
+                    binding.tvDate.text = str
+
 
 
                 Glide.with(binding.root).load(item.product.imageUrl)

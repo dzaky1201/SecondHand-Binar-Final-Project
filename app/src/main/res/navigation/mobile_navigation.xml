@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -51,6 +51,12 @@
         <action
             android:id="@+id/action_navigation_akun_to_orderHistoryFragment"
             app:destination="@id/orderHistoryFragment" />
+        <action
+            android:id="@+id/action_navigation_akun_to_fragment_wishlist"
+            app:destination="@id/fragment_wishlist" />
+        <action
+            android:id="@+id/action_navigation_akun_to_fragment_wishlist2"
+            app:destination="@id/fragment_wishlist" />
     </fragment>
     <fragment
         android:id="@+id/navigation_daftar_jual"
@@ -113,5 +119,17 @@
             android:name="idDiminati"
             app:argType="integer"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_wishlist"
+        android:name="com.binar.secondhand.screen.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_fragment_wishlist_to_navigation_akun"
+            app:destination="@id/navigation_akun" />
+        <action
+            android:id="@+id/action_fragment_wishlist_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

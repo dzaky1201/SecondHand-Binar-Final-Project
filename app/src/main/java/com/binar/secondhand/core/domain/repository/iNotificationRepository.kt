@@ -11,5 +11,5 @@ import java.io.Closeable
 
 interface iNotificationRepository: Closeable {
     val notificationStateEventManager: StateEventManager<List<Notification>>
-    fun getNotificationList()
+    fun getNotificationList(notifType:String)
 }

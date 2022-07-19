@@ -3,6 +3,7 @@ package com.binar.secondhand.screen.home
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,6 +20,7 @@ import com.binar.secondhand.screen.home.adapter.CategoryAdapter
 import com.binar.secondhand.screen.home.adapter.ImageSlideAdapter
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
@@ -109,6 +111,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
     override fun onCreateBinding() {
 
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         viewModel.getCategories()
         viewModel.getBanner()
         viewModel.getProducts(currentPage)

@@ -16,8 +16,8 @@ import io.reactivex.Observable
 
 class NotificationDataSource(private val notifService: NotificationService) {
 
-    fun getNotificationList(): Observable<List<Notification>> {
-        return notifService.getNotificationList().mapObservable {
+    fun getNotificationList(notifType : String): Observable<List<Notification>> {
+        return notifService.getNotificationList(notifType).mapObservable {
             NotificationMapper.mapNotifResponseToEntity(it)
         }
     }

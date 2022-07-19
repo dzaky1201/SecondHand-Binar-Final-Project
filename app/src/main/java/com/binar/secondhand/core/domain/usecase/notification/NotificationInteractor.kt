@@ -11,8 +11,8 @@ import com.binar.secondhand.core.event.StateEventManager
 class NotificationInteractor(private val notifRepos: iNotificationRepository): NotificationUseCase {
     override val notificationStateEventManager: StateEventManager<List<Notification>> = notifRepos.notificationStateEventManager
 
-    override fun getNotificationList() {
-        notifRepos.getNotificationList()
+    override fun getNotificationList(notifType : String) {
+        notifRepos.getNotificationList(notifType)
     }
 
     override fun closeRepository() {

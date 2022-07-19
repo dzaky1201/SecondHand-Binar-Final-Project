@@ -10,8 +10,15 @@ import com.binar.secondhand.core.event.StateEventManager
 class NotificationViewModel(private val useCase : NotificationUseCase) : ViewModel() {
 
     val notificationStateEvent : StateEventManager<List<Notification>> = useCase.notificationStateEventManager
+    val notifType : MutableLiveData<String> by lazy{
+        MutableLiveData<String>()
+    }
 
-    fun getNotificationList(){
-        useCase.getNotificationList()
+    fun getNotifType():LiveData<String>{
+        return notifType
+    }
+
+    fun getNotificationList(notifType : String){
+        useCase.getNotificationList(notifType)
     }
 }

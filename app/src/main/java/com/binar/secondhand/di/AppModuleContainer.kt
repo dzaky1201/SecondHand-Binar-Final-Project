@@ -14,6 +14,7 @@ import com.binar.secondhand.screen.login.LoginViewModel
 import com.binar.secondhand.screen.notification.NotificationViewModel
 import com.binar.secondhand.screen.register.RegisterViewModel
 import com.binar.secondhand.screen.update_akun.UpdateAkunViewModel
+import com.binar.secondhand.screen.wishlist.WishlistViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -65,5 +66,9 @@ class AppModuleContainer : ModuleContainer() {
 
     private val viewModelTerjual = module {
         viewModel { TerjualViewModel(get(), get()) }
+    }
+
+    private val viewModelWishlist = module {
+        viewModel { WishlistViewModel(get()) }
     }
 }

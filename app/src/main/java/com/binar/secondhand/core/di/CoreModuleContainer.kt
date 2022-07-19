@@ -14,6 +14,8 @@ import com.binar.secondhand.core.data.remote.notification.NotificationService
 import com.binar.secondhand.core.data.remote.notification.source.NotificationDataSource
 import com.binar.secondhand.core.data.remote.jual.JualService
 import com.binar.secondhand.core.data.remote.jual.source.JualDataSource
+import com.binar.secondhand.core.data.remote.wishlist.WishlistService
+import com.binar.secondhand.core.data.remote.wishlist.source.WishlistDataSource
 import com.binar.secondhand.core.data.repository.*
 import com.binar.secondhand.core.domain.repository.*
 import com.binar.secondhand.core.domain.usecase.daftar_jual.DaftarJualInteractor
@@ -28,6 +30,8 @@ import com.binar.secondhand.core.domain.usecase.jual.JualInteractor
 import com.binar.secondhand.core.domain.usecase.jual.JualUseCase
 import com.binar.secondhand.core.domain.usecase.profile.ProfileInteractor
 import com.binar.secondhand.core.domain.usecase.profile.ProfileUseCase
+import com.binar.secondhand.core.domain.usecase.wishlist.WishlistInteractor
+import com.binar.secondhand.core.domain.usecase.wishlist.WishlistUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.create
@@ -57,6 +61,10 @@ class CoreModuleContainer : ModuleContainer() {
         single<DaftarJualService> { RetrofitProvider.retrofit().create(DaftarJualService::class.java) }
     }
 
+    private val wishlistServicesModule = module {
+        single<WishlistService> { RetrofitProvider.retrofit().create(WishlistService::class.java) }
+    }
+
     private val profileDataSourceModule = module {
         single { ProfileDataSource(get()) }
     }
@@ -78,6 +86,10 @@ class CoreModuleContainer : ModuleContainer() {
 
     private val daftarJualSourceModule = module {
         single { DaftarJualSource(get()) }
+    }
+
+    private val wishlistDataSourceModule = module {
+        single { WishlistDataSource(get()) }
     }
 
     private val profileRepositoryModule = module {
@@ -103,6 +115,10 @@ class CoreModuleContainer : ModuleContainer() {
         factory<IDaftarJualRepository> { DaftarJualRepositoryImpl(get()) }
     }
 
+    private val wishlistRepositoryModule = module {
+        factory<iWishlistRepository> { WishlistRepositoryImpl(get()) }
+    }
+
     private val profileUseCaseModule = module {
         factory<ProfileUseCase> { ProfileInteractor(get()) }
     }
@@ -125,6 +141,11 @@ class CoreModuleContainer : ModuleContainer() {
 
     private val daftarJualUseCaseModule = module {
         factory<DaftarJualUseCase> { DaftarJualInteractor(get()) }
+    }
+
+
+    private val wishlistCaseModule = module {
+        factory<WishlistUseCase> { WishlistInteractor(get()) }
     }
 
     private val preferencesModule = module {
