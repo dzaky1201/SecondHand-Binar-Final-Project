@@ -91,6 +91,8 @@ class DiminatiDetailFragment : Fragment() {
                         progressDialog?.dismiss()
                         if (data.status == "accepted") {
                             showDialogSuccess(data, detail)
+                        }else{
+                            findNavController().popBackStack()
                         }
                     }
                 }

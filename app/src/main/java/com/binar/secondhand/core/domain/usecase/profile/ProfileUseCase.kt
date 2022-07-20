@@ -40,13 +40,7 @@ interface ProfileUseCase {
     )
 
     fun registerUser(
-        fullname: String,
-        email: String,
-        password: String,
-        address: String,
-        phoneNumber: String,
-        city: String,
-        file: File
+        request: LoginRequest
     )
 
     fun closeRepository()

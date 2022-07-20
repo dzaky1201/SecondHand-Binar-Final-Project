@@ -13,10 +13,10 @@ import com.binar.secondhand.core.event.StateEventManager
 
 class HomeViewModel(private val useCase: ProductUseCase) : ViewModel() {
 
-    val productStateEvent: StateEventManager<PagingHome<Product>> = useCase.productStateEventManager
+    val productStateEvent: StateEventManager<List<Product>> = useCase.productStateEventManager
     val categoriesStateEvent: StateEventManager<List<Categories>> = useCase.categoriesStateEventManager
-    val searchStateEvent: StateEventManager<PagingHome<Product>> = useCase.searchStateEventManager
-    val categoryStateEvent: StateEventManager<PagingHome<Product>> = useCase.categoryStateEventManager
+    val searchStateEvent: StateEventManager<List<Product>> = useCase.searchStateEventManager
+    val categoryStateEvent: StateEventManager<List<Product>> = useCase.categoryStateEventManager
     val bannerStateEvent: StateEventManager<List<Banner>> = useCase.bannerStateEventManager
 
     fun getProducts(page: Int){

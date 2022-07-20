@@ -38,7 +38,10 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModelAkun.getUser()
         val userManager = viewModelAkun.userManager
-        val data = arguments?.getBoolean("isFromPageAccount")
+        val listNotificationAdapter = ListNotificationAdapter()
+        binding.rvNotifList.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        binding.rvNotifList.adapter = listNotificationAdapter
 
 
         userManager.onLoading = {
@@ -60,12 +63,14 @@ class NotificationFragment : Fragment() {
                     )
                 }
                 onSuccess = {
-                    progressDialog?.dismiss()
-                    val listNotificationAdapter = ListNotificationAdapter()
-                    binding.rvNotifList.layoutManager =
-                        LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-                    binding.rvNotifList.adapter = listNotificationAdapter
-                    listNotificationAdapter.submitList(it)
+                    if (it.isNotEmpty()){
+                        progressDialog?.dismiss()
+                        listNotificationAdapter.submitList(it)
+                        binding.imgProductNotFound.isVisible = false
+                    }else{
+                        progressDialog?.dismiss()
+                        binding.imgProductNotFound.isVisible = true
+                    }
                 }
                 onFailure = { _, _ ->
                     progressDialog?.dismiss()

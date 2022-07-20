@@ -80,16 +80,10 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : IProfil
     }
 
     override fun registerUser(
-        fullname: String,
-        email: String,
-        password: String,
-        address: String,
-        phoneNumber: String,
-        city: String,
-        file: File
+        request: LoginRequest
     ) {
         val disposable =
-            dataSource.registerUser(fullname, email, password, address, phoneNumber, city, file)
+            dataSource.registerUser(request)
                 .fetchStateEventSubscriber {
                     _registerUserStateEventManager.post(it)
                 }

@@ -12,8 +12,9 @@ interface ProductService {
     @GET("buyer/product")
     fun getProducts(
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 10
-    ): SecondHandPagingResponse<ProductResponseItem>
+        @Query("per_page") perPage: Int = 10,
+        @Query("status") available: String = "available"
+    ): SecondHandResponse<List<ProductResponseItem>>
 
     @GET("seller/category")
     fun getCategories(): SecondHandResponse<List<CategoriesResponseItem>>
@@ -22,15 +23,17 @@ interface ProductService {
     fun searchProduct(
         @Query("search") search: String = "",
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 10
-    ): SecondHandPagingResponse<ProductResponseItem>
+        @Query("per_page") perPage: Int = 10,
+        @Query("status") available: String = "available"
+    ): SecondHandResponse<List<ProductResponseItem>>
 
     @GET("buyer/product")
     fun getCategory(
         @Query("category_id") category: Int = 0,
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 10
-    ): SecondHandPagingResponse<ProductResponseItem>
+        @Query("per_page") perPage: Int = 10,
+        @Query("status") available: String = "available"
+    ): SecondHandResponse<List<ProductResponseItem>>
 
     @GET("seller/banner")
     fun getBanner(): SecondHandResponse<List<BannerResponseItem>>
