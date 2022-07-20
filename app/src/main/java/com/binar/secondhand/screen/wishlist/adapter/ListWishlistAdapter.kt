@@ -1,6 +1,7 @@
 package com.binar.secondhand.screen.wishlist.adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,20 +22,40 @@ class ListWishlistAdapter : ListAdapter<ListWishlist, ListWishlistAdapter.ViewHo
         private val binding = ItemWishlistBinding.bind(view)
 
         fun bind(item: ListWishlist) {
-
-            binding.apply {
+            Log.d("tan", item.product.toString())
+            if (item.product.name == ""|| item.product.location == "") {
+                binding.tvProductName.text = "-"
+                binding.tvBasePrice.text = item.product.basePrice.toString()
+                binding.tvLocation.text = "Lokasi di " + " -"
+                binding.tvDate.text = item.product.updatedAt
+            }
+            else if (item.product.name == ""){
+                binding.tvProductName.text = "-"
+                binding.tvBasePrice.text = item.product.basePrice.toString()
+                binding.tvLocation.text = "Lokasi di " + item.product.location
+                binding.tvDate.text = item.product.updatedAt
+            }
+            else if (item.product.location == ""){
                 binding.tvProductName.text = item.product.name
                 binding.tvBasePrice.text = item.product.basePrice.toString()
-                binding.tvLocation.text = "Lokasi di "+item.product.location
+                binding.tvLocation.text = "Lokasi di " + " -"
                 binding.tvDate.text = item.product.updatedAt
-
-
-                Glide.with(binding.root).load(item.product.imageUrl)
-                    .error(R.drawable.home_attribute)
-                    .into(binding.ivPosterImage)
-                root.setOnClickListener{
-                    it.findNavController().navigate(WishlistFragmentDirections.actionFragmentWishlistToDetailFragment(item.productId))
+            }
+            else {
+                binding.apply {
+                    binding.tvProductName.text = item.product.name
+                    binding.tvBasePrice.text = item.product.basePrice.toString()
+                    binding.tvLocation.text = "Lokasi di " + item.product.location
+                    binding.tvDate.text = item.product.updatedAt
                 }
+            }
+            Glide.with(binding.root).load(item.product.imageUrl)
+                .error(R.drawable.home_attribute)
+                .into(binding.ivPosterImage)
+            binding.root.setOnClickListener {
+                it.findNavController().navigate(
+                    WishlistFragmentDirections.actionFragmentWishlistToDetailFragment(item.productId)
+                )
             }
         }
     }
