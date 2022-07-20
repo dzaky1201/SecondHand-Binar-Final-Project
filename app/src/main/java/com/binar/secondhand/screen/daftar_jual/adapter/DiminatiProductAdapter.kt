@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductInterestedEntity
+import com.binar.secondhand.core.utils.dateformat
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.bumptech.glide.Glide
 
@@ -38,7 +39,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
                     itemView.resources.getString(R.string.basePrice, item.basePrice)
                 binding.tvBidPrice.text =
                     itemView.resources.getString(R.string.fixPrice, item.price.toString())
-                binding.tvDate.text = item.transactionDate
+                binding.tvDate.text = item.transactionDate?.dateformat()
 
 
                 Glide.with(binding.root).load(item.imageProduct)

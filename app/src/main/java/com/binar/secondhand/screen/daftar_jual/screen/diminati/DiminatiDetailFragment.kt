@@ -16,6 +16,7 @@ import com.binar.secondhand.core.data.remote.daftar_jual.request.UpdateStatusPro
 import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductInterestedEntity
 import com.binar.secondhand.core.domain.model.daftar_jual.UpdateStatusProduct
 import com.binar.secondhand.core.utils.DialogWindow
+import com.binar.secondhand.core.utils.dateformat
 import com.binar.secondhand.databinding.FragmentDiminatiDetailBinding
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -63,7 +64,7 @@ class DiminatiDetailFragment : Fragment() {
                     tvDitawar.text = resources.getString(R.string.fixPrice, detail.price.toString())
                     tvBasePrice.text =
                         resources.getString(R.string.basePrice, detail.basePrice.toString())
-                    tvDate.text = detail.transactionDate
+                    tvDate.text = detail.transactionDate?.dateformat()
 
                 }
                 binding.apply {
