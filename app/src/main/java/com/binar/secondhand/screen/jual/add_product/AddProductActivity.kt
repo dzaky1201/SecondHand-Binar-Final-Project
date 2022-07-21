@@ -97,8 +97,6 @@ class AddProductActivity : AppCompatActivity() {
 
 
 
-
-
         with(binding) {
             btnTerbitkan.setOnClickListener {
                 val namaProduk = edtNamaProduk.text.toString()
@@ -153,6 +151,12 @@ class AddProductActivity : AppCompatActivity() {
 
 //                    Toast.makeText(this@AddProductActivity, idCategory.toString(), Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+
+        with(binding){
+            icBack.setOnClickListener {
+                onBackPressed()
             }
         }
 
