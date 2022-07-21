@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Product
-import com.binar.secondhand.core.utils.BindingFragment
-import com.binar.secondhand.core.utils.DialogWindow
-import com.binar.secondhand.core.utils.genericAdapterLazy
-import com.binar.secondhand.core.utils.onReachBottomScroll
+import com.binar.secondhand.core.utils.*
 import com.binar.secondhand.databinding.FragmentHomeBinding
 import com.binar.secondhand.databinding.ItemHomeListProductsBinding
 import com.binar.secondhand.screen.home.adapter.CategoryAdapter
 import com.binar.secondhand.screen.home.adapter.ImageSlideAdapter
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.NumberFormat
+import java.util.*
 
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>() {
@@ -56,7 +55,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
             val categories = categoryName.joinToString()
             Log.d("CategoryName", categories)
             tvTitle.text = item.name
-            tvPrice.text = item.basePrice.toString()
+            tvPrice.text = item.basePrice.toDouble().formatRupiah()
 
             tvCategory.text = categories.replace(", ", "\n")
 
