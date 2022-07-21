@@ -85,6 +85,7 @@ class DetailFragment : Fragment() {
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
                         checkWishlist = true
                     }else{
+                        viewModelWishlist.deleteWishlist(idWishlist)
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_false)
                         checkWishlist = false
                     }

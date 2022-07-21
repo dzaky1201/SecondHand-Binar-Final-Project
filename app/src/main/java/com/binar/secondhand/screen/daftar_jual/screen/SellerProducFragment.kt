@@ -68,6 +68,7 @@ class SellerProducFragment : Fragment() {
 
         viewModel.deleteSuccess.observe(viewLifecycleOwner){
             progressDialog?.dismiss()
+            binding.rvSellerProduct.isVisible = false
             viewModel.getProductSeller()
         }
 

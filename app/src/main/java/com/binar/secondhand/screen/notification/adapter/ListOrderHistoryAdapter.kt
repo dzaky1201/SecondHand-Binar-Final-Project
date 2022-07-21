@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.detail.OrdersProduct
+import com.binar.secondhand.core.utils.dateformat
 import com.binar.secondhand.databinding.ItemOrderHistoryBinding
 import com.bumptech.glide.Glide
 import java.time.LocalDateTime
@@ -29,7 +30,7 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
                 binding.tvProductName.text = item.productName
                 binding.tvBasePrice.text ="Harga Awal Rp."+item.basePrice
                 binding.tvSellerName.text = "Status Barang : "+item.status
-                    binding.tvDate.text = str
+                    binding.tvDate.text = str.dateformat()
 
 
 

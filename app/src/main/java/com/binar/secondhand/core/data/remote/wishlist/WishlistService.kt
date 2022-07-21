@@ -17,10 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl("https://market-final-project-herokuapp.com/")
-    .build()
+
 
 interface WishlistService {
 
@@ -28,30 +25,6 @@ interface WishlistService {
     fun getListWishlist():SecondHandResponse<List<ListWishlistResponseItem>>
 
     @DELETE("buyer/wishlist/{id}")
-    fun deleteWishlist(@Path("id") id : Int):SecondHandResponse<DeleteWishlistResponse>
+    fun deleteWishlist(@Path("id") id : Int):Call<DeleteWishlistResponse>
 
-}
-
-object WishlistAPI{
-    private val logging: HttpLoggingInterceptor
-        get() {
-            val httpLoggingInterceptor = HttpLoggingInterceptor()
-            return httpLoggingInterceptor.apply {
-                httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            }
-        }
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(logging)
-        .build()
-
-    val instance: WishlistService by lazy{
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://market-final-project-herokuapp.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-
-        retrofit.create(WishlistService::class.java)
-    }
-    val retrofitService:WishlistService by lazy{retrofit.create(WishlistService::class.java)}
 }

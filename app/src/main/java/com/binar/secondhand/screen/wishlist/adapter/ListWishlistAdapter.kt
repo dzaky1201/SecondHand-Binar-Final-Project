@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.wishlist.ListWishlist
+import com.binar.secondhand.core.utils.dateformat
 import com.binar.secondhand.databinding.ItemWishlistBinding
 import com.binar.secondhand.screen.wishlist.WishlistFragmentDirections
 import com.bumptech.glide.Glide
@@ -25,7 +26,7 @@ class ListWishlistAdapter : ListAdapter<ListWishlist, ListWishlistAdapter.ViewHo
                 binding.tvProductName.text = "-"
                 binding.tvBasePrice.text = item.product.basePrice.toString()
                 binding.tvLocation.text = "Lokasi di " + " -"
-                binding.tvDate.text = item.product.updatedAt
+                binding.tvDate.text = item.product.updatedAt.dateformat()
             }
             else if (item.product.name == ""){
                 binding.tvProductName.text = "-"
