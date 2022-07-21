@@ -100,6 +100,10 @@
             android:name="isFromDaftarJual"
             app:argType="boolean"
             android:defaultValue="false" />
+        <argument
+            android:name="idWishlist"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <dialog
         android:id="@+id/loginFragmentDialog"

@@ -24,13 +24,13 @@
 
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvStatus"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins"
-            android:text="Penawaran Produk"
+            android:text="Status : Available"
             android:textColor="@color/text_notif"
             android:textSize="10sp"
             app:layout_constraintStart_toEndOf="@+id/iv_poster_image"
@@ -59,7 +59,7 @@
             android:text="Jam Tangan Casio"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/iv_poster_image"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
         <TextView
             android:id="@+id/tvLocation"

@@ -17,6 +17,7 @@ import com.binar.secondhand.core.data.remote.detail.request.WishListRequest
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentDetailBuyerBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
+import com.binar.secondhand.screen.wishlist.WishlistViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,12 +27,15 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by viewModel()
     private val viewModelAkun: AkunViewModel by viewModel()
+    private val viewModelWishlist: WishlistViewModel by viewModel()
     var idProduct: Int = 0
+    var idWishlist: Int = 0
     var name: String = ""
     var price: Int = 0
     var image: String = ""
     var checkProduct: Boolean = false
     var checkLoggedIn: Boolean = false
+    var checkWishlist: Boolean = false
     private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(
@@ -47,6 +51,9 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModelAkun.getUser()
+        viewModelWishlist.getListWishlist()
+
+
 
         val userManager = viewModelAkun.userManager
         val prefrences = DataPreferences.get
@@ -65,9 +72,24 @@ class DetailFragment : Fragment() {
 
 
         val data = arguments?.getInt("idProduct")
+        idWishlist = arguments?.getInt("idWishlist")!!
         val isFromDaftarJual = arguments?.getBoolean("isFromDaftarJual")
         if (isFromDaftarJual == true){
             binding.btnBuy.isVisible = false
+        }
+        with(viewModelWishlist.listWishlistStateEvent){
+            onSuccess = {
+                for(i in 0..it.size-1){
+                    if(it[i].productId == data){
+                        it[i].id
+                        binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
+                        checkWishlist = true
+                    }else{
+                        binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_false)
+                        checkWishlist = false
+                    }
+                }
+            }
         }
         viewModel.getDetailProduct(data ?: 0)
 
@@ -76,16 +98,30 @@ class DetailFragment : Fragment() {
         }
 
         binding.icFavoriteFalse.setOnClickListener {
-            val request: WishListRequest = WishListRequest(
-                idProduct
-            )
-            viewModel.addToWishlist(request)
+            if(checkWishlist == false){
+                val request: WishListRequest = WishListRequest(
+                    idProduct
+                )
+                viewModel.addToWishlist(request)
 
-            with(viewModel.wishlistStateEvent){
-                onSuccess = {
-                    binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
+                with(viewModel.wishlistStateEvent){
+                    onSuccess = {
+                        binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
+                    }
+                }
+            }else{
+                Log.d("Delete wishlist","test")
+                Log.d("Delete wishlist",idWishlist.toString())
+                Log.d("Delete wishlist",token)
+                viewModelWishlist.deleteWishlist(idWishlist)
+                binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_false)
+
+                viewModelWishlist.setStringSucess().observe(viewLifecycleOwner){
+                    print("Delete wishlist $it")
                 }
             }
+
+
         }
 
         binding.btnBuy.setOnClickListener {

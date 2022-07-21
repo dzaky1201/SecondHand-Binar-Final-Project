@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.notification.Notification
+import com.binar.secondhand.core.utils.dateformat
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.binar.secondhand.screen.home.HomeFragmentDirections
 import com.binar.secondhand.screen.notification.NotificationFragmentDirections
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
 
 
 class ListNotificationAdapter : ListAdapter<Notification, ListNotificationAdapter.ViewHolder>(DiffCallBack()) {
@@ -27,7 +29,7 @@ class ListNotificationAdapter : ListAdapter<Notification, ListNotificationAdapte
                 binding.tvProductName.text = item.productName
                 binding.tvStartPrice.text = item.basePrice
                 binding.tvBidPrice.text = "Ditawar Rp. "+item.bidPrice.toString()
-                binding.tvDate.text = item.product.updatedAt
+                binding.tvDate.text = item.product.updatedAt.dateformat()
 
 
                 Glide.with(binding.root).load(item.imageUrl)

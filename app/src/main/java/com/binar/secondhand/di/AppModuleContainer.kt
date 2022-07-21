@@ -69,6 +69,6 @@ class AppModuleContainer : ModuleContainer() {
     }
 
     private val viewModelWishlist = module {
-        viewModel { WishlistViewModel(get()) }
+        viewModel { WishlistViewModel(get(),get()) }
     }
 }

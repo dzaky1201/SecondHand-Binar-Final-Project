@@ -21,6 +21,7 @@ data class ListWishlist (
         var location: String = "",
         var name: String = "",
         var updatedAt: String = "",
-        var userId: Int = 0
+        var userId: Int = 0,
+        var status: String = ""
     )
 }

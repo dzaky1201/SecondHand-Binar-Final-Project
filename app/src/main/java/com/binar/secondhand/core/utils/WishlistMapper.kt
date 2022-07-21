@@ -32,14 +32,15 @@ object WishlistMapper {
 
         product.basePrice = wishlistResponse?.product?.basePrice.orNol()
         product.createdAt = wishlistResponse?.product?.createdAt.orEmpty()
-        product.description = wishlistResponse?.product?.description.orEmpty()
+        product.description = wishlistResponse?.product?.description.toString()
         product.id = wishlistResponse?.product?.id.orNol()
         product.imageName = wishlistResponse?.product?.imageName.orEmpty()
         product.imageUrl = wishlistResponse?.product?.imageUrl.orEmpty()
         product.location = wishlistResponse?.product?.location.orEmpty()
-        product.name = wishlistResponse?.product?.name.orEmpty()
+        product.name = wishlistResponse?.product?.name!!
         product.updatedAt = wishlistResponse?.product?.updatedAt.orEmpty()
         product.userId = wishlistResponse?.product?.userId.orNol()
+        product.status = wishlistResponse?.product?.status.orEmpty()
 
         return ListWishlist(
             wishlistResponse?.createdAt.orEmpty(),
