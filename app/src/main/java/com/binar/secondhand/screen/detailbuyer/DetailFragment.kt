@@ -1,5 +1,6 @@
 package com.binar.secondhand.screen.detailbuyer
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ class DetailFragment : Fragment() {
     var checkWishlist: Boolean = false
     private var progressDialog: AlertDialog? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,8 +56,6 @@ class DetailFragment : Fragment() {
         viewModelAkun.getUser()
         viewModelWishlist.getListWishlist()
 
-
-
         val userManager = viewModelAkun.userManager
         val prefrences = DataPreferences.get
         val token = prefrences.token
@@ -66,7 +66,7 @@ class DetailFragment : Fragment() {
         }
         userManager.onFailure = { _, _ ->
             checkLoggedIn = false
-            binding.btnBuy.setText("Anda perlu login terlebih dahulu")
+            binding.btnBuy.setText("Login untuk Order ")
             binding.btnBuy.isClickable = false
             binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
         }
@@ -197,7 +197,7 @@ class DetailFragment : Fragment() {
                     bin.tvHarga.text = it.base_price.toDouble().formatRupiah()
 
 
-                    if (checkLoggedIn == true) {
+                    if (token != null) {
                         bin.btnBuy.setOnClickListener {
                             Log.d("Check Product", checkProduct.toString())
                             Log.d("Nama Product", name)
@@ -266,7 +266,7 @@ class DetailFragment : Fragment() {
 
                         }
                     }
-                    if (checkLoggedIn == false) {
+                    if (token == null) {
                         bin.btnBuy.setOnClickListener {
                             null
                         }
