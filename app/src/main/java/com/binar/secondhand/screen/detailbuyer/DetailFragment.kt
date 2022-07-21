@@ -22,8 +22,6 @@ import com.binar.secondhand.screen.wishlist.WishlistViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.NumberFormat
-import java.util.*
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBuyerBinding? = null
@@ -196,7 +194,7 @@ class DetailFragment : Fragment() {
                     bin.tvDescription.text = it.description
                     bin.tvNameSeller.text = it.user.fullname
                     bin.tvCity.text = it.user.city
-                    bin.tvHarga.text = formatRupiah(it.base_price.toDouble())
+                    bin.tvHarga.text = it.base_price.toDouble().formatRupiah()
 
 
                     if (checkLoggedIn == true) {
@@ -283,10 +281,5 @@ class DetailFragment : Fragment() {
             }
         }
 
-    }
-    private fun formatRupiah(number: Double): String{
-        val locale = Locale("in", "ID")
-        val format = NumberFormat.getCurrencyInstance(locale)
-        return format.format(number)
     }
 }
