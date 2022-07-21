@@ -44,15 +44,9 @@ class ProfileInteractor(private val profileRepository: IProfileRepository) : Pro
     }
 
     override fun registerUser(
-        fullname: String,
-        email: String,
-        password: String,
-        address: String,
-        phoneNumber: String,
-        city: String,
-        file: File
+        request: LoginRequest
     ) {
-        profileRepository.registerUser(fullname, email, password, address, phoneNumber, city, file)
+        profileRepository.registerUser(request)
     }
 
     override fun getUser() = profileRepository.getUser()

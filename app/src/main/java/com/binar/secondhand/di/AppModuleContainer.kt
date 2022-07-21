@@ -57,7 +57,7 @@ class AppModuleContainer : ModuleContainer() {
     }
 
     private val viewModelSellerProduct = module {
-        viewModel { SellerProducViewModel(get(), get()) }
+        viewModel { SellerProducViewModel(get(), get(), get()) }
     }
 
     private val viewModelDiminati = module {

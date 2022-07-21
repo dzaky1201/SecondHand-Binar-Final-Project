@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,8 +47,17 @@ class DiminatiFragment : Fragment() {
             }
 
             onSuccess = {
-                progressDialog?.dismiss()
-                adapter.submitList(it)
+                if (it.isEmpty()){
+                    progressDialog?.dismiss()
+                    binding.imgProductNotFound.isVisible = true
+
+                }else{
+                    progressDialog?.dismiss()
+                    adapter.submitList(it)
+                    binding.imgProductNotFound.isVisible = false
+                }
+
+
             }
 
             onFailure = { _, _ ->

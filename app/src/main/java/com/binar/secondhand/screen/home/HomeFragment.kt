@@ -79,7 +79,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 }
                 onSuccess = {
                     progressDialog?.dismiss()
-                    productPagingAdapter.pushItems(it.data!!)
+                    productPagingAdapter.pushItems(it)
                     currentPageCategory += 1
                 }
                 onFailure = { _, _ ->
@@ -95,7 +95,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
             }
             onSuccess = {
                 progressDialog?.dismiss()
-                productPagingAdapter.pushItemNew(it.data!!)
+                productPagingAdapter.pushItemNew(it)
             }
             onFailure = { _, _ ->
                 progressDialog?.dismiss()
@@ -168,7 +168,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                         }
                         onSuccess = {
                             progressDialog?.dismiss()
-                            productPagingAdapter.pushItems(it.data!!)
+                            productPagingAdapter.pushItems(it)
                             currentPageSearch += 1
                         }
                         onFailure = { _, _ ->
@@ -183,7 +183,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                     }
                     onSuccess = {
                         progressDialog?.dismiss()
-                        productPagingAdapter.pushItemNew(it.data!!)
+                        productPagingAdapter.pushItemNew(it)
 
                     }
                     onFailure = { _, _ ->
@@ -214,7 +214,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
             onSuccess = {
                 progressDialog?.dismiss()
                 if (!stateCategoryProduct) {
-                    productPagingAdapter.pushItems(it.data!!)
+                    productPagingAdapter.pushItems(it)
                     currentPage += 1
                 }
             }

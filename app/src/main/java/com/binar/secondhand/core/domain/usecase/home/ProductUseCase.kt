@@ -7,10 +7,10 @@ import com.binar.secondhand.core.domain.model.home.Product
 import com.binar.secondhand.core.event.StateEventManager
 
 interface ProductUseCase {
-    val productStateEventManager: StateEventManager<PagingHome<Product>>
+    val productStateEventManager: StateEventManager<List<Product>>
     val categoriesStateEventManager: StateEventManager<List<Categories>>
-    val searchStateEventManager: StateEventManager<PagingHome<Product>>
-    val categoryStateEventManager: StateEventManager<PagingHome<Product>>
+    val searchStateEventManager: StateEventManager<List<Product>>
+    val categoryStateEventManager: StateEventManager<List<Product>>
     val bannerStateEventManager: StateEventManager<List<Banner>>
     fun getProducts(page: Int)
     fun getBannerList()

@@ -14,9 +14,9 @@ import okhttp3.internal.closeQuietly
 
 class ProductRepositoryImpl(private val homeDataSource: HomeDataSource) : IProductRepository {
     private val compositeDisposable = CompositeDisposable()
-    private var _productStateEventManager: MutableStateEventManager<PagingHome<Product>> =
+    private var _productStateEventManager: MutableStateEventManager<List<Product>> =
         MutableStateEventManager()
-    override val productStateEventManager: StateEventManager<PagingHome<Product>>
+    override val productStateEventManager: StateEventManager<List<Product>>
         get() = _productStateEventManager
 
     private var _categoriesStateEventManager: MutableStateEventManager<List<Categories>> =
@@ -24,14 +24,14 @@ class ProductRepositoryImpl(private val homeDataSource: HomeDataSource) : IProdu
     override val categoriesStateEventManager: StateEventManager<List<Categories>>
         get() = _categoriesStateEventManager
 
-    private var _searchStateEventManager: MutableStateEventManager<PagingHome<Product>> =
+    private var _searchStateEventManager: MutableStateEventManager<List<Product>> =
         MutableStateEventManager()
-    override val searchStateEventManager: StateEventManager<PagingHome<Product>>
+    override val searchStateEventManager: StateEventManager<List<Product>>
         get() = _searchStateEventManager
 
-    private var _categoryStateEventManager: MutableStateEventManager<PagingHome<Product>> =
+    private var _categoryStateEventManager: MutableStateEventManager<List<Product>> =
         MutableStateEventManager()
-    override val categoryStateEventManager: StateEventManager<PagingHome<Product>>
+    override val categoryStateEventManager: StateEventManager<List<Product>>
         get() = _categoryStateEventManager
 
     private var _bannerStateEventManager: MutableStateEventManager<List<Banner>> =

@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Product
-import com.binar.secondhand.databinding.ItemHomeListProductsBinding
+import com.binar.secondhand.databinding.ItemLisSellerProductsBinding
 import com.binar.secondhand.screen.daftar_jual.screen.DaftarJualFragmentDirections
 import com.bumptech.glide.Glide
 
 
-class SellerProductAdapter : ListAdapter<Product, SellerProductAdapter.ViewHolder>(DiffCallBack()) {
+class SellerProductAdapter() : ListAdapter<Product, SellerProductAdapter.ViewHolder>(DiffCallBack()) {
 
-
+    var deleteProduct: ((id: Int) -> Unit)? = null
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemHomeListProductsBinding.bind(view)
+        private val binding = ItemLisSellerProductsBinding.bind(view)
 
         fun bind(item: Product) {
 
@@ -37,6 +37,10 @@ class SellerProductAdapter : ListAdapter<Product, SellerProductAdapter.ViewHolde
                 Glide.with(binding.root).load(item.imageUrl)
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
+
+                binding.imgDelete.setOnClickListener {
+                    deleteProduct?.invoke(item.id)
+                }
                     
                 root.setOnClickListener{
                     it.findNavController().navigate(DaftarJualFragmentDirections.actionNavigationDaftarJualToDetailFragment(item.id, true))
@@ -48,7 +52,7 @@ class SellerProductAdapter : ListAdapter<Product, SellerProductAdapter.ViewHolde
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_home_list_products, parent, false)
+                .inflate(R.layout.item_lis_seller_products, parent, false)
         )
     }
 

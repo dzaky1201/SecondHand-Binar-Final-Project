@@ -11,9 +11,9 @@ import io.reactivex.Observable
 
 class HomeDataSource(private val productService: ProductService) {
 
-    fun getProducts(page: Int): Observable<PagingHome<Product>> {
+    fun getProducts(page: Int): Observable<List<Product>> {
         return productService.getProducts(page = page).mapObservable {
-            ProductMapper.mapProdResponsePagingToEntity(it)
+            ProductMapper.mapProdResponseToEntity(it)
         }
     }
 
@@ -23,15 +23,15 @@ class HomeDataSource(private val productService: ProductService) {
         }
     }
 
-    fun searchProduct(product: String, page: Int): Observable<PagingHome<Product>> {
+    fun searchProduct(product: String, page: Int): Observable<List<Product>> {
         return productService.searchProduct(search = product, page = page).mapObservable {
-            ProductMapper.mapProdResponsePagingToEntity(it)
+            ProductMapper.mapProdResponseToEntity(it)
         }
     }
 
-    fun getProductWithCategory(categoryId: Int, page: Int): Observable<PagingHome<Product>> {
+    fun getProductWithCategory(categoryId: Int, page: Int): Observable<List<Product>> {
         return productService.getCategory(categoryId, page).mapObservable {
-            ProductMapper.mapProdResponsePagingToEntity(it)
+            ProductMapper.mapProdResponseToEntity(it)
         }
     }
 

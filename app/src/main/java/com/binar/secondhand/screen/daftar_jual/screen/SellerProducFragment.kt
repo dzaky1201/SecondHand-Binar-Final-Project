@@ -1,12 +1,12 @@
 package com.binar.secondhand.screen.daftar_jual.screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.binar.secondhand.core.utils.DialogWindow
@@ -37,14 +37,28 @@ class SellerProducFragment : Fragment() {
             GridLayoutManager(requireContext(), 2)
         binding.rvSellerProduct.adapter = sellerAdapter
 
+        // for delete product
+        sellerAdapter.deleteProduct = { id ->
+            progressDialog =
+                DialogWindow.progressCircle(requireContext(), "Menghapus Product...", true)
+            deleteProduct(id)
+        }
+
         with(viewModel.productSellerStateEvent) {
             onLoading = {
                 progressDialog =
                     DialogWindow.progressCircle(requireContext(), "Please wait...", true)
             }
             onSuccess = {
-                progressDialog?.dismiss()
-                sellerAdapter.submitList(it)
+                if (it.isEmpty()){
+                    progressDialog?.dismiss()
+                    binding.imgProductNotFound.isVisible = true
+
+                }else{
+                    progressDialog?.dismiss()
+                    sellerAdapter.submitList(it)
+                    binding.imgProductNotFound.isVisible = false
+                }
             }
             onFailure = { _, _ ->
                 progressDialog?.dismiss()
@@ -52,6 +66,27 @@ class SellerProducFragment : Fragment() {
             }
         }
 
+        viewModel.deleteSuccess.observe(viewLifecycleOwner){
+            progressDialog?.dismiss()
+            viewModel.getProductSeller()
+        }
+
+    }
+
+    private fun deleteProduct(id: Int) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Delete Product")
+        dialog.setMessage("Apakah Anda Yakin Menghapusnya ?")
+        dialog.setPositiveButton("Yakin") { _, _ ->
+            viewModel.deleteProduct(id)
+        }
+
+        dialog.setNegativeButton("Batal") { listener, _ ->
+            progressDialog?.dismiss()
+            listener.dismiss()
+        }
+
+        dialog.show()
     }
 
     override fun onResume() {
