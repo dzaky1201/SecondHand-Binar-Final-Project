@@ -32,20 +32,20 @@ class ListWishlistAdapter : ListAdapter<ListWishlist, ListWishlistAdapter.ViewHo
                 binding.tvProductName.text = "-"
                 binding.tvBasePrice.text = item.product.basePrice.toString()
                 binding.tvLocation.text = "Lokasi di " + item.product.location
-                binding.tvDate.text = item.product.updatedAt
+                binding.tvDate.text = item.product.updatedAt.dateformat()
             }
             else if (item.product.location == ""){
                 binding.tvProductName.text = item.product.name
                 binding.tvBasePrice.text = item.product.basePrice.toString()
                 binding.tvLocation.text = "Lokasi di " + " -"
-                binding.tvDate.text = item.product.updatedAt
+                binding.tvDate.text = item.product.updatedAt.dateformat()
             }
             else {
                 binding.apply {
                     binding.tvProductName.text = item.product.name
                     binding.tvBasePrice.text = item.product.basePrice.toString()
                     binding.tvLocation.text = "Deskripsi: " + item.product.description
-                    binding.tvDate.text = item.product.updatedAt
+                    binding.tvDate.text = item.product.updatedAt.dateformat()
                 }
             }
             Glide.with(binding.root).load(item.product.imageUrl)
