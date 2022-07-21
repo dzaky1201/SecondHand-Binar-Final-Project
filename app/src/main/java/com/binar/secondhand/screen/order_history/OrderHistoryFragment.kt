@@ -35,6 +35,13 @@ class OrderHistoryFragment : Fragment() {
         binding.rvHistoryOrder.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         binding.rvHistoryOrder.adapter = listNotificationAdapter
+
+        listNotificationAdapter.deleteOrder = { id ->
+            progressDialog =
+                DialogWindow.progressCircle(requireContext(), "Menghapus Product...", true)
+            deleteOrder(id)
+        }
+
         viewModelDetail.checkOrdersProduct()
         with(viewModelDetail.checkOrdersProductStateEvent) {
 
@@ -61,6 +68,28 @@ class OrderHistoryFragment : Fragment() {
                 progressDialog?.dismiss()
             }
         }
+
+        viewModelDetail.deleteSuccess.observe(viewLifecycleOwner){
+            progressDialog?.dismiss()
+            binding.rvHistoryOrder.isVisible = false
+            viewModelDetail.checkOrdersProduct()
+        }
+
+    }
+    private fun deleteOrder(id: Int) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Delete Order")
+        dialog.setMessage("Apakah Anda Yakin Menghapusnya ?")
+        dialog.setPositiveButton("Yakin") { _, _ ->
+            viewModelDetail.deleteOrder(id)
+        }
+
+        dialog.setNegativeButton("Batal") { listener, _ ->
+            progressDialog?.dismiss()
+            listener.dismiss()
+        }
+
+        dialog.show()
     }
 
     override fun onDestroyView() {

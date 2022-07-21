@@ -9,7 +9,6 @@ import com.binar.secondhand.core.data.remote.wishlist.response.DeleteWishlistRes
 import com.binar.secondhand.core.domain.model.daftar_jual.DeleteResponse
 import com.binar.secondhand.core.domain.model.notification.Notification
 import com.binar.secondhand.core.domain.model.wishlist.ListWishlist
-import com.binar.secondhand.core.domain.usecase.notification.NotificationUseCase
 import com.binar.secondhand.core.domain.usecase.wishlist.WishlistUseCase
 import com.binar.secondhand.core.event.StateEventManager
 import retrofit2.Call

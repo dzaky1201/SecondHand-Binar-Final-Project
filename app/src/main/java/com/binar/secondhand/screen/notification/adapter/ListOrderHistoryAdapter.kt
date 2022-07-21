@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter
 class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapter.ViewHolder>(
     DiffCallBackHistory()
 ) {
-
+    var deleteOrder: ((id: Int) -> Unit)? = null
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemOrderHistoryBinding.bind(view)
 
@@ -37,6 +37,10 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
                 Glide.with(binding.root).load(item.product.imageUrl)
                     .error(R.drawable.home_attribute)
                     .into(binding.ivPosterImage)
+
+                binding.imgDelete.setOnClickListener {
+                    deleteOrder?.invoke(item.id)
+                }
             }
         }
     }

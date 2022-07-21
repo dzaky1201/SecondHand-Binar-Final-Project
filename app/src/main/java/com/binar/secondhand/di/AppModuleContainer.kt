@@ -38,7 +38,7 @@ class AppModuleContainer : ModuleContainer() {
         viewModel { RegisterViewModel(get()) }
     }
     private val viewModelDetail = module {
-        viewModel { DetailViewModel(get()) }
+        viewModel { DetailViewModel(get(), get()) }
     }
 
     private val viewModelNotification = module {
