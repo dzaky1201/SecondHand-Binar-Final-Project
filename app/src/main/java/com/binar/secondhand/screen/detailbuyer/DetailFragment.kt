@@ -53,12 +53,21 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelAkun.getUser()
-        viewModelWishlist.getListWishlist()
 
         val userManager = viewModelAkun.userManager
         val prefrences = DataPreferences.get
         val token = prefrences.token
+        val data = arguments?.getInt("idProduct")
+        idWishlist = arguments?.getInt("idWishlist")!!
+        val isFromDaftarJual = arguments?.getBoolean("isFromDaftarJual")
+
+        binding.icBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        viewModelAkun.getUser()
+        viewModelWishlist.getListWishlist()
+
         Log.d("token", token)
 
         userManager.onSuccess = {
@@ -72,32 +81,30 @@ class DetailFragment : Fragment() {
         }
 
 
-        val data = arguments?.getInt("idProduct")
-        idWishlist = arguments?.getInt("idWishlist")!!
-        val isFromDaftarJual = arguments?.getBoolean("isFromDaftarJual")
+
         if (isFromDaftarJual == true){
             binding.btnBuy.isVisible = false
         }
+
         with(viewModelWishlist.listWishlistStateEvent){
             onSuccess = {
                 for(i in 0..it.size-1){
                     if(it[i].productId == data){
-                        it[i].id
+                        idWishlist = it[i].id
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
                         checkWishlist = true
                     }else{
-                        viewModelWishlist.deleteWishlist(idWishlist)
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_false)
                         checkWishlist = false
                     }
                 }
             }
         }
+        viewModelWishlist.readStateWishlist().observe(viewLifecycleOwner){
+            checkWishlist = it
+        }
         viewModel.getDetailProduct(data ?: 0)
 
-        binding.icBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         binding.icFavoriteFalse.setOnClickListener {
             if(checkWishlist == false){
@@ -109,15 +116,20 @@ class DetailFragment : Fragment() {
                 with(viewModel.wishlistStateEvent){
                     onSuccess = {
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
+                        viewModelWishlist.getListWishlist()
+                        viewModelWishlist.stateWishlist.postValue(true)
+                        with(viewModelWishlist.listWishlistStateEvent){
+                            onSuccess = {
+                              idWishlist = it.last().id
+                            }
+                        }
                     }
                 }
             }else{
-                Log.d("Delete wishlist","test")
-                Log.d("Delete wishlist",idWishlist.toString())
-                Log.d("Delete wishlist",token)
+
                 viewModelWishlist.deleteWishlist(idWishlist)
                 binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_false)
-
+                viewModelWishlist.stateWishlist.postValue(false)
                 viewModelWishlist.setStringSucess().observe(viewLifecycleOwner){
                     print("Delete wishlist $it")
                 }
@@ -148,10 +160,10 @@ class DetailFragment : Fragment() {
                 viewModel.checkOrdersProduct()
             }
             onSuccess = {
-
+                progressDialog?.dismiss()
                 with(viewModel.checkOrdersProductStateEvent) {
                     onSuccess = {
-                        var i = 0
+                        progressDialog?.dismiss()
                         for (i in 0..it.size - 1) {
                             checkProduct = if (it[i].productId == idProduct) {
                                 Log.d("Product ID", it[i].productId.toString())
@@ -163,18 +175,15 @@ class DetailFragment : Fragment() {
                                 false
                             }
                         }
-                        Log.d("Looping", "Testing")
+
                     }
 
                     onFailure = { _, _ ->
-                        Log.d("FAILED", "Looping")
+
                     }
                 }
                 progressDialog?.dismiss()
                 idProduct = it.id!!
-                Log.d("ID PRODUCT", idProduct.toString())
-                Log.d("Name PRODUCT", it.name.toString())
-                Log.d("Price PRODUCT", it.base_price.toString())
                 name = it.name!!
                 price = it.base_price!!
                 image = it.image_url!!
@@ -276,7 +285,6 @@ class DetailFragment : Fragment() {
                 }
             }
             onFailure = { _, _ ->
-                Log.d("Detail API", "Loading Detail")
 
             }
         }

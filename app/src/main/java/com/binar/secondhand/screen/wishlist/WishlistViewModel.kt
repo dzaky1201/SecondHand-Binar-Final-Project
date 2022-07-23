@@ -19,11 +19,15 @@ class WishlistViewModel(private val useCase : WishlistUseCase, private val servi
 
     val listWishlistStateEvent : StateEventManager<List<ListWishlist>> = useCase.listWishlistStateEventManager
     private val sucessDelete : MutableLiveData<String> = MutableLiveData<String>()
-
+    var stateWishlist : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private var _deleteSuccess = MutableLiveData<DeleteWishlistResponse>()
     val deleteSuccess: LiveData<DeleteWishlistResponse> get() = _deleteSuccess
     fun getListWishlist(){
         useCase.getListWishlist()
+    }
+
+    fun readStateWishlist() : LiveData<Boolean>{
+        return stateWishlist
     }
 
     fun setStringSucess():LiveData<String>{

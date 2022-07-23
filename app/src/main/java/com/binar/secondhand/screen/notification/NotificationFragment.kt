@@ -62,7 +62,7 @@ class NotificationFragment : Fragment() {
             binding.textNotification.isVisible = true
             binding.buttonMenuOption.isVisible = true
             binding.textNotification.text = "Semua"
-            viewModelNotif.getNotificationList("")
+            viewModelNotif.getNotificationList("seller")
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
             }
@@ -70,6 +70,7 @@ class NotificationFragment : Fragment() {
             with(viewModelNotif.notificationStateEvent) {
                 onSuccess = {
                     progressDialog?.dismiss()
+
                     listNotificationAdapter.submitList(it)
                     binding.imgProductNotFound.isVisible = false
                 }
@@ -121,18 +122,27 @@ class NotificationFragment : Fragment() {
             popupWindow.dismiss()
             viewModelNotif.notifType.value = ""
             binding.textNotification.text = "Semua"
+            viewModelNotif.getNotifType().observe(viewLifecycleOwner){
+                viewModelNotif.getNotificationList(it)
+            }
         }
 
         buttonSeller.setOnClickListener {
             popupWindow.dismiss()
             viewModelNotif.notifType.value = "seller"
             binding.textNotification.text = "Seller"
+            viewModelNotif.getNotifType().observe(viewLifecycleOwner){
+                viewModelNotif.getNotificationList(it)
+            }
         }
 
         buttonBuyer.setOnClickListener {
             popupWindow.dismiss()
             viewModelNotif.notifType.value = "buyer"
             binding.textNotification.text = "Buyer"
+            viewModelNotif.getNotifType().observe(viewLifecycleOwner){
+                viewModelNotif.getNotificationList(it)
+            }
         }
 
         val values = IntArray(2)

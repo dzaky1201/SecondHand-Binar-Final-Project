@@ -23,6 +23,9 @@
             android:name=".screen.jual.add_product.AddProductActivity"
             android:exported="false" />
         <activity
+            android:name=".screen.preview_product.PreviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.register.RegisterActivity"
             android:exported="false" />
         <activity

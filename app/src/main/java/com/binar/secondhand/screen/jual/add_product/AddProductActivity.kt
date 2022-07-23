@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.androidbuts.multispinnerfilter.KeyPairBoolData
+import com.binar.secondhand.screen.preview_product.PreviewActivity
 import com.binar.secondhand.core.data.remote.jual.request.SellerProductRequest
 import com.binar.secondhand.databinding.ActivityAddProductBinding
 import com.bumptech.glide.Glide
@@ -54,6 +55,19 @@ class AddProductActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnPreview.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("namaProduk",binding.edtNamaProduk.text.toString())
+            bundle.putString("productPrice", binding.edtHargaProduk.text.toString())
+            bundle.putString("nameDescription", binding.edtDescription.text.toString())
+            bundle.putStringArrayList("listIdCategory",idCategory)
+            bundle.putString("nameAddress", binding.edtAddress.text.toString())
+            bundle.putString("imageProduct", fileImage.toString())
+
+            val intent = Intent(this, PreviewActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
         binding.profileView.setOnClickListener {
             val pictureDialog = AlertDialog.Builder(this)
             pictureDialog.setTitle("Select Action")
