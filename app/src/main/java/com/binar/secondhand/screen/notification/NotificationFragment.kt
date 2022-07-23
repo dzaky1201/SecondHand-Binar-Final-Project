@@ -68,13 +68,6 @@ class NotificationFragment : Fragment() {
             }
 
             with(viewModelNotif.notificationStateEvent) {
-                onLoading = {
-                    progressDialog = DialogWindow.progressCircle(
-                        requireContext(),
-                        "Mendapatkan Notifikasi...",
-                        true
-                    )
-                }
                 onSuccess = {
                     progressDialog?.dismiss()
                     listNotificationAdapter.submitList(it)
