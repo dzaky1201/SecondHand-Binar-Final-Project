@@ -13,7 +13,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel by viewModel<RegisterViewModel>()
-    private var fileImage: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,6 @@ class RegisterActivity : AppCompatActivity() {
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
                 val register = LoginRequest(email, password)
-                val image = fileImage
                 if (register.email.isNullOrEmpty()) {
                     Toast.makeText(this@RegisterActivity, "Masukan Email !", Toast.LENGTH_SHORT)
                         .show()
@@ -64,6 +62,9 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
             }
+        }
+        binding.icBack.setOnClickListener {
+            onBackPressed()
         }
 
     }

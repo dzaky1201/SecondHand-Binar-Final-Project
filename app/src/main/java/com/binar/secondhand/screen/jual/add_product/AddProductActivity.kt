@@ -134,7 +134,7 @@ class AddProductActivity : AppCompatActivity() {
                 } else if (idCategory.isEmpty()) {
                     Toast.makeText(
                         this@AddProductActivity,
-                        "Masukan Alamat Anda !",
+                        "Pilih Category Terlebih Dahulu",
                         Toast.LENGTH_SHORT
                     )
                         .show()

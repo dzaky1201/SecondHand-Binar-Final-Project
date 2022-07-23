@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layoutAkun"
-    android:visibility="invisible"
+    android:visibility="visible"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -82,54 +82,12 @@
         android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray" />
 
-    <LinearLayout
-        android:id="@+id/btnPengaturan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lineUbahAkun"
-        tools:ignore="UseCompoundDrawables"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/edit"
-            android:src="@drawable/ic_settings" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginHorizontal="16dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/pengaturan"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/linePengaturan"
-        app:layout_constraintEnd_toEndOf="@id/btnPengaturan"
-        app:layout_constraintStart_toStartOf="@+id/btnPengaturan"
-        app:layout_constraintTop_toBottomOf="@id/btnPengaturan"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:id="@+id/btnOrderHistory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linePengaturan"
+        app:layout_constraintTop_toBottomOf="@+id/lineUbahAkun"
         tools:ignore="UseCompoundDrawables"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -105,6 +105,10 @@ class DiminatiDetailFragment : Fragment() {
 
         }
 
+        binding.icBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     @SuppressLint("InflateParams")
