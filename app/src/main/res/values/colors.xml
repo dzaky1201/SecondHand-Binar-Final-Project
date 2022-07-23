@@ -14,4 +14,8 @@
     <color name="grey">#8A8A8A</color>
     <color name="btn_detail">#7126B5</color>
     <color name="text_notif">#8A8A8A</color>
+
+    <color name="gray1">#f2f3f4</color> <!-- #f2f3f4 -->
+    <color name="gray2">#E6E9ED</color>
+    <color name="text_color_gray4">#454646</color>
 </resources>

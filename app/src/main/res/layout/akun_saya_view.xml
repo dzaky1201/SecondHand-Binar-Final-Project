@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layoutAkun"
-    android:visibility="visible"
+    android:visibility="invisible"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -118,8 +118,8 @@
 
     <View
         android:id="@+id/lineHistory"
-        app:layout_constraintEnd_toEndOf="@id/btnPengaturan"
-        app:layout_constraintStart_toStartOf="@+id/btnPengaturan"
+        app:layout_constraintEnd_toEndOf="@id/btnOrderHistory"
+        app:layout_constraintStart_toStartOf="@+id/btnOrderHistory"
         app:layout_constraintTop_toBottomOf="@id/btnOrderHistory"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -163,13 +163,13 @@
 
     <View
         android:id="@+id/lineWishList"
-        app:layout_constraintEnd_toEndOf="@id/btnPengaturan"
-        app:layout_constraintStart_toStartOf="@+id/btnPengaturan"
-        app:layout_constraintTop_toBottomOf="@id/btnWishList"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@id/btnWishList"
+        app:layout_constraintStart_toStartOf="@+id/btnWishList"
+        app:layout_constraintTop_toBottomOf="@id/btnWishList" />
     <LinearLayout
         android:id="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"

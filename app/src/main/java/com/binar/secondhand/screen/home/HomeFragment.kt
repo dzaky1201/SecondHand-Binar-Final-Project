@@ -109,8 +109,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     }
 
     override fun onCreateBinding() {
-
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         viewModel.getCategories()
         viewModel.getBanner()
         viewModel.getProducts(currentPage)
