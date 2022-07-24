@@ -72,8 +72,8 @@ class AddProductActivity : AppCompatActivity() {
             val pictureDialog = AlertDialog.Builder(this)
             pictureDialog.setTitle("Select Action")
             val pictureDialogItems = arrayOf(
-                "Select Photo From Galery",
-                "Capture photo from camera"
+                "Pilih Foto dari Gallery",
+                "Tangkap Gambar dari Camera"
             )
             pictureDialog.setItems(pictureDialogItems) { _, which ->
                 when (which) {
@@ -88,7 +88,7 @@ class AddProductActivity : AppCompatActivity() {
         with(binding) {
             selectCategory.setSearchHint("Categories...")
             selectCategory.isSearchEnabled
-            selectCategory.setClearText("Close & Clear")
+            selectCategory.setClearText("Tutup & Kosongkan")
             selectCategory.setSearchHint("Pilih Category Produk")
             selectCategory.setEmptyTitle("Categori tidak ditemukan")
             selectCategory.setLimit(3) {
