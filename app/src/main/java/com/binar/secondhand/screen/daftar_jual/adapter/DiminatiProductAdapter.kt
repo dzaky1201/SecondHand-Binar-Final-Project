@@ -36,7 +36,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
 
                 }
                 binding.tvStartPrice.text = "Harga Awal "+item.basePrice?.toDouble()?.formatRupiah()
-                binding.tvBidPrice.text = "Ditawar "+item.price?.toDouble()?.formatRupiah()
+                binding.tvBidPrice.text = "Terjual: "+item.price?.toDouble()?.formatRupiah()
                 binding.tvDate.text = item.transactionDate?.dateformat()
 
 

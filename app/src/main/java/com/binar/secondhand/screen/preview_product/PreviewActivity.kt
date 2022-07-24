@@ -87,7 +87,7 @@ class PreviewActivity : AppCompatActivity() {
             with(viewModel.productPostStateEventManager) {
                 onLoading = {
                     binding.btnUpload.setText("Sedang Mengupload..")
-                    binding.btnUpload.setBackgroundColor(R.drawable.shape_btn_detail_two)
+                    binding.btnUpload.setBackgroundResource(R.drawable.shape_btn_detail_two)
                     binding.btnUpload.isClickable = false
                 }
 

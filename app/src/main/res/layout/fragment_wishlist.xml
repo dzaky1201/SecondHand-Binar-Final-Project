@@ -37,7 +37,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Wishlist Products"
+        android:text="Daftar Produk Favorit"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
