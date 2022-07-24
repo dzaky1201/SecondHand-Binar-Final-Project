@@ -17,6 +17,7 @@ import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductIntereste
 import com.binar.secondhand.core.domain.model.daftar_jual.UpdateStatusProduct
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.core.utils.dateformat
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.FragmentDiminatiDetailBinding
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -61,9 +62,8 @@ class DiminatiDetailFragment : Fragment() {
                     tvProductName.text = detail.productName
                     Glide.with(root).load(detail.user?.imageUrl).into(ivAkun)
                     Glide.with(root).load(detail.imageProduct).into(ivPosterImage)
-                    tvDitawar.text = resources.getString(R.string.fixPrice, detail.price.toString())
-                    tvBasePrice.text =
-                        resources.getString(R.string.basePrice, detail.basePrice.toString())
+                    tvDitawar.text = detail.price?.toDouble()?.formatRupiah()
+                    tvBasePrice.text = "Harga awal "+detail.basePrice?.toDouble()?.formatRupiah()
                     tvDate.text = detail.transactionDate?.dateformat()
 
                 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.notification.Notification
 import com.binar.secondhand.core.utils.dateformat
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.binar.secondhand.screen.home.HomeFragmentDirections
 import com.binar.secondhand.screen.notification.NotificationFragmentDirections
@@ -27,8 +28,8 @@ class ListNotificationAdapter : ListAdapter<Notification, ListNotificationAdapte
 
             binding.apply {
                 binding.tvProductName.text = item.productName
-                binding.tvStartPrice.text = item.basePrice
-                binding.tvBidPrice.text = "Ditawar Rp. "+item.bidPrice.toString()
+                binding.tvStartPrice.text = "Harga Awal "+item.basePrice.toDouble().formatRupiah()
+                binding.tvBidPrice.text = "Ditawar "+item.bidPrice.toDouble().formatRupiah()
                 binding.tvDate.text = item.product.updatedAt.dateformat()
 
 

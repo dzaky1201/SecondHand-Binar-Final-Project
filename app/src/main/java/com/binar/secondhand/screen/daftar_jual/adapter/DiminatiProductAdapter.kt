@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductInterestedEntity
 import com.binar.secondhand.core.utils.dateformat
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.bumptech.glide.Glide
 
@@ -27,18 +28,15 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
                 binding.tvProductName.text = item.productName
                 if (item.status == "accepted") {
                     binding.tvStartPrice.apply {
-                        text = itemView.resources.getString(R.string.basePrice, item.basePrice)
+                        text = item.basePrice?.toDouble()?.formatRupiah()
                         paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                     }
                 } else {
-                    binding.tvStartPrice.text =
-                        itemView.resources.getString(R.string.basePrice, item.basePrice)
+                    binding.tvStartPrice.text = item.basePrice?.toDouble()?.formatRupiah()
 
                 }
-                binding.tvStartPrice.text =
-                    itemView.resources.getString(R.string.basePrice, item.basePrice)
-                binding.tvBidPrice.text =
-                    itemView.resources.getString(R.string.fixPrice, item.price.toString())
+                binding.tvStartPrice.text = "Harga Awal "+item.basePrice?.toDouble()?.formatRupiah()
+                binding.tvBidPrice.text = "Ditawar "+item.price?.toDouble()?.formatRupiah()
                 binding.tvDate.text = item.transactionDate?.dateformat()
 
 

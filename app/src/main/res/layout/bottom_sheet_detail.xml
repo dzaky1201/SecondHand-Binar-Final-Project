@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="25dp">
 
         <!--image view for displaying course image-->
 
@@ -33,77 +33,99 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/idTVCourseName"
             android:layout_marginTop="10dp"
-
             android:text="@string/detail_nego"
-            android:textColor="@color/black"
+            android:textColor="@color/gray3"
             android:textSize="15sp" />
 
         <!--text view for displaying course duration-->
         <androidx.cardview.widget.CardView
-            app:cardCornerRadius="20dp"
             android:id="@+id/cardItem"
             android:layout_width="300dp"
+            android:layout_marginStart="30dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
-            >
+            app:cardCornerRadius="20dp">
+
             <ImageView
-                android:background="@drawable/shape_images"
-                android:layout_marginLeft="10dp"
                 android:id="@+id/ivPoster"
-                android:scaleType="fitCenter"
-                android:layout_marginTop="12dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_launcher_background"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_images"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_background" />
+
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="65dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""/>
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/tvPrice"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="65dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:text=""/>
+                android:text=""
+                android:textSize="16sp" />
         </androidx.cardview.widget.CardView>
 
 
         <TextView
-            android:layout_below="@id/cardItem"
             android:id="@+id/hargaTawar"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Harga Tawar"/>
+            android:layout_below="@id/cardItem"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:text="Harga Tawar"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/etPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hargaTawar"
-            android:ems="20"
-            android:inputType="number"/>
-        <!--button for dismissing our dialog-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldHargaTawar"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/hargaTawar"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="30dp"
+            android:hint="@string/rp_0_00"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hargaTawar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnBuy"
-            android:backgroundTint="@color/purple"
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/hargaTawar"
-            android:textColor="@color/white"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="85dp"
             android:background="@drawable/shape_btn_detail"
+            android:backgroundTint="@color/purple"
             android:text="Kirim"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

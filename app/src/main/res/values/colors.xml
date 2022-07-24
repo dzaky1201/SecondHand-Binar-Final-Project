@@ -17,5 +17,6 @@
 
     <color name="gray1">#f2f3f4</color> <!-- #f2f3f4 -->
     <color name="gray2">#E6E9ED</color>
+    <color name="gray3">#888888</color>
     <color name="text_color_gray4">#454646</color>
 </resources>

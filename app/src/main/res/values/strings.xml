@@ -51,5 +51,6 @@
     <string name="message_success_order">Yeay kamu berhasil mendapat harga \n yang sesuai</string>
     <string name="message_success_order_second">Segera hubungi pembeli melalui \n whatsapp untuk transaksi selanjutnya</string>
     <string name="base_price_strike"><strike>Rp.20.000</strike></string>
+    <string name="rp_0_00">Rp 0,00</string>
     <!-- Detail -->
 </resources>

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.wishlist.ListWishlist
 import com.binar.secondhand.core.utils.dateformat
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.ItemWishlistBinding
 import com.binar.secondhand.screen.wishlist.WishlistFragmentDirections
 import com.bumptech.glide.Glide
@@ -24,26 +25,26 @@ class ListWishlistAdapter : ListAdapter<ListWishlist, ListWishlistAdapter.ViewHo
         fun bind(item: ListWishlist) {
             if (item.product.name == ""|| item.product.location == "") {
                 binding.tvProductName.text = "-"
-                binding.tvBasePrice.text = item.product.basePrice.toString()
+                binding.tvBasePrice.text = item.product.basePrice.toDouble().formatRupiah()
                 binding.tvLocation.text = "Lokasi di " + " -"
                 binding.tvDate.text = item.createdAt.dateformat()
             }
             else if (item.product.name == ""){
                 binding.tvProductName.text = "-"
-                binding.tvBasePrice.text = item.product.basePrice.toString()
+                binding.tvBasePrice.text = item.product.basePrice.toDouble().formatRupiah()
                 binding.tvLocation.text = "Lokasi di " + item.product.location
                 binding.tvDate.text = item.createdAt.dateformat()
             }
             else if (item.product.location == ""){
                 binding.tvProductName.text = item.product.name
-                binding.tvBasePrice.text = item.product.basePrice.toString()
+                binding.tvBasePrice.text = item.product.basePrice.toDouble().formatRupiah()
                 binding.tvLocation.text = "Lokasi di " + " -"
                 binding.tvDate.text = item.createdAt.dateformat()
             }
             else {
                 binding.apply {
                     binding.tvProductName.text = item.product.name
-                    binding.tvBasePrice.text = item.product.basePrice.toString()
+                    binding.tvBasePrice.text = item.product.basePrice.toDouble().formatRupiah()
                     binding.tvLocation.text = "Deskripsi: " + item.product.description
                     binding.tvDate.text = item.createdAt.dateformat()
                 }
