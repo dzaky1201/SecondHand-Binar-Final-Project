@@ -69,10 +69,16 @@ class NotificationFragment : Fragment() {
 
             with(viewModelNotif.notificationStateEvent) {
                 onSuccess = {
-                    progressDialog?.dismiss()
+                    if(it.size>=1){
 
-                    listNotificationAdapter.submitList(it)
-                    binding.imgProductNotFound.isVisible = false
+                        binding.imgProductNotFound.isVisible = false
+                        progressDialog?.dismiss()
+                        listNotificationAdapter.submitList(it)
+                    }else{
+                        binding.imgProductNotFound.isVisible = true
+
+                    }
+
                 }
                 onFailure = { _, _ ->
                     progressDialog?.dismiss()

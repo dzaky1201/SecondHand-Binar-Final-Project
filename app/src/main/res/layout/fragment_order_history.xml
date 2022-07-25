@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Daftar Riwayat Transaksi"
         android:textAlignment="center"
@@ -44,13 +44,13 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="200dp"
-            android:src="@drawable/ic_undraw_house_searching_re_stk8" />
+            android:src="@drawable/empty_state" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Tidak History Pembelian"
+            android:text="Tidak Ada Riwayat Transaksi.."
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>

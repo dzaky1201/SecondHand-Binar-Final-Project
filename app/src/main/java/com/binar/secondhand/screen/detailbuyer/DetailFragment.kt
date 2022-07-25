@@ -160,132 +160,146 @@ class DetailFragment : Fragment() {
                 viewModel.checkOrdersProduct()
             }
             onSuccess = {
-                progressDialog?.dismiss()
-                with(viewModel.checkOrdersProductStateEvent) {
-                    onSuccess = {
-                        progressDialog?.dismiss()
-                        for (i in 0..it.size - 1) {
-                            checkProduct = if (it[i].productId == idProduct) {
-                                Log.d("Product ID", it[i].productId.toString())
-                                binding.btnBuy.setText("Order sedang dalam Proses..")
-                                binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
-                                Toast.makeText(requireActivity(), it[i].status, Toast.LENGTH_LONG)
-                                true
-                            } else {
-                                false
+                if(it!=null){
+                    progressDialog?.dismiss()
+                    with(viewModel.checkOrdersProductStateEvent) {
+                        onSuccess = {
+                            progressDialog?.dismiss()
+                            for (i in 0..it.size - 1) {
+                                checkProduct = if (it[i].productId == idProduct) {
+                                    Log.d("Product ID", it[i].productId.toString())
+                                    binding.btnBuy.setText("Order sedang dalam Proses..")
+                                    binding.btnBuy.setBackgroundResource(R.drawable.shape_btn_detail_two)
+                                    Toast.makeText(requireActivity(), it[i].status, Toast.LENGTH_LONG)
+                                    true
+                                } else {
+                                    false
+                                }
                             }
+
                         }
 
+                        onFailure = { _, _ ->
+
+                        }
                     }
-
-                    onFailure = { _, _ ->
-
-                    }
-                }
-                progressDialog?.dismiss()
-                idProduct = it.id!!
-                name = it.name!!
-                price = it.base_price!!
-                image = it.image_url!!
+                    progressDialog?.dismiss()
+                    idProduct = it.id!!
+                    name = it.name!!
+                    price = it.base_price!!
+                    image = it.image_url!!
 
 
 
-                binding.also { bin ->
-                    Glide.with(view).load(it.image_url).into(bin.ivProduct)
-                    Glide.with(view).load(it.user.imageUrl).into(bin.ivSellerProfile)
-                    bin.tvName.text = it.name
-                    if (it.Categories.isNullOrEmpty()) {
-                        bin.tvCategory.text = "This item have no Category"
+                    binding.also { bin ->
+                        Glide.with(view).load(it.image_url).into(bin.ivProduct)
+                        Glide.with(view).load(it.user.imageUrl).into(bin.ivSellerProfile)
+                        bin.tvName.text = it.name
+                        if (it.Categories.isNullOrEmpty()) {
+                            bin.tvCategory.text = "This item have no Category"
 
-                    } else {
-                        bin.tvCategory.text = it.Categories[0].name
-                    }
-                    bin.tvDescription.text = it.description
-                    bin.tvNameSeller.text = it.user.fullname
-                    bin.tvCity.text = it.user.city
-                    bin.tvHarga.text = it.base_price.toDouble().formatRupiah()
+                        } else {
+                            bin.tvCategory.text = it.Categories[0].name
+                        }
+                        bin.tvDescription.text = it.description
+                        bin.tvNameSeller.text = it.user.fullname
+                        bin.tvCity.text = it.user.city
+                        bin.tvHarga.text = it.base_price.toDouble().formatRupiah()
 
 
-                    if (token != null) {
-                        bin.btnBuy.setOnClickListener {
-                            Log.d("Check Product", checkProduct.toString())
-                            Log.d("Nama Product", name)
-                            Log.d("Harga Product", price.toString())
+                        if (token != null) {
+                            bin.btnBuy.setOnClickListener {
+                                Log.d("Check Product", checkProduct.toString())
+                                Log.d("Nama Product", name)
+                                Log.d("Harga Product", price.toString())
 
-                            if (bin.btnBuy.text != "Order sedang dalam Proses..") {
-                                val dialog = BottomSheetDialog(requireActivity())
-                                val view =
-                                    layoutInflater.inflate(R.layout.bottom_sheet_detail, null)
+                                if (bin.btnBuy.text != "Order sedang dalam Proses..") {
+                                    val dialog = BottomSheetDialog(requireActivity())
+                                    val view =
+                                        layoutInflater.inflate(R.layout.bottom_sheet_detail, null)
 
-                                val btnClose = view.findViewById<Button>(R.id.btnBuy)
-                                val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
-                                val tvPrice = view.findViewById<TextView>(R.id.tvPrice)
-                                val ivPoster = view.findViewById<ImageView>(R.id.ivPoster)
-                                val etPrice = view.findViewById<EditText>(R.id.etPrice)
+                                    val btnClose = view.findViewById<Button>(R.id.btnBuy)
+                                    val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
+                                    val tvPrice = view.findViewById<TextView>(R.id.tvPrice)
+                                    val ivPoster = view.findViewById<ImageView>(R.id.ivPoster)
+                                    val etPrice = view.findViewById<EditText>(R.id.etPrice)
 
-                                tvTitle.setText(name)
-                                tvPrice.setText(price.toDouble().formatRupiah())
-                                Glide.with(view).load(image).into(ivPoster)
-                                btnClose.setOnClickListener {
-                                    var request: OrderRequest = OrderRequest(
-                                        idProduct,
-                                        etPrice.text.toString().toInt(),
-                                    )
-                                    viewModel.orderProducts(request)
-                                }
-                                with(viewModel.orderStateEvent) {
-                                    onLoading = {
-                                        progressDialog = DialogWindow.progressCircle(
-                                            requireContext(),
-                                            "Tunggu Sebentar...",
-                                            true
+                                    tvTitle.setText(name)
+                                    tvPrice.setText(price.toDouble().formatRupiah())
+                                    Glide.with(view).load(image).into(ivPoster)
+                                    btnClose.setOnClickListener {
+                                        var request: OrderRequest = OrderRequest(
+                                            idProduct,
+                                            etPrice.text.toString().toInt(),
                                         )
+                                        viewModel.orderProducts(request)
                                     }
-                                    onSuccess = {
-                                        Toast.makeText(
-                                            requireActivity(),
-                                            "Success to Negotiate",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        dialog.dismiss()
-                                        progressDialog?.dismiss()
-                                        Log.d("Order State", it.toString())
+                                    with(viewModel.orderStateEvent) {
+                                        onLoading = {
+                                            progressDialog = DialogWindow.progressCircle(
+                                                requireContext(),
+                                                "Tunggu Sebentar...",
+                                                true
+                                            )
+                                        }
+                                        onSuccess = {
+                                            Toast.makeText(
+                                                requireActivity(),
+                                                "Success to Negotiate",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            dialog.dismiss()
+                                            progressDialog?.dismiss()
+                                            Log.d("Order State", it.toString())
+                                        }
+                                        onFailure = { _, _ ->
+                                            progressDialog?.dismiss()
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Failed to Negotiate",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            Log.d("Order State", "Failed")
+                                        }
                                     }
-                                    onFailure = { _, _ ->
-                                        progressDialog?.dismiss()
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Failed to Negotiate",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        Log.d("Order State", "Failed")
-                                    }
+                                    dialog.setCancelable(true)
+                                    dialog.setContentView(view)
+                                    dialog.show()
+                                } else {
+                                    bin.btnBuy.isClickable = false
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Pesanan Sudah di Order",
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
-                                dialog.setCancelable(true)
-                                dialog.setContentView(view)
-                                dialog.show()
-                            } else {
-                                bin.btnBuy.isClickable = false
-                                Toast.makeText(
-                                    requireActivity(),
-                                    "Pesanan Sudah di Order",
-                                    Toast.LENGTH_LONG
-                                ).show()
+
                             }
-
                         }
-                    }
-                    if (token == null) {
-                        bin.btnBuy.setOnClickListener {
-                            null
+                        if (token == null) {
+                            bin.btnBuy.setOnClickListener {
+                                null
+                            }
                         }
+
+
                     }
-
-
+                }else{
+                    findNavController().popBackStack()
                 }
+
             }
             onFailure = { _, _ ->
+                Toast.makeText(context,"Produk tidak tersedia",Toast.LENGTH_SHORT)
 
+                progressDialog?.dismiss()
+                progressDialog = DialogWindow.progressCircle(
+                    requireContext(),
+                    "Produk tidak tersedia",
+                    true,
+                )
+                progressDialog?.dismiss()
+                findNavController().popBackStack()
             }
         }
 
