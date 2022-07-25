@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import com.androidbuts.multispinnerfilter.KeyPairBoolData
 import com.binar.secondhand.MainActivity
 import com.binar.secondhand.R
 import com.binar.secondhand.core.data.remote.jual.request.SellerProductRequest
-import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.FragmentPreviewBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
-import com.binar.secondhand.screen.jual.add_product.AddProductActivity
 import com.binar.secondhand.screen.jual.add_product.AddProductViewModel
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
