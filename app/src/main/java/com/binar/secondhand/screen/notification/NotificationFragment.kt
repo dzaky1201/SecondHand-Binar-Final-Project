@@ -20,7 +20,7 @@ import com.binar.secondhand.R
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentNotificationBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
-import com.binar.secondhand.screen.notification.adapter.ListNotificationAdapter
+import com.binar.secondhand.screen.notification.adapter.ListNotifAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
@@ -47,10 +47,10 @@ class NotificationFragment : Fragment() {
         setHasOptionsMenu(true)
         viewModelAkun.getUser()
         val userManager = viewModelAkun.userManager
-        val listNotificationAdapter = ListNotificationAdapter()
-        binding.rvNotifList.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        binding.rvNotifList.adapter = listNotificationAdapter
+//        val listNotificationAdapter = ListNotificationAdapter()
+//        binding.rvNotifList.layoutManager =
+//            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+//        binding.rvNotifList.adapter = listNotificationAdapter
 
         userManager.onLoading = {
             progressDialog =
@@ -60,12 +60,30 @@ class NotificationFragment : Fragment() {
             progressDialog?.dismiss()
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
-            binding.buttonMenuOption.isVisible = true
+//            binding.buttonMenuOption.isVisible = true
             binding.textNotification.text = "Semua"
-            viewModelNotif.getNotificationList("")
+//            viewModelNotif.getNotificationList("")
+            viewModelNotif.getNotifList()
+            viewModelNotif.getListNotif().observe(viewLifecycleOwner){
+                if (it.isEmpty()){
+                    binding.rvNotifList.isVisible = false
+                    binding.textNotification.isVisible = false
+                    binding.emptyState.isVisible = true
+                }else{
+                    binding.rvNotifList.isVisible = true
+                    binding.textNotification.isVisible = true
+                    binding.emptyState.isVisible = false
+                    val listNotificationAdapter = ListNotifAdapter(it)
+                    binding.rvNotifList.layoutManager =
+                        LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                    binding.rvNotifList.adapter = listNotificationAdapter
+                }
+
+            }
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
             }
+
 
             with(viewModelNotif.notificationStateEvent) {
                 onLoading = {
@@ -74,10 +92,11 @@ class NotificationFragment : Fragment() {
                 onSuccess = {
                     if(it.size>=1){
 
+
                         binding.rvNotifList.isVisible = true
                         binding.imgProductNotFound.isVisible = false
                         progressDialog?.dismiss()
-                        listNotificationAdapter.submitList(it)
+//                        listNotificationAdapter.submitList(it)
                     }else{
                         binding.imgProductNotFound.isVisible = true
 
@@ -92,9 +111,9 @@ class NotificationFragment : Fragment() {
                 }
             }
 
-            binding.buttonMenuOption.setOnClickListener {
-                dropDownOption(it)
-            }
+//            binding.buttonMenuOption.setOnClickListener {
+//                dropDownOption(it)
+//            }
 
         }
 

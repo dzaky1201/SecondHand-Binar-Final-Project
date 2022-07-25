@@ -52,11 +52,13 @@ class SellerProducFragment : Fragment() {
             }
             onSuccess = {
                 if (it.isEmpty()){
+                    binding.rvSellerProduct.isVisible = false
                     sellerAdapter.notifyDataSetChanged()
                     progressDialog?.dismiss()
                     binding.imgProductNotFound.isVisible = true
 
                 }else{
+                    binding.rvSellerProduct.isVisible = true
                     sellerAdapter.notifyDataSetChanged()
                     progressDialog?.dismiss()
                     sellerAdapter.submitList(it)
