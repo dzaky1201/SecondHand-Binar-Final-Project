@@ -228,7 +228,7 @@ class DetailFragment : Fragment() {
                                     tvPrice.setText(price.toDouble().formatRupiah())
                                     Glide.with(view).load(image).into(ivPoster)
                                     btnClose.setOnClickListener {
-                                        var request: OrderRequest = OrderRequest(
+                                        val request: OrderRequest = OrderRequest(
                                             idProduct,
                                             etPrice.text.toString().toInt(),
                                         )
@@ -245,12 +245,13 @@ class DetailFragment : Fragment() {
                                         onSuccess = {
                                             Toast.makeText(
                                                 requireActivity(),
-                                                "Success to Negotiate",
+                                                "Berhasil mengorder..",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                             dialog.dismiss()
                                             progressDialog?.dismiss()
                                             Log.d("Order State", it.toString())
+                                            findNavController().popBackStack()
                                         }
                                         onFailure = { _, _ ->
                                             progressDialog?.dismiss()

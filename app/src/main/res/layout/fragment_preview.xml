@@ -85,14 +85,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-                    <ImageView
-                        android:scaleType="fitCenter"
-                        android:id="@+id/ivSellerProfile"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/iv_akun"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="25dp"
-                        android:background="@drawable/shape_images" />
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivSellerProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/photo_profile"
+                            android:fitsSystemWindows="true"
+                            tools:src="@tools:sample/avatars" />
+                    </com.google.android.material.card.MaterialCardView>
+<!--                    <ImageView-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:id="@+id/ivSellerProfile"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:layout_marginTop="25dp"-->
+<!--                        android:background="@drawable/shape_images" />-->
 
                     <TextView
                         android:id="@+id/tvNameSeller"
@@ -186,11 +206,11 @@
 
                     <ImageView
                         android:id="@+id/icFavoriteFalse"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="370dp"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginLeft="350dp"
                         android:layout_marginTop="20dp"
-                        android:src="@drawable/ic_favorite_false" />
+                        android:src="@drawable/ic_favorite_true" />
                 </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

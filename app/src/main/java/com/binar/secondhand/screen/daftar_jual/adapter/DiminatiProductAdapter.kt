@@ -43,6 +43,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
 
                 Glide.with(binding.root).load(item.imageProduct)
                     .error(R.drawable.home_attribute)
+                    .centerCrop()
                     .into(binding.ivPosterImage)
                 root.setOnClickListener {
                     onClick(item.id!!)

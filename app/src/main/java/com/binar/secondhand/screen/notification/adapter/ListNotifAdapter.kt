@@ -44,6 +44,7 @@ class ListNotifAdapter(
 
         Glide.with(holder.itemView.context).load(item[position].imageUrl)
             .error(R.drawable.home_attribute)
+            .centerCrop()
             .into(holder.binding.ivPosterImage)
 
 

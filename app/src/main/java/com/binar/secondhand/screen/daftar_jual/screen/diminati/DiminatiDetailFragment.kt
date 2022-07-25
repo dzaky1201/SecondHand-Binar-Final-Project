@@ -63,7 +63,7 @@ class DiminatiDetailFragment : Fragment() {
                     txtName.text = detail.user?.fullName
                     txtCity.text = detail.user?.city
                     tvProductName.text = detail.productName
-                    Glide.with(root).load(detail.user?.imageUrl).into(ivAkun)
+                    Glide.with(root).load(detail.user?.imageUrl).into(ivProfile)
                     Glide.with(root).load(detail.imageProduct).into(ivPosterImage)
                     tvDitawar.text = "Ditawar "+detail.price?.toDouble()?.formatRupiah()
                     tvBasePrice.text = "Harga awal "+detail.basePrice?.toDouble()?.formatRupiah()
@@ -147,10 +147,11 @@ class DiminatiDetailFragment : Fragment() {
         }
 
         btnCall.setOnClickListener {
-            val url = "https://api.whatsapp.com/send?phone=+62$phone&text=Halo, Selamat penawaran anda terpilih untuk membeli produk ${data.productName}"
+            val url = "https://api.whatsapp.com/send?phone=+62$phone&text=Halo, penawaran anda terpilih untuk membeli produk *${data.productName}* dengan harga *Rp. ${data.price}*"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
+            findNavController().navigate(DiminatiDetailFragmentDirections.actionDiminatiDetailFragmentToNavigationDaftarJual())
         }
 
 
@@ -160,5 +161,6 @@ class DiminatiDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }
