@@ -123,6 +123,9 @@
             android:name="idDiminati"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_diminatiDetailFragment_to_navigation_daftar_jual"
+            app:destination="@id/navigation_daftar_jual" />
     </fragment>
     <fragment
         android:id="@+id/fragment_wishlist"

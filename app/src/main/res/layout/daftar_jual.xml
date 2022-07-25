@@ -37,16 +37,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_akun"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardviewImage"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/rectangle_notif"
-                android:src="@drawable/ic_account"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_akun"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/photo_profile"
+                    android:fitsSystemWindows="true"
+                    tools:src="@tools:sample/avatars" />
+            </com.google.android.material.card.MaterialCardView>
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_akun"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:background="@drawable/rectangle_notif"-->
+<!--                android:src="@drawable/ic_account"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <TextView
                 android:id="@+id/txtName"
@@ -57,8 +77,8 @@
                 android:textSize="14sp"
                 android:layout_marginStart="16dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/iv_akun"
-                app:layout_constraintTop_toTopOf="@+id/iv_akun"
+                app:layout_constraintStart_toEndOf="@+id/cardviewImage"
+                app:layout_constraintTop_toTopOf="@+id/cardviewImage"
                 tools:text="Dzaky Haidar" />
 
             <TextView

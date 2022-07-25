@@ -38,13 +38,13 @@ class PreviewActivity : AppCompatActivity() {
 
             userManager.onSuccess = {
                 tvNameSeller.setText(it.fullName)
-                Glide.with(this@PreviewActivity).load(it.imageUrl).into(ivSellerProfile)
+                Glide.with(this@PreviewActivity).load(it.imageUrl).centerCrop().into(ivSellerProfile)
             }
             tvName.text = bundle?.getString("namaProduk")
             tvDescription.text = bundle?.getString("nameDescription")
             tvCity.text = bundle?.getString("nameAddress")
             tvHarga.text = bundle?.getString("productPrice")
-            Glide.with(this@PreviewActivity).load(bundle?.getString("imageProduct")).into(ivProduct)
+            Glide.with(this@PreviewActivity).load(bundle?.getString("imageProduct")).centerCrop().into(ivProduct)
             categories?.forEach {
                 val span = SpannableString(it + "\n")
                 binding.tvCategory.text = span
