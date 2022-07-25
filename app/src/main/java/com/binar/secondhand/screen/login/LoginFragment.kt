@@ -61,10 +61,8 @@ class LoginFragment : Fragment() {
                 onFailure = { code, ex ->
                     profileLoginProgressBar.isVisible = false
                     btnMasuk.isEnabled = true
-                    if (code == 503){
-                        Toast.makeText(requireContext(), "error 503", Toast.LENGTH_SHORT).show()
-                    }
-                    // failure
+                    Toast.makeText(requireContext(), "Akun Tidak Terdaftar", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
