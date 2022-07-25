@@ -36,7 +36,7 @@ class PreviewActivity : AppCompatActivity() {
         val userManager = viewModelAkun.userManager
 
         val bundle = intent.extras
-        val categories = bundle?.getStringArrayList("listIdCategory")
+        val categories = bundle?.getStringArrayList("listNameCategory")
 
         with(binding){
 
