@@ -43,7 +43,7 @@ class AkunFragment : Fragment() {
         userManager.onSuccess = { user ->
             binding.progressBar.isVisible = false
             binding.includeAkunSaya.layoutAkun.isVisible = true
-            Glide.with(binding.root).load(user.imageUrl).into(binding.includeAkunSaya.imgProfile)
+            Glide.with(binding.root).load(user.imageUrl).centerCrop().into(binding.includeAkunSaya.imgProfile)
             binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
                 val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
                 intent.putExtra("showData", user)

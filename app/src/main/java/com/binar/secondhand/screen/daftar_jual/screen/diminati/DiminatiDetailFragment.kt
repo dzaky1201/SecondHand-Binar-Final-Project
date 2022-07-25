@@ -147,7 +147,7 @@ class DiminatiDetailFragment : Fragment() {
         }
 
         btnCall.setOnClickListener {
-            val url = "https://api.whatsapp.com/send?phone=$phone"
+            val url = "https://api.whatsapp.com/send?phone=+62$phone"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)

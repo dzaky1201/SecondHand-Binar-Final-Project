@@ -48,7 +48,7 @@ class DaftarJualFragment : Fragment() {
                 binding.includeDaftarJual.daftarJualSaya.isVisible = true
                 binding.includeDaftarJual.txtName.text = user.fullName
                 binding.includeDaftarJual.txtCity.text = user.city
-                Glide.with(binding.root).load(user.imageUrl).into(binding.includeDaftarJual.ivAkun)
+                Glide.with(binding.root).load(user.imageUrl).centerCrop().into(binding.includeDaftarJual.ivAkun)
 
                 binding.includeDaftarJual.btnEditProfile.setOnClickListener {
                     val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)

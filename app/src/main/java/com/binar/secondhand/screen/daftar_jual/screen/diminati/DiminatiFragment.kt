@@ -53,6 +53,7 @@ class DiminatiFragment : Fragment() {
                     binding.imgProductNotFound.isVisible = true
 
                 }else{
+                    binding.rvDiminati.isVisible = true
                     progressDialog?.dismiss()
                     adapter.submitList(it)
                     binding.imgProductNotFound.isVisible = false

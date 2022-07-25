@@ -61,7 +61,7 @@ class NotificationFragment : Fragment() {
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
 //            binding.buttonMenuOption.isVisible = true
-            binding.textNotification.text = "Semua"
+            binding.textNotification.text = "Notifikasi"
 //            viewModelNotif.getNotificationList("")
             viewModelNotif.getNotifList()
             viewModelNotif.getListNotif().observe(viewLifecycleOwner){
