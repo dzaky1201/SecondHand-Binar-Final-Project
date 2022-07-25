@@ -1,6 +1,7 @@
 package com.binar.secondhand.screen.daftar_jual.screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,10 +69,14 @@ class SellerProducFragment : Fragment() {
             }
         }
 
-        viewModel.deleteSuccess.observe(viewLifecycleOwner){
-            progressDialog?.dismiss()
-            binding.rvSellerProduct.isVisible = false
-            viewModel.getProductSeller()
+        viewModel.getIsSuccess().observe(viewLifecycleOwner){
+            if(it == true){
+                progressDialog?.dismiss()
+                sellerAdapter.notifyDataSetChanged()
+                viewModel.getProductSeller()
+            }else{
+                Toast.makeText(activity,"Gagal hapus produk",Toast.LENGTH_LONG)
+            }
         }
 
     }

@@ -19,18 +19,21 @@ import retrofit2.Response
 class SellerProducViewModel(
     private val daftarJualUseCase: DaftarJualUseCase,
     private val profileUseCase: ProfileUseCase,
-    private val service: DaftarJualService
+    private val service: DaftarJualService,
 ) : ViewModel() {
     val productSellerStateEvent: StateEventManager<List<Product>> =
         daftarJualUseCase.productSellerStateEventManager
     val userChecked: StateEventManager<User> = profileUseCase.userStateEventManager
-
+    private val isSuccess : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private var _deleteSuccess = MutableLiveData<DeleteResponse>()
     val deleteSuccess: LiveData<DeleteResponse> get() = _deleteSuccess
 
     private var _deleteFailed = MutableLiveData<DeleteResponse>()
     val deleteFailed: LiveData<DeleteResponse> get() = _deleteFailed
 
+    fun getIsSuccess(): LiveData<Boolean>{
+        return isSuccess
+    }
     fun getUser() {
         profileUseCase.getUser()
     }
@@ -47,9 +50,14 @@ class SellerProducViewModel(
                     response: Response<DeleteResponse>
                 ) {
                     _deleteSuccess.value = response.body()
+                    isSuccess.value = true
+                    Log.d("Delete","Success")
                 }
 
                 override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
+                    isSuccess.value = false
+
+                    Log.d("Delete","Failure")
                     Log.d("showError", t.message.toString())
                 }
             })

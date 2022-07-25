@@ -62,15 +62,20 @@ class NotificationFragment : Fragment() {
             binding.textNotification.isVisible = true
             binding.buttonMenuOption.isVisible = true
             binding.textNotification.text = "Semua"
-            viewModelNotif.getNotificationList("seller")
+            viewModelNotif.getNotificationList("")
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
             }
 
             with(viewModelNotif.notificationStateEvent) {
+                onLoading = {
+                    Log.d("Notification","Loading")
+                }
                 onSuccess = {
                     if(it.size>=1){
 
+
+                        binding.rvNotifList.isVisible = true
                         binding.imgProductNotFound.isVisible = false
                         progressDialog?.dismiss()
                         listNotificationAdapter.submitList(it)
@@ -81,7 +86,10 @@ class NotificationFragment : Fragment() {
 
                 }
                 onFailure = { _, _ ->
+                    Log.d("Notification","Failure")
                     progressDialog?.dismiss()
+                    binding.rvNotifList.isVisible = false
+                    binding.imgProductNotFound.isVisible = true
                 }
             }
 
@@ -130,6 +138,7 @@ class NotificationFragment : Fragment() {
             binding.textNotification.text = "Semua"
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
+                Log.d("notiftype",it)
             }
         }
 
@@ -139,6 +148,7 @@ class NotificationFragment : Fragment() {
             binding.textNotification.text = "Seller"
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
+                Log.d("notiftype",it)
             }
         }
 
@@ -148,6 +158,7 @@ class NotificationFragment : Fragment() {
             binding.textNotification.text = "Buyer"
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
+                Log.d("notiftype",it)
             }
         }
 
