@@ -256,7 +256,7 @@ class DetailFragment : Fragment() {
                                             progressDialog?.dismiss()
                                             Toast.makeText(
                                                 requireContext(),
-                                                "Failed to Negotiate",
+                                                "Barang sudah habis",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                             Log.d("Order State", "Failed")

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.androidbuts.multispinnerfilter.KeyPairBoolData
 import com.binar.secondhand.MainActivity
 import com.binar.secondhand.R
@@ -11,6 +12,7 @@ import com.binar.secondhand.core.data.remote.jual.request.SellerProductRequest
 import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.FragmentPreviewBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
+import com.binar.secondhand.screen.jual.add_product.AddProductActivity
 import com.binar.secondhand.screen.jual.add_product.AddProductViewModel
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,13 +47,13 @@ class PreviewActivity : AppCompatActivity() {
                         val h = KeyPairBoolData()
                         h.id = categoryId[i]!!.toLong()
                         h.isSelected = i < 5
-                        tvCategory.text = h.name
+                        tvCategory.setText(h.name)
 
                     }
                 }
             }
             userManager.onSuccess = {
-                tvNameSeller.text = it.fullName
+                tvNameSeller.setText(it.fullName)
                 Glide.with(this@PreviewActivity).load(it.imageUrl).into(ivSellerProfile)
             }
             tvName.text = bundle?.getString("namaProduk")
