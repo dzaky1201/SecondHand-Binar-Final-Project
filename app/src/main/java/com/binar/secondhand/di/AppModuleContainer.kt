@@ -42,7 +42,7 @@ class AppModuleContainer : ModuleContainer() {
     }
 
     private val viewModelNotification = module {
-        viewModel { NotificationViewModel(get()) }
+        viewModel { NotificationViewModel(get(),get()) }
     }
 
     private val viewModelJual = module {
