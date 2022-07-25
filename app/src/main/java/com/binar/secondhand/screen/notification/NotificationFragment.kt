@@ -44,29 +44,29 @@ class NotificationFragment : Fragment() {
         setHasOptionsMenu(true)
         viewModelAkun.getUser()
         val userManager = viewModelAkun.userManager
-//        val listNotificationAdapter = ListNotificationAdapter()
-//        binding.rvNotifList.layoutManager =
-//            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-//        binding.rvNotifList.adapter = listNotificationAdapter
+
 
         userManager.onLoading = {
             progressDialog =
                 DialogWindow.progressCircle(requireContext(), "Tunggu Sebentar...", true)
         }
         userManager.onSuccess = { user ->
-            progressDialog?.dismiss()
+
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
-//            binding.buttonMenuOption.isVisible = true
+
             binding.textNotification.text = "Notifikasi"
-//            viewModelNotif.getNotificationList("")
+
             viewModelNotif.getNotifList()
             viewModelNotif.getListNotif().observe(viewLifecycleOwner){
+
                 if (it.isEmpty()){
+                    progressDialog?.dismiss()
                     binding.rvNotifList.isVisible = false
                     binding.textNotification.isVisible = false
                     binding.emptyState.isVisible = true
                 }else{
+                    progressDialog?.dismiss()
                     binding.rvNotifList.isVisible = true
                     binding.textNotification.isVisible = true
                     binding.emptyState.isVisible = false
