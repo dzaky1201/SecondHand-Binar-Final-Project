@@ -4,14 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.androidbuts.multispinnerfilter.KeyPairBoolData
 import com.binar.secondhand.MainActivity
 import com.binar.secondhand.R
 import com.binar.secondhand.core.data.remote.jual.request.SellerProductRequest
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.FragmentPreviewBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
-import com.binar.secondhand.screen.jual.add_product.AddProductActivity
 import com.binar.secondhand.screen.jual.add_product.AddProductViewModel
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,19 +45,19 @@ class PreviewActivity : AppCompatActivity() {
                         val h = KeyPairBoolData()
                         h.id = categoryId[i]!!.toLong()
                         h.isSelected = i < 5
-                        tvCategory.setText(h.name)
+                        tvCategory.text = h.name
 
                     }
                 }
             }
             userManager.onSuccess = {
-                tvNameSeller.setText(it.fullName)
+                tvNameSeller.text = it.fullName
                 Glide.with(this@PreviewActivity).load(it.imageUrl).into(ivSellerProfile)
             }
-            tvName.setText(bundle?.getString("namaProduk"))
-            tvDescription.setText(bundle?.getString("nameDescription"))
-            tvCity.setText(bundle?.getString("nameAddress"))
-            tvHarga.setText(bundle?.getString("productPrice"))
+            tvName.text = bundle?.getString("namaProduk")
+            tvDescription.text = bundle?.getString("nameDescription")
+            tvCity.text = bundle?.getString("nameAddress")
+            tvHarga.text = bundle?.getString("productPrice")
             Glide.with(this@PreviewActivity).load(bundle?.getString("imageProduct")).into(ivProduct)
 
 
@@ -67,12 +66,12 @@ class PreviewActivity : AppCompatActivity() {
             }
 
             btnUpload.setOnClickListener {
-               var nameProduct = bundle?.getString("namaProduk")
-               var description = bundle?.getString("nameDescription")
-                var idCategory = bundle?.getStringArrayList("listIdCategory")
-                var city = bundle?.getString("nameAddress")
-               var productPrice = bundle?.getString("productPrice")
-               var imageProduct : File = File(bundle?.getString("imageProduct"))
+                val nameProduct = bundle?.getString("namaProduk")
+                val description = bundle?.getString("nameDescription")
+                val idCategory = bundle?.getStringArrayList("listIdCategory")
+                val city = bundle?.getString("nameAddress")
+                val productPrice = bundle?.getDouble("productPrice")?.formatRupiah()
+                val imageProduct : File = File(bundle?.getString("imageProduct").toString())
                 val postProduk = SellerProductRequest(
                     name = nameProduct,
                     basePrice = productPrice,
@@ -86,7 +85,7 @@ class PreviewActivity : AppCompatActivity() {
 
             with(viewModel.productPostStateEventManager) {
                 onLoading = {
-                    binding.btnUpload.setText("Sedang Mengupload..")
+                    binding.btnUpload.text = "Sedang Mengupload.."
                     binding.btnUpload.setBackgroundResource(R.drawable.shape_btn_detail_two)
                     binding.btnUpload.isClickable = false
                 }
@@ -103,7 +102,7 @@ class PreviewActivity : AppCompatActivity() {
                 }
 
                 onFailure = { _, _ ->
-                    binding.btnUpload.setText("Upload Ulang..")
+                    binding.btnUpload.text = "Upload Ulang.."
                     Toast.makeText(
                         this@PreviewActivity,
                         "Produk Gagal Diupload",

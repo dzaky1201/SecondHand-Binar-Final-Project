@@ -74,7 +74,6 @@ class NotificationFragment : Fragment() {
                 onSuccess = {
                     if(it.size>=1){
 
-
                         binding.rvNotifList.isVisible = true
                         binding.imgProductNotFound.isVisible = false
                         progressDialog?.dismiss()

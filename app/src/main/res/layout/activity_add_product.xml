@@ -83,14 +83,13 @@
 
         <!-- text view to display selected items-->
 
-
         <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
             android:id="@+id/selectCategory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
-            app:hintText="Pilih Category"
             app:drawableRightCompat="@android:drawable/arrow_down_float"
+            app:hintText="Pilih Category"
             app:layout_constraintEnd_toEndOf="@id/outlinedTextFieldHarga"
             app:layout_constraintStart_toStartOf="@id/outlinedTextFieldHarga"
             app:layout_constraintTop_toBottomOf="@id/outlinedTextFieldHarga" />

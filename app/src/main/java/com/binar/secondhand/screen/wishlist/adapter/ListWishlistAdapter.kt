@@ -45,7 +45,7 @@ class ListWishlistAdapter : ListAdapter<ListWishlist, ListWishlistAdapter.ViewHo
                 binding.apply {
                     binding.tvProductName.text = item.product.name
                     binding.tvBasePrice.text = item.product.basePrice.toDouble().formatRupiah()
-                    binding.tvLocation.text = "Deskripsi: " + item.product.description
+                    binding.tvLocation.text = "Lokasi di " + item.product.location
                     binding.tvDate.text = item.createdAt.dateformat()
                 }
             }

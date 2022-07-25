@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import com.androidbuts.multispinnerfilter.KeyPairBoolData
 import com.binar.secondhand.screen.preview_product.PreviewActivity
 import com.binar.secondhand.core.data.remote.jual.request.SellerProductRequest
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.ActivityAddProductBinding
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
@@ -58,7 +59,7 @@ class AddProductActivity : AppCompatActivity() {
         binding.btnPreview.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("namaProduk",binding.edtNamaProduk.text.toString())
-            bundle.putString("productPrice", binding.edtHargaProduk.text.toString())
+            bundle.putString("productPrice", binding.edtHargaProduk.text.toString().toDouble().formatRupiah())
             bundle.putString("nameDescription", binding.edtDescription.text.toString())
             bundle.putStringArrayList("listIdCategory",idCategory)
             bundle.putString("nameAddress", binding.edtAddress.text.toString())
