@@ -1,6 +1,5 @@
 package com.binar.secondhand.screen.notification
 
-import android.app.ActionBar
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,8 +9,6 @@ import android.view.*
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,7 +18,6 @@ import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentNotificationBinding
 import com.binar.secondhand.screen.akun.AkunViewModel
 import com.binar.secondhand.screen.notification.adapter.ListNotifAdapter
-import com.binar.secondhand.screen.notification.adapter.ListNotificationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
@@ -61,15 +57,25 @@ class NotificationFragment : Fragment() {
             progressDialog?.dismiss()
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
-            binding.buttonMenuOption.isVisible = true
+//            binding.buttonMenuOption.isVisible = true
             binding.textNotification.text = "Semua"
 //            viewModelNotif.getNotificationList("")
             viewModelNotif.getNotifList()
             viewModelNotif.getListNotif().observe(viewLifecycleOwner){
-                val listNotificationAdapter = ListNotifAdapter(it)
-                binding.rvNotifList.layoutManager =
-                    LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-                binding.rvNotifList.adapter = listNotificationAdapter
+                if (it.isEmpty()){
+                    binding.rvNotifList.isVisible = false
+                    binding.textNotification.isVisible = false
+                    binding.emptyState.isVisible = true
+                }else{
+                    binding.rvNotifList.isVisible = true
+                    binding.textNotification.isVisible = true
+                    binding.emptyState.isVisible = false
+                    val listNotificationAdapter = ListNotifAdapter(it)
+                    binding.rvNotifList.layoutManager =
+                        LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                    binding.rvNotifList.adapter = listNotificationAdapter
+                }
+
             }
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
                 viewModelNotif.getNotificationList(it)
@@ -102,9 +108,9 @@ class NotificationFragment : Fragment() {
                 }
             }
 
-            binding.buttonMenuOption.setOnClickListener {
-                dropDownOption(it)
-            }
+//            binding.buttonMenuOption.setOnClickListener {
+//                dropDownOption(it)
+//            }
 
         }
 
