@@ -1,6 +1,5 @@
 package com.binar.secondhand.screen.notification
 
-import android.app.ActionBar
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,8 +9,6 @@ import android.view.*
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
