@@ -1,7 +1,9 @@
 package com.binar.secondhand.screen.daftar_jual.screen.diminati
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +19,13 @@ import com.binar.secondhand.core.domain.model.daftar_jual.SellerProductIntereste
 import com.binar.secondhand.core.domain.model.daftar_jual.UpdateStatusProduct
 import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.core.utils.dateformat
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.FragmentDiminatiDetailBinding
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DiminatiDetailFragment : Fragment() {
 
@@ -61,9 +65,8 @@ class DiminatiDetailFragment : Fragment() {
                     tvProductName.text = detail.productName
                     Glide.with(root).load(detail.user?.imageUrl).into(ivAkun)
                     Glide.with(root).load(detail.imageProduct).into(ivPosterImage)
-                    tvDitawar.text = resources.getString(R.string.fixPrice, detail.price.toString())
-                    tvBasePrice.text =
-                        resources.getString(R.string.basePrice, detail.basePrice.toString())
+                    tvDitawar.text = "Ditawar "+detail.price?.toDouble()?.formatRupiah()
+                    tvBasePrice.text = "Harga awal "+detail.basePrice?.toDouble()?.formatRupiah()
                     tvDate.text = detail.transactionDate?.dateformat()
 
                 }
@@ -105,6 +108,10 @@ class DiminatiDetailFragment : Fragment() {
 
         }
 
+        binding.icBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     @SuppressLint("InflateParams")
@@ -127,20 +134,23 @@ class DiminatiDetailFragment : Fragment() {
         val txtOffering = view.findViewById<TextView>(R.id.tvDitawar)
         val btnCall = view.findViewById<MaterialButton>(R.id.btnCall)
 
+        val phone = productDetail.user?.phoneNumber
         txtName.text = productDetail.user?.fullName
         txtCity.text = productDetail.user?.city
         txtProductName.text = data.productName
         Glide.with(view).load(productDetail.user?.imageUrl).into(imgAkun)
         Glide.with(view).load(data.imageProduct).into(imgProduct)
-        txtOffering.text = resources.getString(R.string.fixPrice, data.price.toString())
+        txtOffering.text = resources.getString(R.string.fixPrice, data.price?.toDouble()?.formatRupiah())
         txtBasePrice.apply {
-            text = resources.getString(R.string.basePrice, data.basePrice.toString())
+            text = "Harga awal "+data.basePrice?.toDouble()?.formatRupiah()
             paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         }
 
         btnCall.setOnClickListener {
-            dialog.dismiss()
-            findNavController().popBackStack()
+            val url = "https://api.whatsapp.com/send?phone=$phone"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
         }
 
 

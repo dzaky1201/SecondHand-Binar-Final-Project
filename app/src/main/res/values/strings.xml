@@ -17,10 +17,9 @@
     <string name="akun_saya">Akun Saya</string>
     <string name="edit">edit</string>
     <string name="photo_profile">Photo Profile</string>
-    <string name="ubah_akun">Ubah Akun</string>
     <string name="pengaturan">Pengaturan</string>
     <string name="keluar">Keluar</string>
-    <string name="order_history">History Order</string>
+    <string name="order_history">Riwayat Transaksi</string>
     <string name="wishlist">Produk Favorit</string>
     <string name="app_version">Version 1.0.0</string>
     <string name="fullname">Fullname</string>
@@ -51,5 +50,7 @@
     <string name="message_success_order">Yeay kamu berhasil mendapat harga \n yang sesuai</string>
     <string name="message_success_order_second">Segera hubungi pembeli melalui \n whatsapp untuk transaksi selanjutnya</string>
     <string name="base_price_strike"><strike>Rp.20.000</strike></string>
+    <string name="rp_0_00">Nominal</string>
+    <string name="lengkapi_akun">Lengkapi Akun</string>
     <!-- Detail -->
 </resources>

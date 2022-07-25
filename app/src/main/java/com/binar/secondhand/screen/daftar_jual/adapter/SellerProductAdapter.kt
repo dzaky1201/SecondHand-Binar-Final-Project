@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.home.Product
+import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.ItemLisSellerProductsBinding
 import com.binar.secondhand.screen.daftar_jual.screen.DaftarJualFragmentDirections
 import com.bumptech.glide.Glide
@@ -26,7 +27,7 @@ class SellerProductAdapter() : ListAdapter<Product, SellerProductAdapter.ViewHol
 
             binding.apply {
                 binding.tvTitle.text = item.name
-                binding.tvPrice.text = item.basePrice.toString()
+                binding.tvPrice.text = item.basePrice.toDouble().formatRupiah()
                 if (item.categories.isNotEmpty()) {
                     item.categories.forEach {
                         val span = SpannableString(it.name + "\n")

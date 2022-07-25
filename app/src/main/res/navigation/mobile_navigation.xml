@@ -20,7 +20,7 @@
         android:name="com.binar.secondhand.screen.notification.NotificationFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notification" >
-        <action
+         <action
             android:id="@+id/action_navigation_notification_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
@@ -136,4 +136,9 @@
             android:id="@+id/action_fragment_wishlist_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentPreview"
+        android:name="com.binar.secondhand.FragmentPreview"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" />
 </navigation>

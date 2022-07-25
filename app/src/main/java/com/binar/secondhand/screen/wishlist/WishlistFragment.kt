@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.secondhand.core.utils.DialogWindow
@@ -42,13 +43,19 @@ class WishlistFragment : Fragment() {
                 progressDialog =
                     DialogWindow.progressCircle(
                         requireContext(),
-                        "Mengambil History Transaksi...",
+                        "Mengambil List Favorite...",
                         true
                     )
             }
             onSuccess = {
                 progressDialog?.dismiss()
-                listNotificationAdapter.submitList(it)
+
+                if(it.size >=1){
+                    listNotificationAdapter.submitList(it)
+                }else{
+                    binding.textWishlist.visibility = View.INVISIBLE
+                    binding.emptyState.visibility = View.VISIBLE
+                }
             }
             onFailure = {_,_->
                 progressDialog?.dismiss()

@@ -52,6 +52,7 @@ class TerjualFragment : Fragment() {
 
             onSuccess = {
                 if (it.isEmpty()){
+                    binding.rvTerjual.isVisible = false
                     progressDialog?.dismiss()
                     binding.imgProductNotFound.isVisible = true
 

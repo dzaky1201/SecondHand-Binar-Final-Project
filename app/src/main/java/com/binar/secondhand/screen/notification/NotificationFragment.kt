@@ -1,11 +1,17 @@
 package com.binar.secondhand.screen.notification
 
 import android.app.ActionBar
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -46,8 +52,6 @@ class NotificationFragment : Fragment() {
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         binding.rvNotifList.adapter = listNotificationAdapter
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Notifikasi"
-
         userManager.onLoading = {
             progressDialog =
                 DialogWindow.progressCircle(requireContext(), "Tunggu Sebentar...", true)
@@ -56,6 +60,7 @@ class NotificationFragment : Fragment() {
             progressDialog?.dismiss()
             binding.rvNotifList.isVisible = true
             binding.textNotification.isVisible = true
+            binding.buttonMenuOption.isVisible = true
             binding.textNotification.text = "Semua"
             viewModelNotif.getNotificationList("")
             viewModelNotif.getNotifType().observe(viewLifecycleOwner){
@@ -64,25 +69,31 @@ class NotificationFragment : Fragment() {
 
             with(viewModelNotif.notificationStateEvent) {
                 onLoading = {
-                    progressDialog = DialogWindow.progressCircle(
-                        requireContext(),
-                        "Mendapatkan Notifikasi...",
-                        true
-                    )
+                    Log.d("Notification","Loading")
                 }
                 onSuccess = {
-                    if (it.isNotEmpty()){
+                    if(it.size>=1){
+
+                        binding.rvNotifList.isVisible = true
+                        binding.imgProductNotFound.isVisible = false
                         progressDialog?.dismiss()
                         listNotificationAdapter.submitList(it)
-                        binding.imgProductNotFound.isVisible = false
                     }else{
-                        progressDialog?.dismiss()
                         binding.imgProductNotFound.isVisible = true
+
                     }
+
                 }
                 onFailure = { _, _ ->
+                    Log.d("Notification","Failure")
                     progressDialog?.dismiss()
+                    binding.rvNotifList.isVisible = false
+                    binding.imgProductNotFound.isVisible = true
                 }
+            }
+
+            binding.buttonMenuOption.setOnClickListener {
+                dropDownOption(it)
             }
 
         }
@@ -103,48 +114,70 @@ class NotificationFragment : Fragment() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.notif_menu,menu)
-        return super.onCreateOptionsMenu(menu,inflater)
-    }
+    private fun dropDownOption(view: View) {
+        //Popup V2
+        val layoutInflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupView: View = layoutInflater.inflate(R.layout.filter_menu_layout, null)
+        val popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        popupWindow.isOutsideTouchable = true
+        popupWindow.isFocusable = true
+        popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item!!.itemId
-        if(id == R.id.menuBuyer){
-            viewModelNotif.notifType.value = "buyer"
-            Log.d("Notifftype",notificationType)
-            binding.textNotification.text = "Buyer"
-        }
-        if(id == R.id.menuSeller){
-            viewModelNotif.notifType.value = "seller"
-            Log.d("Notifftype",notificationType)
-            binding.textNotification.text = "Seller"
-        }
-        if(id == R.id.menuAll){
+        val buttonSemua: LinearLayout = popupView.findViewById(R.id.buttonSemua)
+        val buttonBuyer: LinearLayout = popupView.findViewById(R.id.buttonBuyer)
+        val buttonSeller: LinearLayout = popupView.findViewById(R.id.buttonSeller)
+
+        buttonSemua.setOnClickListener {
+            popupWindow.dismiss()
             viewModelNotif.notifType.value = ""
             binding.textNotification.text = "Semua"
-            Log.d("Notifftype",notificationType)
+            viewModelNotif.getNotifType().observe(viewLifecycleOwner){
+                viewModelNotif.getNotificationList(it)
+                Log.d("notiftype",it)
+            }
         }
 
-        return super.onOptionsItemSelected(item)
+        buttonSeller.setOnClickListener {
+            popupWindow.dismiss()
+            viewModelNotif.notifType.value = "seller"
+            binding.textNotification.text = "Seller"
+            viewModelNotif.getNotifType().observe(viewLifecycleOwner){
+                viewModelNotif.getNotificationList(it)
+                Log.d("notiftype",it)
+            }
+        }
+
+        buttonBuyer.setOnClickListener {
+            popupWindow.dismiss()
+            viewModelNotif.notifType.value = "buyer"
+            binding.textNotification.text = "Buyer"
+            viewModelNotif.getNotifType().observe(viewLifecycleOwner){
+                viewModelNotif.getNotificationList(it)
+                Log.d("notiftype",it)
+            }
+        }
+
+        val values = IntArray(2)
+        view.getLocationInWindow(values)
+        val positionOfIcon = values[1]
+        println("Position Y:$positionOfIcon")
+
+        val displayMetrics = context?.resources?.displayMetrics
+        val height = displayMetrics?.heightPixels!! * 2 / 3
+        println("Height:$height")
+
+        if (positionOfIcon > height) {
+            popupWindow.showAsDropDown(view, 0, -250)
+        } else {
+            popupWindow.showAsDropDown(view, 0, 5)
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        (activity as AppCompatActivity).supportActionBar!!.show()
 
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity).supportActionBar!!.hide()
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity).supportActionBar!!.show()
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

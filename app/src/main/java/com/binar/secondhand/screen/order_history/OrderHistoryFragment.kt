@@ -1,6 +1,7 @@
 package com.binar.secondhand.screen.order_history
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ class OrderHistoryFragment : Fragment() {
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         binding.rvHistoryOrder.adapter = listNotificationAdapter
 
+        Log.d("Order History","On Created")
         listNotificationAdapter.deleteOrder = { id ->
             progressDialog =
                 DialogWindow.progressCircle(requireContext(), "Menghapus Product...", true)
@@ -45,7 +47,9 @@ class OrderHistoryFragment : Fragment() {
         viewModelDetail.checkOrdersProduct()
         with(viewModelDetail.checkOrdersProductStateEvent) {
 
+
             onLoading = {
+                Log.d("Order History","On Loading")
                 progressDialog =
                     DialogWindow.progressCircle(
                         requireContext(),
@@ -54,17 +58,24 @@ class OrderHistoryFragment : Fragment() {
                     )
             }
             onSuccess = {
+
+                Log.d("Order History","success")
                 if (it.isEmpty()){
+                    Log.d("Order History","empty")
                     progressDialog?.dismiss()
                     binding.imgProductNotFound.isVisible = true
 
                 }else{
                     progressDialog?.dismiss()
+
+                    Log.d("Order History","success")
                     listNotificationAdapter.submitList(it)
                     binding.imgProductNotFound.isVisible = false
                 }
             }
             onFailure = {_,_->
+                Log.d("Order History","Failure")
+                binding.imgProductNotFound.isVisible = true
                 progressDialog?.dismiss()
             }
         }

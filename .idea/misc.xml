@@ -9,15 +9,31 @@
         <entry key="..\:/AndroidStudioProjects/FInal/app/src/main/res/layout/fragment_home.xml" value="0.17552083333333332" />
         <entry key="..\:/AndroidStudioProjects/FInal/app/src/main/res/layout/nego.xml" value="0.3333333333333333" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/drawable/ic_favorite_false.xml" value="0.1465" />
-        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/activity_add_product.xml" value="0.20520833333333333" />
-        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.20520833333333333" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/activity_add_product.xml" value="0.25" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/activity_update_akun.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/akun_saya_view.xml" value="0.1" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/bottom_sheet_detail.xml" value="0.25" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/bottom_sheet_dialog_success.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/daftar_jual.xml" value="0.33" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_akun.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.2" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_detail_buyer.xml" value="0.25" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_diminati.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_diminati_detail.xml" value="0.25" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_home.xml" value="0.20615384615384616" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_jual.xml" value="0.20520833333333333" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_login.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_notification.xml" value="0.209375" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_order_history.xml" value="0.20520833333333333" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_seller_produc.xml" value="0.20520833333333333" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_terjual.xml" value="0.20520833333333333" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/fragment_wishlist.xml" value="0.209375" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_home_list_products.xml" value="0.5" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_lis_seller_products.xml" value="0.20520833333333333" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_notification.xml" value="0.13240740740740742" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_order_history.xml" value="0.33" />
+        <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/item_wishlist.xml" value="0.33" />
         <entry key="..\:/SecondHand-Binar-Final-Project/app/src/main/res/layout/jual_layout.xml" value="0.20520833333333333" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/drawable/bg_white_rounded.xml" value="0.1045" />
         <entry key="..\:/dzaky/belajar/binar/final-project/SecondHand-Binar-Final-Project/app/src/main/res/drawable/btn_border_add_product.xml" value="0.145" />

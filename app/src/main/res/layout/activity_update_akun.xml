@@ -37,7 +37,7 @@
             android:text="@string/update_profile"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textSize="23sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"

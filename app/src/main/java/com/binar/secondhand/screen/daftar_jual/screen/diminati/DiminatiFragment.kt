@@ -48,6 +48,7 @@ class DiminatiFragment : Fragment() {
 
             onSuccess = {
                 if (it.isEmpty()){
+                    binding.rvDiminati.isVisible = false
                     progressDialog?.dismiss()
                     binding.imgProductNotFound.isVisible = true
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="UselessParent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="150dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/shadow_radius_4"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_rounded"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/buttonSemua"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:background="@drawable/xml_button_white_gray_rectangle"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_gray4"
+                    android:text="Semua" android:id="@+id/txtSemu"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonBuyer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:background="@drawable/xml_button_white_gray_rectangle"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_gray4"
+                    android:text="Buyer" android:id="@+id/txtBuyer"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonSeller"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:background="@drawable/xml_button_white_gray_rectangle"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_gray4"
+                    android:text="Seller" android:id="@+id/txtSeller"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
