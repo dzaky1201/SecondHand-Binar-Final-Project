@@ -59,7 +59,7 @@ class AddProductActivity : AppCompatActivity() {
         binding.btnPreview.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("namaProduk",binding.edtNamaProduk.text.toString())
-            bundle.putString("productPrice", binding.edtHargaProduk.text.toString().toDouble().formatRupiah())
+            bundle.putString("productPrice", binding.edtHargaProduk.text.toString())
             bundle.putString("nameDescription", binding.edtDescription.text.toString())
             bundle.putStringArrayList("listIdCategory",idCategory)
             bundle.putString("nameAddress", binding.edtAddress.text.toString())

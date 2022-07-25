@@ -72,8 +72,8 @@ class PreviewActivity : AppCompatActivity() {
                 val description = bundle?.getString("nameDescription")
                 val idCategory = bundle?.getStringArrayList("listIdCategory")
                 val city = bundle?.getString("nameAddress")
-                val productPrice = bundle?.getDouble("productPrice")?.formatRupiah()
-                val imageProduct : File = File(bundle?.getString("imageProduct").toString())
+                val productPrice = bundle?.getString("productPrice")
+                val imageProduct = File(bundle?.getString("imageProduct").toString())
                 val postProduk = SellerProductRequest(
                     name = nameProduct,
                     basePrice = productPrice,
