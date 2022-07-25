@@ -14,9 +14,9 @@ import com.binar.secondhand.core.utils.formatRupiah
 import com.binar.secondhand.databinding.ItemNotificationBinding
 import com.bumptech.glide.Glide
 
-class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
-    ListAdapter<SellerProductInterestedEntity, DiminatiProductAdapter.ViewHolder>(
-        DiffCallBackDiminati()
+class TerjualProductAdapter(private val onClick: (Int) -> (Unit)) :
+    ListAdapter<SellerProductInterestedEntity, TerjualProductAdapter.ViewHolder>(
+        DiffCallBackTerjual()
     ) {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,7 +37,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
 
                 }
                 binding.tvStartPrice.text = "Harga Awal "+item.basePrice?.toDouble()?.formatRupiah()
-                binding.tvBidPrice.text = "Ditawar: "+item.price?.toDouble()?.formatRupiah()
+                binding.tvBidPrice.text = "Terjual: "+item.price?.toDouble()?.formatRupiah()
                 binding.tvDate.text = item.transactionDate?.dateformat()
 
 
@@ -64,7 +64,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
     }
 }
 
-class DiffCallBackDiminati : DiffUtil.ItemCallback<SellerProductInterestedEntity>() {
+class DiffCallBackTerjual : DiffUtil.ItemCallback<SellerProductInterestedEntity>() {
     override fun areItemsTheSame(
         oldItem: SellerProductInterestedEntity,
         newItem: SellerProductInterestedEntity
