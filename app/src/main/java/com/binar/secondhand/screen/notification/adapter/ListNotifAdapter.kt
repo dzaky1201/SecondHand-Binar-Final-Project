@@ -33,7 +33,21 @@ class ListNotifAdapter(
 
         holder.binding.tvProductName.text = item[position].productName
         holder.binding.tvStartPrice.text = "Harga Awal "+item[position].basePrice.toDouble().formatRupiah()
-        holder.binding.tvBidPrice.text = "Ditawar "+item[position].bidPrice.toDouble().formatRupiah()
+
+
+        if(item[position].status == "accepted"){
+            holder.binding.tvBidPrice.text = "Berhasil beli di harga "+item[position].bidPrice.toDouble().formatRupiah()
+        }else if(item[position].status == "bid"){
+            holder.binding.tvBidPrice.text = "Dinego "+item[position].bidPrice.toDouble().formatRupiah()
+        }else if(item[position].status == "declined"){
+            holder.binding.tvBidPrice.text = "Gagal untuk menego di harga "+item[position].bidPrice.toDouble().formatRupiah()
+        }else if(item[position].status == "create"){
+            holder.binding.tvTitle.text = "Produk Anda "
+            holder.binding.tvBidPrice.text = "Menunggu untuk dinego.. "
+        }else{
+            holder.binding.tvBidPrice.text = "Dinego "+item[position].bidPrice.toDouble().formatRupiah()
+        }
+
        if(item[position].updatedAt.isNotEmpty()){
 
            holder.binding.tvDate.text = item[position].updatedAt.dateformat()

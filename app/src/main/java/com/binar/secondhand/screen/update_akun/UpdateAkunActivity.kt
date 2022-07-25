@@ -40,7 +40,7 @@ class UpdateAkunActivity : AppCompatActivity() {
                 edtPhoneNumber.setText(args.phoneNumber)
                 edtAddress.setText(args.address)
                 edtCity.setText(args.city)
-                Glide.with(this@UpdateAkunActivity).load(args.imageUrl).into(binding.imgProfile)
+                Glide.with(this@UpdateAkunActivity).load(args.imageUrl).centerCrop().into(binding.imgProfile)
             }
         }
 
