@@ -88,7 +88,7 @@ class DetailFragment : Fragment() {
 
         with(viewModelWishlist.listWishlistStateEvent){
             onSuccess = {
-                for(i in 0..it.size-1){
+                for(i in it.indices){
                     if(it[i].productId == data){
                         idWishlist = it[i].id
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
@@ -107,7 +107,7 @@ class DetailFragment : Fragment() {
 
 
         binding.icFavoriteFalse.setOnClickListener {
-            if(checkWishlist == false){
+            if(!checkWishlist){
                 val request: WishListRequest = WishListRequest(
                     idProduct
                 )

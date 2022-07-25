@@ -187,8 +187,9 @@
                         android:id="@+id/icFavoriteFalse"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_marginLeft="325dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="326dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="31dp"
                         android:src="@drawable/ic_favorite_false" />
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
