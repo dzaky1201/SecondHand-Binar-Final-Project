@@ -25,6 +25,7 @@ class DiminatiProductAdapter(private val onClick: (Int) -> (Unit)) :
         fun bind(item: SellerProductInterestedEntity) {
 
             binding.apply {
+                binding.tvTitle.text = "Produk Terjual"
                 binding.tvProductName.text = item.productName
                 if (item.status == "accepted") {
                     binding.tvStartPrice.apply {

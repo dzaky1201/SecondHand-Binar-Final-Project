@@ -185,9 +185,9 @@
 
                     <ImageView
                         android:id="@+id/icFavoriteFalse"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="320dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="325dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/ic_favorite_false" />
                 </RelativeLayout>
