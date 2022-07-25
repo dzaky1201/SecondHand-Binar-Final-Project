@@ -2,6 +2,7 @@ package com.binar.secondhand.screen.preview_product
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -35,23 +36,10 @@ class PreviewActivity : AppCompatActivity() {
         val userManager = viewModelAkun.userManager
 
         val bundle = intent.extras
+        val categories = bundle?.getStringArrayList("listIdCategory")
+
         with(binding){
 
-
-            with(viewModel.stateCategories) {
-                onSuccess = { categories ->
-                    val categoryName = categories.map { it.name }
-                    val categoryId = categories.map { it.id }
-
-                    for (i in categoryName.indices) {
-                        val h = KeyPairBoolData()
-                        h.id = categoryId[i]!!.toLong()
-                        h.isSelected = i < 5
-                        tvCategory.setText(h.name)
-
-                    }
-                }
-            }
             userManager.onSuccess = {
                 tvNameSeller.setText(it.fullName)
                 Glide.with(this@PreviewActivity).load(it.imageUrl).into(ivSellerProfile)
@@ -61,6 +49,10 @@ class PreviewActivity : AppCompatActivity() {
             tvCity.text = bundle?.getString("nameAddress")
             tvHarga.text = bundle?.getString("productPrice")
             Glide.with(this@PreviewActivity).load(bundle?.getString("imageProduct")).into(ivProduct)
+            categories?.forEach {
+                val span = SpannableString(it + "\n")
+                binding.tvCategory.text = span
+            }
 
 
             icBack.setOnClickListener {
@@ -72,8 +64,8 @@ class PreviewActivity : AppCompatActivity() {
                 val description = bundle?.getString("nameDescription")
                 val idCategory = bundle?.getStringArrayList("listIdCategory")
                 val city = bundle?.getString("nameAddress")
-                val productPrice = bundle?.getDouble("productPrice")?.formatRupiah()
-                val imageProduct : File = File(bundle?.getString("imageProduct").toString())
+                val productPrice = bundle?.getString("productPrice")
+                val imageProduct = File(bundle?.getString("imageProduct").toString())
                 val postProduk = SellerProductRequest(
                     name = nameProduct,
                     basePrice = productPrice,

@@ -40,6 +40,7 @@ class AddProductActivity : AppCompatActivity() {
         viewModel.getCategories()
         val listArray1: MutableList<KeyPairBoolData> = ArrayList()
         val idCategory: ArrayList<String> = arrayListOf()
+        val nameCategory: ArrayList<String> = arrayListOf()
 
         with(viewModel.stateCategories) {
             onSuccess = { categories ->
@@ -59,9 +60,9 @@ class AddProductActivity : AppCompatActivity() {
         binding.btnPreview.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("namaProduk",binding.edtNamaProduk.text.toString())
-            bundle.putString("productPrice", binding.edtHargaProduk.text.toString().toDouble().formatRupiah())
+            bundle.putString("productPrice", binding.edtHargaProduk.text.toString())
             bundle.putString("nameDescription", binding.edtDescription.text.toString())
-            bundle.putStringArrayList("listIdCategory",idCategory)
+            bundle.putStringArrayList("listIdCategory",nameCategory)
             bundle.putString("nameAddress", binding.edtAddress.text.toString())
             bundle.putString("imageProduct", fileImage.toString())
 
@@ -106,6 +107,7 @@ class AddProductActivity : AppCompatActivity() {
                     )
 
                     idCategory.add(items[i].id.toString())
+                    nameCategory.add(items[i].name.toString())
                 }
             }
         }
