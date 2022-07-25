@@ -16,6 +16,7 @@ import com.binar.secondhand.core.utils.DialogWindow
 import com.binar.secondhand.databinding.FragmentTerjualBinding
 import com.binar.secondhand.screen.daftar_jual.TerjualViewModel
 import com.binar.secondhand.screen.daftar_jual.adapter.DiminatiProductAdapter
+import com.binar.secondhand.screen.daftar_jual.adapter.TerjualProductAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TerjualFragment : Fragment() {
@@ -36,7 +37,7 @@ class TerjualFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = DiminatiProductAdapter {
+        val adapter = TerjualProductAdapter {
 
         }
         binding.rvTerjual.layoutManager =
