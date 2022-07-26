@@ -21,6 +21,7 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
     DiffCallBackHistory()
 ) {
     var deleteOrder: ((id: Int) -> Unit)? = null
+    var refreshList: (() -> Unit)?=  null
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemOrderHistoryBinding.bind(view)
 
@@ -41,6 +42,7 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
 
                 binding.imgDelete.setOnClickListener {
                     deleteOrder?.invoke(item.id)
+                    refreshList?.invoke()
                 }
             }
         }

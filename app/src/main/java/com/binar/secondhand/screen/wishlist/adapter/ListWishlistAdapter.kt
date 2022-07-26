@@ -51,6 +51,7 @@ class ListWishlistAdapter : ListAdapter<ListWishlist, ListWishlistAdapter.ViewHo
             }
             Glide.with(binding.root).load(item.product.imageUrl)
                 .error(R.drawable.home_attribute)
+                .centerCrop()
                 .into(binding.ivPosterImage)
             binding.root.setOnClickListener {
                 it.findNavController().navigate(WishlistFragmentDirections.actionFragmentWishlistToDetailFragment(item.productId,false,item.id))

@@ -42,7 +42,9 @@ class OrderHistoryFragment : Fragment() {
             progressDialog =
                 DialogWindow.progressCircle(requireContext(), "Menghapus Product...", true)
             deleteOrder(id)
+//            refreshList()
         }
+
 
         viewModelDetail.checkOrdersProduct()
         with(viewModelDetail.checkOrdersProductStateEvent) {
@@ -58,16 +60,17 @@ class OrderHistoryFragment : Fragment() {
                     )
             }
             onSuccess = {
-
+                progressDialog?.dismiss()
                 Log.d("Order History","success")
                 if (it.isEmpty()){
                     Log.d("Order History","empty")
                     progressDialog?.dismiss()
                     binding.imgProductNotFound.isVisible = true
+                    binding.rvHistoryOrder.isVisible = false
 
                 }else{
                     progressDialog?.dismiss()
-
+                    binding.rvHistoryOrder.isVisible = true
                     Log.d("Order History","success")
                     listNotificationAdapter.submitList(it)
                     binding.imgProductNotFound.isVisible = false
@@ -82,7 +85,7 @@ class OrderHistoryFragment : Fragment() {
 
         viewModelDetail.deleteSuccess.observe(viewLifecycleOwner){
             progressDialog?.dismiss()
-            binding.rvHistoryOrder.isVisible = false
+            binding.rvHistoryOrder.isVisible = true
             viewModelDetail.checkOrdersProduct()
         }
 
@@ -101,6 +104,10 @@ class OrderHistoryFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    private fun refreshList(){
+        viewModelDetail.checkOrdersProduct()
     }
 
     override fun onDestroyView() {
