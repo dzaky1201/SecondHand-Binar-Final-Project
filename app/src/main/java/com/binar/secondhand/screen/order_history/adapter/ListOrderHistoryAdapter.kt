@@ -38,6 +38,7 @@ class ListOrderHistoryAdapter : ListAdapter<OrdersProduct, ListOrderHistoryAdapt
 
                 Glide.with(binding.root).load(item.product.imageUrl)
                     .error(R.drawable.home_attribute)
+                    .centerCrop()
                     .into(binding.ivPosterImage)
 
                 binding.imgDelete.setOnClickListener {
