@@ -88,11 +88,8 @@ class DetailFragment : Fragment() {
 
         with(viewModelWishlist.listWishlistStateEvent){
             onSuccess = {
-                Log.d("PRODUCT ID",data.toString())
-                Log.d("Wishlist","Success")
                 for(i in 0..it.size-1){
                     if(it[i].productId == data){
-                        Log.d("Wishlist","foundit")
                         idWishlist = it[i].id
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_true)
                         checkWishlist = true
@@ -100,7 +97,6 @@ class DetailFragment : Fragment() {
                     }else{
                         binding.icFavoriteFalse.setImageResource(R.drawable.ic_favorite_false)
                         checkWishlist = false
-                        Log.d("Wishlist","notfound")
                     }
                 }
             }
@@ -109,7 +105,7 @@ class DetailFragment : Fragment() {
             checkWishlist = it
         }
         viewModel.getDetailProduct(data ?: 0)
-        Log.d("checkwishlist",checkWishlist.toString())
+
 
         binding.icFavoriteFalse.setOnClickListener {
             if(checkWishlist == false){
