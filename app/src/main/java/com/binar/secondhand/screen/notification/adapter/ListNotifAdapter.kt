@@ -42,8 +42,8 @@ class ListNotifAdapter(
         }else if(item[position].status == "declined"){
             holder.binding.tvBidPrice.text = "Gagal untuk menego di harga "+item[position].bidPrice.toDouble().formatRupiah()
         }else if(item[position].status == "create"){
-            holder.binding.tvTitle.text = "Produk Anda "
-            holder.binding.tvBidPrice.text = "Menunggu untuk dinego.. "
+            holder.binding.tvTitle.text = "Berhasil di terbitkan"
+            holder.binding.tvBidPrice.text = "     "
         }else{
             holder.binding.tvBidPrice.text = "Dinego "+item[position].bidPrice.toDouble().formatRupiah()
         }

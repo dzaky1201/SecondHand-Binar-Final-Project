@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.binar.secondhand.R
 import com.binar.secondhand.core.domain.model.profile.User
 import com.binar.secondhand.databinding.ActivityUpdateAkunBinding
 import com.bumptech.glide.Glide
@@ -40,8 +41,13 @@ class UpdateAkunActivity : AppCompatActivity() {
                 edtPhoneNumber.setText(args.phoneNumber)
                 edtAddress.setText(args.address)
                 edtCity.setText(args.city)
-                Glide.with(this@UpdateAkunActivity).load(args.imageUrl).centerCrop().into(binding.imgProfile)
-            }
+                if(args.imageUrl !=null){
+                    Glide.with(this@UpdateAkunActivity).load(args.imageUrl).error(R.drawable.ic_baseline_person_).centerCrop().into(binding.imgProfile)
+                }else{
+                    Glide.with(this@UpdateAkunActivity).load(R.drawable.ic_baseline_person_).error(R.drawable.ic_baseline_person_).centerCrop().into(binding.imgProfile)
+
+                }
+              }
         }
 
         val updateUserManager = viewModel.updateUserManager

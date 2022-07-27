@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.binar.secondhand.R
 import com.binar.secondhand.databinding.FragmentAkunBinding
 import com.binar.secondhand.screen.update_akun.UpdateAkunActivity
 import com.bumptech.glide.Glide
@@ -43,7 +44,7 @@ class AkunFragment : Fragment() {
         userManager.onSuccess = { user ->
             binding.progressBar.isVisible = false
             binding.includeAkunSaya.layoutAkun.isVisible = true
-            Glide.with(binding.root).load(user.imageUrl).centerCrop().into(binding.includeAkunSaya.imgProfile)
+            Glide.with(binding.root).load(user.imageUrl).centerCrop().error(R.drawable.ic_baseline_person_).into(binding.includeAkunSaya.imgProfile)
             binding.includeAkunSaya.btnUbahAkun.setOnClickListener {
                 val intent = Intent(requireActivity(), UpdateAkunActivity::class.java)
                 intent.putExtra("showData", user)
